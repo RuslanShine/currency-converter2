@@ -51,6 +51,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.currencyconverter.R
 import java.time.format.TextStyle
 import java.time.temporal.TemporalQueries.offset
 
@@ -95,8 +96,9 @@ fun MainScreen() {
                     Text(
                         modifier = Modifier
                             .padding(Dimens._4),
-                        text = "Currency",
-                        fontSize = 24.sp
+                        text = stringResource(R.string.currency),
+                        color = Color.Black,
+                        fontSize = FontSizes._24
                     )
                 }
             }
@@ -121,7 +123,11 @@ fun MainScreen() {
                             Row(modifier = Modifier.clickable {
                                 expandedOne.value = !expandedOne.value
                             }, verticalAlignment = Alignment.CenterVertically) {
-                                Text(text = currentValueOne.value, fontSize = 24.sp, color = Color.Black)
+                                Text(
+                                    text = currentValueOne.value,
+                                    fontSize = FontSizes._24,
+                                    color = Color.Black
+                                )
                                 Icon(
                                     imageVector = Icons.Filled.ArrowDropDown,
                                     contentDescription = null
@@ -147,7 +153,7 @@ fun MainScreen() {
                                         onValueChange = { textOne = it },
                                         modifier = Modifier
                                             .width(Dimens._150),
-                                        textStyle = androidx.compose.ui.text.TextStyle(fontSize = 24.sp),
+                                        textStyle = androidx.compose.ui.text.TextStyle(fontSize = FontSizes._24),
                                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                         colors = TextFieldDefaults.outlinedTextFieldColors(
                                             focusedBorderColor = Color.White,
@@ -191,7 +197,11 @@ fun MainScreen() {
                             Row(modifier = Modifier.clickable {
                                 expandedTow.value = !expandedTow.value
                             }, verticalAlignment = Alignment.CenterVertically) {
-                                Text(text = currentValueTow.value, fontSize = 24.sp, color = Color.Black)
+                                Text(
+                                    text = currentValueTow.value,
+                                    fontSize = FontSizes._24,
+                                    color = Color.Black
+                                )
                                 Icon(
                                     imageVector = Icons.Filled.ArrowDropDown,
                                     contentDescription = null
@@ -217,7 +227,7 @@ fun MainScreen() {
                                         onValueChange = { textTow = it },
                                         modifier = Modifier
                                             .width(Dimens._150),
-                                        textStyle = androidx.compose.ui.text.TextStyle(fontSize = 24.sp),
+                                        textStyle = androidx.compose.ui.text.TextStyle(fontSize = FontSizes._24),
                                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                         colors = TextFieldDefaults.outlinedTextFieldColors(
                                             focusedBorderColor = Color.White,
@@ -229,15 +239,10 @@ fun MainScreen() {
 
                                     )
                                 }
-
-
                             }
-
                         }
-
                     }
                 }
-
             }
             Box(
                 modifier = Modifier.fillMaxSize(),
@@ -245,10 +250,10 @@ fun MainScreen() {
             ) {
                 Button(
                     onClick = { /*TODO*/ },
-                    modifier = Modifier.width(320.dp),
+                    modifier = Modifier.width(Dimens._320),
                     colors = ButtonDefaults.buttonColors(ButtonColors)
                 ) {
-                    Text("CONVERT", fontSize = 25.sp)
+                    Text("CONVERT", fontSize = FontSizes._24)
 
                 }
 
