@@ -4,7 +4,7 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 
 interface DataApi {
-    @GET("/all/")
+    @GET("/scripts/XML_daily.asp/")
     @Headers("Accept: application/json")
     suspend fun getValues(): List<DataResponse>
 }

@@ -1,6 +1,7 @@
-package com.example.currencyconverter.ui.theme
+package com.example.currencyconverter
 
 import android.app.Application
+import com.example.currencyconverter.ui.theme.ServiceLocator
 import com.example.currencyconverter.ui.theme.data.DataRepository
 import com.example.currencyconverter.ui.theme.domain.Interactor
 
