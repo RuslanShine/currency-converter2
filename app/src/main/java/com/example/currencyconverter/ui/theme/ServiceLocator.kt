@@ -7,6 +7,8 @@ import com.example.currencyconverter.ui.theme.data.DataApi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory
+import java.util.logging.XMLFormatter
 
 object ServiceLocator {
 
@@ -28,7 +30,7 @@ object ServiceLocator {
 
         val builder = Retrofit.Builder()
             .baseUrl(ApiConstants.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(SimpleXmlConverterFactory.create())
             .client(okHttpClient)
             .build()
         dataApi = builder.create(DataApi::class.java)

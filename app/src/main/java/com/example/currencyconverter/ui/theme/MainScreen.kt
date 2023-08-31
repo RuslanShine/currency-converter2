@@ -36,16 +36,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.currencyconverter.R
-import com.example.currencyconverter.ui.theme.data.DataResponse
 import com.example.currencyconverter.ui.theme.domain.MainViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
+fun MainScreen(viewModel: MainViewModel) {
+
+//    val a: MainViewModel = viewModel()
+//
+//     val viewModel by lazy {
+//        ViewModelProvider.NewInstanceFactory().create(
+//            MainViewModel::class.java
+//        )
+//    }
+////    val valuesData = ValCurs
+//
+//
+//    val m: Currency
+
 
 
 
