@@ -18,17 +18,17 @@ data class ValCurs(
 @Root(name="Valute", strict = false)
 data class Currency(
     @field:Attribute(name = "ID", required = false)
-    var id: String? = null,
+    var id: String? ,
     @field:Element(name = "NumCode", required = false)
-    var numCode: String? = null,
+    var numCode: String?,
     @field:Element(name = "CharCode", required = false)
     var charCode: String? = null,
     @field:Element(name = "Nominal", required = false)
-    var nominal: String? = null,
+    var nominal: String?,
     @field:Element(name = "Name", required = false)
-    var name: String? = null,
+    var name: String? ,
     @field:Element(name = "Value", required = false)
-    var value: String? = null
+    var value: String?
 )
 
 

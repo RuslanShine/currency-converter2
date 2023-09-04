@@ -1,38 +1,30 @@
 package com.example.currencyconverter
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import com.example.currencyconverter.ui.theme.MainScreen
-import com.example.currencyconverter.ui.theme.domain.MainViewModel
+import androidx.core.view.WindowCompat
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.example.currencyconverter.databinding.ActivityMainBinding
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
-//    private val viewModel by lazy {
-//        ViewModelProvider.NewInstanceFactory().create(
-//            MainViewModel::class.java
-//        )
-//    }
-
-//    @Inject
-//    lateinit var viewModelFactory: MainViewModel.Factory
-//
-//    private val viewModel: MainViewModel by loadPosts() {
-//        viewModelFactory.create( )
-//    }
-
-    private val viewModel by viewModels<MainViewModel>()
-
+    lateinit var binding: ActivityMainBinding
+    lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            MainScreen(viewModel)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        }
+//        supportFragmentManager
+//            .beginTransaction()
+//            .replace(R.id.fragment_placeholder,HomeFragment())
+//            .addToBackStack(null)
+//            .commit()
 
-
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
     }
-
 }

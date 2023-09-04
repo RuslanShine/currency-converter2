@@ -36,27 +36,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.currencyconverter.R
-import com.example.currencyconverter.ui.theme.domain.MainViewModel
+import com.example.currencyconverter.ui.theme.data.ValCurs
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(viewModel: MainViewModel) {
-
-//    val a: MainViewModel = viewModel()
-//
-//     val viewModel by lazy {
-//        ViewModelProvider.NewInstanceFactory().create(
-//            MainViewModel::class.java
-//        )
-//    }
-////    val valuesData = ValCurs
-//
-//
-//    val m: Currency
-
-
-
+fun MainScreen() {
 
     val listСurrencyOne = listOf("USD", "EUR", "JPY", "GBP", "AUD", "CHF", "RUB")
     val expandedOne = remember { mutableStateOf(false) }
@@ -92,13 +81,15 @@ fun MainScreen(viewModel: MainViewModel) {
                     modifier = Modifier
                         .fillMaxWidth()
                 ) {
-                    Text(
-                        modifier = Modifier
-                            .padding(Dimens._4),
-                        text = stringResource(R.string.currency),
-                        color = Color.Black,
-                        fontSize = FontSizes._24
-                    )
+
+                        Text(
+                            modifier = Modifier
+                                .padding(Dimens._4),
+                            text = "sdfdf",
+                            color = Color.Black,
+                            fontSize = FontSizes._24
+                        )
+
                 }
             }
             Card(

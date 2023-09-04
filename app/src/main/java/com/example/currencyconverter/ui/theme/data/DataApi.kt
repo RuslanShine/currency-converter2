@@ -6,5 +6,5 @@ import retrofit2.http.Headers
 interface DataApi {
     @GET("/scripts/XML_daily.asp/")
     @Headers("Accept: application/xml")
-    suspend fun getValues(): List<ValCurs>
+    suspend fun getValues(): List<Currency>
 }
