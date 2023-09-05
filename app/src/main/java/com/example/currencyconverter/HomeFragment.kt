@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.currencyconverter.databinding.FragmentHomeBinding
 import com.example.currencyconverter.ui.theme.MainScreen
 
@@ -49,9 +51,6 @@ class HomeFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent { MainScreen() }
         }
-
-        (activity as MainActivity).navController.navigate(R.id.homeFragment)
-
     }
 
     override fun onDestroyView() {

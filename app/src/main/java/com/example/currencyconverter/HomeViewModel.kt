@@ -13,11 +13,11 @@ import kotlinx.coroutines.launch
 class HomeViewModel : ViewModel() {
 
 //    val valuesData = MutableLiveData<List<ValCurs>>()
-    private val _valuesData = MutableLiveData<List<Currency>>()
-//    val valuesData get() = _valuesData
+    private val _valuesData = MutableLiveData<List<ValCurs>>()
+    val valuesData get() = _valuesData
 
 //    private val _posts = MutableLiveData<List<Currency>>()
-    val valuesData: LiveData<List<Currency>> get() = _valuesData
+//    val valuesData: LiveData<List<ValCurs>> get() = _valuesData
 
     private var interactor: Interactor = App.instance.interactor
 
@@ -35,5 +35,4 @@ class HomeViewModel : ViewModel() {
             }
         }
     }
-
 }

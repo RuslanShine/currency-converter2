@@ -6,12 +6,14 @@ import androidx.activity.viewModels
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import com.example.currencyconverter.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
-    lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,12 +21,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        supportFragmentManager
-//            .beginTransaction()
-//            .replace(R.id.fragment_placeholder,HomeFragment())
-//            .addToBackStack(null)
-//            .commit()
 
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        val host: NavHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment? ?: return
+
+        val navController = host.navController
+        appBarConfiguration = AppBarConfiguration(navController.graph)
+
+
     }
 }

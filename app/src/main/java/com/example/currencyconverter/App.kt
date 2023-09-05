@@ -13,6 +13,7 @@ class App: Application() {
         super.onCreate()
         ServiceLocator.initiation(this)
         instance = this
+        repo = DataRepository()
         interactor = Interactor(repo)
     }
 
