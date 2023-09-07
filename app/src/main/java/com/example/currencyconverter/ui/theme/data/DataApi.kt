@@ -1,10 +1,10 @@
 package com.example.currencyconverter.ui.theme.data
 
+import com.example.convertmy.data.ValCurs
 import retrofit2.http.GET
-import retrofit2.http.Headers
+
 
 interface DataApi {
-    @GET("/scripts/XML_daily.asp/")
-    @Headers("Accept: application/xml")
-    suspend fun getValues(): List<ValCurs>
+    @GET("/daily_json.js")
+    suspend fun getValues(): ValCurs
 }

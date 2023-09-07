@@ -30,7 +30,7 @@ object ServiceLocator {
 
         val builder = Retrofit.Builder()
             .baseUrl(ApiConstants.BASE_URL)
-            .addConverterFactory(SimpleXmlConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
         dataApi = builder.create(DataApi::class.java)

@@ -3,22 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F1D6D6"
     tools:context=".HomeFragment">
-
-    <TextView
-        android:id="@+id/text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="34sp"
-        android:textColor="@color/white"
-        android:layout_marginTop="65dp"
-        android:layout_gravity="center_horizontal"
-        android:text="Hello Fragment" />
 
     <androidx.compose.ui.platform.ComposeView
         android:id="@+id/compos_view"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:layout_gravity="bottom"/>
+        android:layout_height="600dp" />
 
 </FrameLayout>
