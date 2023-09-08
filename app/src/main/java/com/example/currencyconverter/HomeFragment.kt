@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.example.currencyconverter.databinding.FragmentHomeBinding
 import com.example.currencyconverter.ui.theme.MainScreen
@@ -29,15 +28,14 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        viewModel.loadPosts()
-//        viewModel.valuesData.observe(viewLifecycleOwner) { valuesData ->
-//            binding.text2.text = valuesData.valute.vND.name
-//        }
-
-        binding.composView.apply {
-            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent { MainScreen(viewModel) }
+        viewModel.valuesData.observe(viewLifecycleOwner) { valuesData ->
+            binding.composView.apply {
+                setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+                setContent { MainScreen(valuesData,context) }
+            }
         }
+
+
     }
 
     override fun onDestroyView() {
