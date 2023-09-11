@@ -36,22 +36,83 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.convertmy.data.ValCurs
+import com.example.currencyconverter.R
 
+//fun convert(from: String?, to: String?, v: Float): Float {
+//    val fromVal: Float = repo.get(from)
+//    val toVal: Float = repo.get(to)
+//    return fromVal / toVal * v
+//}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(valuesData: ValCurs, context: Context) {
 
+    val myList = listOf(
+        valuesData.valute.aED.charCode,
+        valuesData.valute.aMD.charCode,
+        valuesData.valute.aUD.charCode,
+        valuesData.valute.aZN.charCode,
+        valuesData.valute.bGN.charCode,
+        valuesData.valute.bRL.charCode,
+        valuesData.valute.bYN.charCode,
+        valuesData.valute.cAD.charCode,
+        valuesData.valute.cHF.charCode,
+        valuesData.valute.cNY.charCode,
+        valuesData.valute.cZK.charCode,
+        valuesData.valute.dKK.charCode,
+        valuesData.valute.eGP.charCode,
+        valuesData.valute.eUR.charCode,
+        valuesData.valute.gBP.charCode,
+        valuesData.valute.gEL.charCode,
+        valuesData.valute.hKD.charCode,
+        valuesData.valute.hUF.charCode,
+        valuesData.valute.iDR.charCode,
+        valuesData.valute.iNR.charCode,
+        valuesData.valute.jPY.charCode,
+        valuesData.valute.kGS.charCode,
+        valuesData.valute.kRW.charCode,
+        valuesData.valute.kZT.charCode,
+        valuesData.valute.mDL.charCode,
+        valuesData.valute.nOK.charCode,
+        valuesData.valute.nZD.charCode,
+        valuesData.valute.pLN.charCode,
+        valuesData.valute.qAR.charCode,
+        valuesData.valute.rON.charCode,
+        valuesData.valute.rSD.charCode,
+        valuesData.valute.sEK.charCode,
+        valuesData.valute.sGD.charCode,
+        valuesData.valute.tHB.charCode,
+        valuesData.valute.tJS.charCode,
+        valuesData.valute.tMT.charCode,
+        valuesData.valute.tRY.charCode,
+        valuesData.valute.uAH.charCode,
+        valuesData.valute.uSD.charCode,
+        valuesData.valute.uZS.charCode,
+        valuesData.valute.vND.charCode,
+        valuesData.valute.xDR.charCode,
+        valuesData.valute.zAR.charCode
+    )
 
 
-    val listСurrencyOne = listOf("USD", "EUR", "JPY", "GBP", "AUD", "CHF", "RUB")
+    val listСurrencyOne = myList
     val expandedOne = remember { mutableStateOf(false) }
     val currentValueOne = remember { mutableStateOf(listСurrencyOne[0]) }
     var textOne by remember { mutableStateOf("") }
+    var rezult = textOne + valuesData.valute.aUD.value
+
+    when(currentValueOne.value) {
+        currentValueOne.value[0].toString() -> println("!!!Zero")
+        currentValueOne.value[1].toString() -> println("!!!One")
+//        listOf(2) -> println("!!!Two")
+        else -> println("Other number")
+    }
+    println("!!!Start")
+
 
     val listСurrencyTow = listOf("USD", "EUR", "JPY", "GBP", "AUD", "CHF", "RUB")
     val expandedTow = remember { mutableStateOf(false) }
@@ -60,8 +121,7 @@ fun MainScreen(valuesData: ValCurs, context: Context) {
 
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Card(
             modifier = Modifier
@@ -87,7 +147,7 @@ fun MainScreen(valuesData: ValCurs, context: Context) {
                     ) {
                         Text(
                             modifier = Modifier.padding(Dimens._4),
-                            text = valuesData.valute.aUD.name,
+                            text = stringResource(R.string.currency_converter),
                             color = Color.Black,
                             fontSize = FontSizes._24
                         )
@@ -126,10 +186,11 @@ fun MainScreen(valuesData: ValCurs, context: Context) {
                                     DropdownMenu(expanded = expandedOne.value,
                                         onDismissRequest = { expandedOne.value = false }) {
                                         listСurrencyOne.forEach {
-                                            DropdownMenuItem(text = { Text(text = it) }, onClick = {
-                                                currentValueOne.value = it
-                                                expandedOne.value = false
-                                            })
+                                            DropdownMenuItem(text = { Text(text = it) },
+                                                onClick = {
+                                                    currentValueOne.value = it
+                                                    expandedOne.value = false
+                                                })
                                         }
                                     }
                                     Box(
@@ -139,7 +200,9 @@ fun MainScreen(valuesData: ValCurs, context: Context) {
                                         OutlinedTextField(value = textOne,
                                             onValueChange = { textOne = it },
                                             modifier = Modifier.width(Dimens._150),
-                                            textStyle = androidx.compose.ui.text.TextStyle(fontSize = FontSizes._24),
+                                            textStyle = androidx.compose.ui.text.TextStyle(
+                                                fontSize = FontSizes._24
+                                            ),
                                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                             colors = TextFieldDefaults.outlinedTextFieldColors(
                                                 focusedBorderColor = Color.White,
@@ -151,6 +214,12 @@ fun MainScreen(valuesData: ValCurs, context: Context) {
 
                                         )
                                     }
+                                }
+                                Box(modifier = Modifier.padding(top = 100.dp)) {
+                                    Text(
+                                        text = valuesData.valute.uSD.name,
+                                        color = Color.Black,
+                                    )
                                 }
                             }
                         }
@@ -200,7 +269,9 @@ fun MainScreen(valuesData: ValCurs, context: Context) {
                                         modifier = Modifier.fillMaxWidth()
                                     ) {
                                         OutlinedTextField(value = textTow,
-                                            onValueChange = { textTow = it },
+                                            onValueChange = {
+                                                textTow = rezult
+                                            },
                                             modifier = Modifier.width(Dimens._150),
                                             textStyle = androidx.compose.ui.text.TextStyle(fontSize = FontSizes._24),
                                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
@@ -215,6 +286,12 @@ fun MainScreen(valuesData: ValCurs, context: Context) {
                                         )
                                     }
                                 }
+                                Box(modifier = Modifier.padding(top = 100.dp)) {
+                                    Text(
+                                        text = "Австралийский доллар",
+                                        color = Color.Black,
+                                    )
+                                }
                             }
                         }
                     }
@@ -222,11 +299,14 @@ fun MainScreen(valuesData: ValCurs, context: Context) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 36.dp), contentAlignment = Alignment.Center
+                        .padding(top = 36.dp),
+                    contentAlignment = Alignment.Center
                 ) {
                     Button(
                         onClick = {
-                            Toast.makeText(context, "Конвертация", Toast.LENGTH_SHORT).show() },
+
+                            Toast.makeText(context, "Конвертация", Toast.LENGTH_SHORT).show()
+                        },
                         modifier = Modifier.width(Dimens._320),
                         colors = ButtonDefaults.buttonColors(ButtonColors)
                     ) {
@@ -238,7 +318,7 @@ fun MainScreen(valuesData: ValCurs, context: Context) {
             }
         }
     }
-
 }
+
 
 
