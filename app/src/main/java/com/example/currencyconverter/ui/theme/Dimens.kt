@@ -50,6 +50,8 @@ object Dimens {
     @Stable
     val _150: Dp = 150.dp
     @Stable
+    val _240: Dp = 240.dp
+    @Stable
     val _320: Dp = 320.dp
     @Stable
     val _500: Dp = 500.dp

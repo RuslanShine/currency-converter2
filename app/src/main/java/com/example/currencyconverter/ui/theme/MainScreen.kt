@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,6 +25,7 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -38,7 +40,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.convertmy.data.ValCurs
 import com.example.currencyconverter.R
 
@@ -48,54 +53,55 @@ import com.example.currencyconverter.R
 //    return fromVal / toVal * v
 //}
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(valuesData: ValCurs, context: Context) {
 
     val myList = listOf(
-        valuesData.valute.aED.charCode,
-        valuesData.valute.aMD.charCode,
-        valuesData.valute.aUD.charCode,
-        valuesData.valute.aZN.charCode,
-        valuesData.valute.bGN.charCode,
-        valuesData.valute.bRL.charCode,
-        valuesData.valute.bYN.charCode,
-        valuesData.valute.cAD.charCode,
-        valuesData.valute.cHF.charCode,
-        valuesData.valute.cNY.charCode,
-        valuesData.valute.cZK.charCode,
-        valuesData.valute.dKK.charCode,
-        valuesData.valute.eGP.charCode,
-        valuesData.valute.eUR.charCode,
-        valuesData.valute.gBP.charCode,
-        valuesData.valute.gEL.charCode,
-        valuesData.valute.hKD.charCode,
-        valuesData.valute.hUF.charCode,
-        valuesData.valute.iDR.charCode,
-        valuesData.valute.iNR.charCode,
-        valuesData.valute.jPY.charCode,
-        valuesData.valute.kGS.charCode,
-        valuesData.valute.kRW.charCode,
-        valuesData.valute.kZT.charCode,
-        valuesData.valute.mDL.charCode,
-        valuesData.valute.nOK.charCode,
-        valuesData.valute.nZD.charCode,
-        valuesData.valute.pLN.charCode,
-        valuesData.valute.qAR.charCode,
-        valuesData.valute.rON.charCode,
-        valuesData.valute.rSD.charCode,
-        valuesData.valute.sEK.charCode,
-        valuesData.valute.sGD.charCode,
-        valuesData.valute.tHB.charCode,
-        valuesData.valute.tJS.charCode,
-        valuesData.valute.tMT.charCode,
-        valuesData.valute.tRY.charCode,
-        valuesData.valute.uAH.charCode,
-        valuesData.valute.uSD.charCode,
-        valuesData.valute.uZS.charCode,
-        valuesData.valute.vND.charCode,
-        valuesData.valute.xDR.charCode,
-        valuesData.valute.zAR.charCode
+        valuesData.valute.aED.name,
+        valuesData.valute.aMD.name,
+        valuesData.valute.aUD.name,
+        valuesData.valute.aZN.name,
+        valuesData.valute.bGN.name,
+        valuesData.valute.bRL.name,
+        valuesData.valute.bYN.name,
+        valuesData.valute.cAD.name,
+        valuesData.valute.cHF.name,
+        valuesData.valute.cNY.name,
+        valuesData.valute.cZK.name,
+        valuesData.valute.dKK.name,
+        valuesData.valute.eGP.name,
+        valuesData.valute.eUR.name,
+        valuesData.valute.gBP.name,
+        valuesData.valute.gEL.name,
+        valuesData.valute.hKD.name,
+        valuesData.valute.hUF.name,
+        valuesData.valute.iDR.name,
+        valuesData.valute.iNR.name,
+        valuesData.valute.jPY.name,
+        valuesData.valute.kGS.name,
+        valuesData.valute.kRW.name,
+        valuesData.valute.kZT.name,
+        valuesData.valute.mDL.name,
+        valuesData.valute.nOK.name,
+        valuesData.valute.nZD.name,
+        valuesData.valute.pLN.name,
+        valuesData.valute.qAR.name,
+        valuesData.valute.rON.name,
+        valuesData.valute.rSD.name,
+        valuesData.valute.sEK.name,
+        valuesData.valute.sGD.name,
+        valuesData.valute.tHB.name,
+        valuesData.valute.tJS.name,
+        valuesData.valute.tMT.name,
+        valuesData.valute.tRY.name,
+        valuesData.valute.uAH.name,
+        valuesData.valute.uSD.name,
+        valuesData.valute.uZS.name,
+        valuesData.valute.vND.name,
+        valuesData.valute.xDR.name,
+        valuesData.valute.zAR.name
     )
 
 
@@ -103,18 +109,10 @@ fun MainScreen(valuesData: ValCurs, context: Context) {
     val expandedOne = remember { mutableStateOf(false) }
     val currentValueOne = remember { mutableStateOf(listСurrencyOne[0]) }
     var textOne by remember { mutableStateOf("") }
-    var rezult = textOne + valuesData.valute.aUD.value
-
-    when(currentValueOne.value) {
-        currentValueOne.value[0].toString() -> println("!!!Zero")
-        currentValueOne.value[1].toString() -> println("!!!One")
-//        listOf(2) -> println("!!!Two")
-        else -> println("Other number")
-    }
-    println("!!!Start")
+//    var rez = textOne * valuesData.valute.aUD.value
 
 
-    val listСurrencyTow = listOf("USD", "EUR", "JPY", "GBP", "AUD", "CHF", "RUB")
+    val listСurrencyTow = myList
     val expandedTow = remember { mutableStateOf(false) }
     val currentValueTow = remember { mutableStateOf(listСurrencyTow[0]) }
     var textTow by remember { mutableStateOf("") }
@@ -159,147 +157,140 @@ fun MainScreen(valuesData: ValCurs, context: Context) {
                         .height(Dimens._150)
                         .padding(Dimens._8),
                 ) {
-                    Row(
+                    Column(
                         modifier = Modifier.fillMaxWidth()
                     ) {
-                        Surface(modifier = Modifier.fillMaxSize()) {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(Dimens._8)
-                                    .padding(start = Dimens._20)
-                                    .padding(end = Dimens._20),
-                                contentAlignment = Alignment.CenterStart
-                            ) {
-                                Row(modifier = Modifier.clickable {
-                                    expandedOne.value = !expandedOne.value
-                                }, verticalAlignment = Alignment.CenterVertically) {
-                                    Text(
-                                        text = currentValueOne.value,
-                                        fontSize = FontSizes._24,
-                                        color = Color.Black
-                                    )
-                                    Icon(
-                                        imageVector = Icons.Filled.ArrowDropDown,
-                                        contentDescription = null
-                                    )
-                                    DropdownMenu(expanded = expandedOne.value,
-                                        onDismissRequest = { expandedOne.value = false }) {
-                                        listСurrencyOne.forEach {
-                                            DropdownMenuItem(text = { Text(text = it) },
-                                                onClick = {
-                                                    currentValueOne.value = it
-                                                    expandedOne.value = false
-                                                })
-                                        }
-                                    }
-                                    Box(
-                                        contentAlignment = Alignment.CenterEnd,
-                                        modifier = Modifier.fillMaxWidth()
-                                    ) {
-                                        OutlinedTextField(value = textOne,
-                                            onValueChange = { textOne = it },
-                                            modifier = Modifier.width(Dimens._150),
-                                            textStyle = androidx.compose.ui.text.TextStyle(
-                                                fontSize = FontSizes._24
-                                            ),
-                                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                                focusedBorderColor = Color.White,
-                                                unfocusedBorderColor = Color.White,
-                                                textColor = Color.Black
-                                            ),
-                                            placeholder = { Text("0") }
-
-
-                                        )
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = Dimens._12),
+                            contentAlignment = Alignment.TopCenter
+                        ) {
+                            Row(modifier = Modifier.clickable {
+                                expandedOne.value = !expandedOne.value
+                            }, verticalAlignment = Alignment.CenterVertically) {
+                                Text(
+                                    text = currentValueOne.value,
+                                    fontSize = FontSizes._18,
+                                    color = Color.Black
+                                )
+                                Icon(
+                                    imageVector = Icons.Filled.ArrowDropDown,
+                                    contentDescription = null
+                                )
+                                DropdownMenu(expanded = expandedOne.value,
+                                    onDismissRequest = { expandedOne.value = false }) {
+                                    listСurrencyOne.forEach {
+                                        DropdownMenuItem(text = { Text(text = it) }, onClick = {
+                                            currentValueOne.value = it
+                                            expandedOne.value = false
+                                        }, modifier = Modifier.background(Color.White))
                                     }
                                 }
-                                Box(modifier = Modifier.padding(top = 100.dp)) {
-                                    Text(
-                                        text = valuesData.valute.uSD.name,
-                                        color = Color.Black,
-                                    )
-                                }
+
                             }
+                        }
+                        Row(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(Dimens._8),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceAround
+                        ) {
+                            Text(
+                                text = valuesData.valute.uSD.charCode,
+                                fontSize = FontSizes._24,
+                                color = Color.Black
+                            )
+                            OutlinedTextField(value = textOne,
+                                onValueChange = { textOne = it },
+                                modifier = Modifier.width(Dimens._240),
+                                textStyle = androidx.compose.ui.text.TextStyle(
+                                    fontSize = FontSizes._24
+                                ),
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                                colors = TextFieldDefaults.outlinedTextFieldColors(
+                                    focusedBorderColor = Color.White,
+                                    unfocusedBorderColor = Color.White,
+                                    textColor = Color.Black
+                                ),
+                                placeholder = { Text("0") })
                         }
                     }
                 }
+
+
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(Dimens._150)
-                        .padding(Dimens._8),
+                        .padding(Dimens._8)
                 ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth()
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(color = Purple80)
                     ) {
-                        Surface(modifier = Modifier.fillMaxSize(), color = Purple80) {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(Dimens._8)
-                                    .padding(start = Dimens._20)
-                                    .padding(end = Dimens._20),
-                                contentAlignment = Alignment.CenterStart
-                            ) {
-                                Row(modifier = Modifier.clickable {
-                                    expandedTow.value = !expandedTow.value
-                                }, verticalAlignment = Alignment.CenterVertically) {
-                                    Text(
-                                        text = currentValueTow.value,
-                                        fontSize = FontSizes._24,
-                                        color = Color.Black
-                                    )
-                                    Icon(
-                                        imageVector = Icons.Filled.ArrowDropDown,
-                                        contentDescription = null
-                                    )
-                                    DropdownMenu(expanded = expandedTow.value,
-                                        onDismissRequest = { expandedTow.value = false }) {
-                                        listСurrencyTow.forEach {
-                                            DropdownMenuItem(text = { Text(text = it) }, onClick = {
-                                                currentValueTow.value = it
-                                                expandedTow.value = false
-                                            })
-                                        }
-                                    }
-                                    Box(
-                                        contentAlignment = Alignment.CenterEnd,
-                                        modifier = Modifier.fillMaxWidth()
-                                    ) {
-                                        OutlinedTextField(value = textTow,
-                                            onValueChange = {
-                                                textTow = rezult
-                                            },
-                                            modifier = Modifier.width(Dimens._150),
-                                            textStyle = androidx.compose.ui.text.TextStyle(fontSize = FontSizes._24),
-                                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                                focusedBorderColor = Color.White,
-                                                unfocusedBorderColor = Color.White,
-                                                textColor = Color.Black
-                                            ),
-                                            placeholder = { Text("0") }
-
-
-                                        )
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = Dimens._12),
+                            contentAlignment = Alignment.TopCenter
+                        ) {
+                            Row(modifier = Modifier.clickable {
+                                expandedTow.value = !expandedTow.value
+                            }, verticalAlignment = Alignment.CenterVertically) {
+                                Text(
+                                    text = currentValueTow.value,
+                                    fontSize = FontSizes._18,
+                                    color = Color.Black
+                                )
+                                Icon(
+                                    imageVector = Icons.Filled.ArrowDropDown,
+                                    contentDescription = null
+                                )
+                                DropdownMenu(expanded = expandedTow.value,
+                                    onDismissRequest = { expandedTow.value = false }) {
+                                    listСurrencyTow.forEach {
+                                        DropdownMenuItem(text = { Text(text = it) }, onClick = {
+                                            currentValueTow.value = it
+                                            expandedTow.value = false
+                                        }, modifier = Modifier.background(Color.White))
                                     }
                                 }
-                                Box(modifier = Modifier.padding(top = 100.dp)) {
-                                    Text(
-                                        text = "Австралийский доллар",
-                                        color = Color.Black,
-                                    )
-                                }
+
                             }
+                        }
+                        Row(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(8.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceAround
+                        ) {
+                            Text(
+                                text = valuesData.valute.aED.charCode, fontSize = FontSizes._24, color = Color.Black
+                            )
+                            OutlinedTextField(value = textTow,
+                                onValueChange = { textTow = it },
+                                modifier = Modifier.width(Dimens._240),
+                                textStyle = androidx.compose.ui.text.TextStyle(
+                                    fontSize = FontSizes._24
+                                ),
+                                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                                colors = TextFieldDefaults.outlinedTextFieldColors(
+                                    focusedBorderColor = Color.White,
+                                    unfocusedBorderColor = Color.White,
+                                    textColor = Color.Black
+                                ),
+                                placeholder = { Text("0") })
                         }
                     }
                 }
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 36.dp),
+                        .padding(top = Dimens._36),
                     contentAlignment = Alignment.Center
                 ) {
                     Button(
@@ -313,7 +304,6 @@ fun MainScreen(valuesData: ValCurs, context: Context) {
                         Text("CONVERT", fontSize = FontSizes._24)
 
                     }
-
                 }
             }
         }
