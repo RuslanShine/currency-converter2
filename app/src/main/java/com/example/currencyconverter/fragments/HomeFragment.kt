@@ -1,4 +1,4 @@
-package com.example.currencyconverter
+package com.example.currencyconverter.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import com.example.currencyconverter.viewModel.HomeViewModel
 import com.example.currencyconverter.databinding.FragmentHomeBinding
 import com.example.currencyconverter.ui.theme.MainScreen
 
@@ -31,8 +32,10 @@ class HomeFragment : Fragment() {
         viewModel.valuesData.observe(viewLifecycleOwner) { valuesData ->
             binding.composView.apply {
                 setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-                setContent { MainScreen(valuesData,context) }
+                setContent { MainScreen(valuesData,context,viewModel) }
+
             }
+
         }
 
 

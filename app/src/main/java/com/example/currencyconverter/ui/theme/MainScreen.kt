@@ -1,6 +1,7 @@
 package com.example.currencyconverter.ui.theme
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -25,12 +26,11 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,12 +40,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.convertmy.data.ValCurs
 import com.example.currencyconverter.R
+import com.example.currencyconverter.ui.theme.theme.ButtonColors
+import com.example.currencyconverter.ui.theme.theme.Dimens
+import com.example.currencyconverter.ui.theme.theme.FontSizes
+import com.example.currencyconverter.ui.theme.theme.Purple40
+import com.example.currencyconverter.ui.theme.theme.Purple80
+import com.example.currencyconverter.viewModel.HomeViewModel
 
 //fun convert(from: String?, to: String?, v: Float): Float {
 //    val fromVal: Float = repo.get(from)
@@ -56,7 +59,7 @@ import com.example.currencyconverter.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(valuesData: ValCurs, context: Context) {
+fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) {
 
     val myList = listOf(
         valuesData.valute.aED.name,
@@ -187,6 +190,9 @@ fun MainScreen(valuesData: ValCurs, context: Context) {
                                         }, modifier = Modifier.background(Color.White))
                                     }
                                 }
+                                SideEffect {
+
+                                }
 
                             }
                         }
@@ -269,7 +275,9 @@ fun MainScreen(valuesData: ValCurs, context: Context) {
                             horizontalArrangement = Arrangement.SpaceAround
                         ) {
                             Text(
-                                text = valuesData.valute.aED.charCode, fontSize = FontSizes._24, color = Color.Black
+                                text = valuesData.valute.aED.charCode,
+                                fontSize = FontSizes._24,
+                                color = Color.Black
                             )
                             OutlinedTextField(value = textTow,
                                 onValueChange = { textTow = it },
@@ -295,6 +303,12 @@ fun MainScreen(valuesData: ValCurs, context: Context) {
                 ) {
                     Button(
                         onClick = {
+                            val result = textOne
+                            val v = viewModel.recalculatingValues(result)
+                            textTow = v.toString()
+
+
+
 
                             Toast.makeText(context, "Конвертация", Toast.LENGTH_SHORT).show()
                         },
@@ -308,7 +322,11 @@ fun MainScreen(valuesData: ValCurs, context: Context) {
             }
         }
     }
+    SideEffect {
+        Log.e("TAG", "Вызван эффет${currentValueTow.value}")
+    }
 }
+
 
 
 

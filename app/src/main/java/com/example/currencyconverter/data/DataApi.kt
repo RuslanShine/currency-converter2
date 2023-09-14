@@ -1,4 +1,4 @@
-package com.example.currencyconverter.ui.theme.data
+package com.example.currencyconverter.data
 
 import com.example.convertmy.data.ValCurs
 import retrofit2.http.GET

@@ -1,19 +1,17 @@
 package com.example.currencyconverter
 
 import android.app.Application
-import com.example.currencyconverter.ui.theme.ServiceLocator
-import com.example.currencyconverter.ui.theme.data.DataRepository
-import com.example.currencyconverter.ui.theme.domain.Interactor
+import com.example.currencyconverter.domain.Interactor
 
 class App: Application() {
-    lateinit var repo: DataRepository
+    lateinit var repo: com.example.currencyconverter.data.DataRepository
     lateinit var interactor: Interactor
 
     override fun onCreate() {
         super.onCreate()
         ServiceLocator.initiation(this)
         instance = this
-        repo = DataRepository()
+        repo = com.example.currencyconverter.data.DataRepository()
         interactor = Interactor(repo)
     }
 

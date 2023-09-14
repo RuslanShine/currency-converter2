@@ -1,4 +1,4 @@
-package com.example.currencyconverter.ui.theme
+package com.example.currencyconverter.ui.theme.theme
 
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.unit.sp

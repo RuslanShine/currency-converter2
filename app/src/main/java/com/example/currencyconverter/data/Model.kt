@@ -1,4 +1,4 @@
-package com.example.currencyconverter.ui.theme.data
+package com.example.currencyconverter.data
 
 import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Element

@@ -1,11 +1,13 @@
-package com.example.currencyconverter
+package com.example.currencyconverter.viewModel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.convertmy.data.ValCurs
-import com.example.currencyconverter.ui.theme.domain.Interactor
+import com.example.currencyconverter.App
+import com.example.currencyconverter.domain.Interactor
+import com.example.currencyconverter.domain.usecase.GetValuesUseCase
 import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
@@ -14,10 +16,14 @@ class HomeViewModel : ViewModel() {
     private val _valuesData = MutableLiveData<ValCurs>()
     val valuesData get() = _valuesData
 
+    private val getValuesUseCase = GetValuesUseCase(valuesData)
+
+
     private var interactor: Interactor = App.instance.interactor
 
     init {
         loadPosts()
+
     }
 
     fun loadPosts() {
@@ -29,5 +35,10 @@ class HomeViewModel : ViewModel() {
                 e.printStackTrace()
             }
         }
+    }
+
+    fun recalculatingValues(result: String): Double {
+        val a = getValuesUseCase.execute(result)
+        return a
     }
 }
