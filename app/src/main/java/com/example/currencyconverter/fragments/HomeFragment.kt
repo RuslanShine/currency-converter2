@@ -33,7 +33,6 @@ class HomeFragment : Fragment() {
             binding.composView.apply {
                 setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
                 setContent { MainScreen(valuesData,context,viewModel) }
-
             }
 
         }

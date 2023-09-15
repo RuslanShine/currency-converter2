@@ -50,9 +50,7 @@ import com.example.currencyconverter.ui.theme.theme.FontSizes
 import com.example.currencyconverter.ui.theme.theme.Purple40
 import com.example.currencyconverter.ui.theme.theme.Purple80
 import com.example.currencyconverter.viewModel.HomeViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import kotlin.coroutines.coroutineContext
 
 //fun convert(from: String?, to: String?, v: Float): Float {
 //    val fromVal: Float = repo.get(from)
@@ -116,8 +114,6 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
     val expandedOne = remember { mutableStateOf(false) }
     val currentValueOne = remember { mutableStateOf(listСurrencyOne[0]) }
     var textOne by remember { mutableStateOf("") }
-//    var rez = textOne * valuesData.valute.aUD.value
-
 
     val listСurrencyTow = myList
     val expandedTow = remember { mutableStateOf(false) }
@@ -190,6 +186,10 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
                                     listСurrencyOne.forEach {
                                         DropdownMenuItem(text = { Text(text = it) }, onClick = {
                                             currentValueOne.value = it
+                                            coroutine.launch {
+                                                 viewModel.recalculatingValuesMyValute( myValute = it)
+                                            }
+
                                             expandedOne.value = false
                                         }, modifier = Modifier.background(Color.White))
                                     }
@@ -322,9 +322,6 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
                 }
             }
         }
-    }
-    SideEffect {
-        Log.e("TAG", "Вызван эффет${currentValueTow.value}")
     }
 }
 

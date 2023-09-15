@@ -42,4 +42,13 @@ class HomeViewModel : ViewModel() {
     suspend fun recalculatingValues(result: String): Double {
         return getValuesUseCase.execute(result)
     }
+
+    suspend fun recalculatingValuesMyValute(myValute: String) {
+        return getValuesUseCase.getMyValute(myValute)
+
+    }
+
+
+
+
 }
