@@ -48,7 +48,7 @@ object Dimens {
     @Stable
     val _84: Dp = 84.dp
     @Stable
-    val _150: Dp = 150.dp
+    val _156: Dp = 156.dp
     @Stable
     val _240: Dp = 240.dp
     @Stable

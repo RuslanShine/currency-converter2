@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.convertmy.data.ValCurs
 import com.example.currencyconverter.App
+import com.example.currencyconverter.data.DataRepository
 import com.example.currencyconverter.domain.Interactor
 import com.example.currencyconverter.domain.usecase.GetValuesUseCase
 import kotlinx.coroutines.launch
@@ -16,7 +17,8 @@ class HomeViewModel : ViewModel() {
     private val _valuesData = MutableLiveData<ValCurs>()
     val valuesData get() = _valuesData
 
-    private val getValuesUseCase = GetValuesUseCase(valuesData)
+    private val dataRepository = DataRepository()
+    private val getValuesUseCase = GetValuesUseCase(dataRepository)
 
 
     private var interactor: Interactor = App.instance.interactor
@@ -37,8 +39,7 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun recalculatingValues(result: String): Double {
-        val a = getValuesUseCase.execute(result)
-        return a
+    suspend fun recalculatingValues(result: String): Double {
+        return getValuesUseCase.execute(result)
     }
 }

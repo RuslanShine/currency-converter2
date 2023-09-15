@@ -1,15 +1,13 @@
 package com.example.currencyconverter.domain.usecase
 
-import androidx.lifecycle.MutableLiveData
-import com.example.convertmy.data.ValCurs
+import com.example.currencyconverter.data.DataRepository
+import com.example.currencyconverter.domain.repository.DataRepositoryImpl
 
-class GetValuesUseCase(valuesData: MutableLiveData<ValCurs>) {
+class GetValuesUseCase(private val dataRepository:DataRepositoryImpl) {
 
-    private val d = valuesData.value?.valute?.dKK?.value
-    private val s = 10.0
-
-    fun execute(param: String): Double {
-        param.toFloat()
-        return d?.times(s) ?: 0.0
+    suspend fun execute(param: String): Double {
+        val userParamConvert = param.toDouble()
+        val data = dataRepository.getValues().valute.uSD.value
+        return userParamConvert * data
     }
 }

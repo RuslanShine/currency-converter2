@@ -34,6 +34,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,6 +50,9 @@ import com.example.currencyconverter.ui.theme.theme.FontSizes
 import com.example.currencyconverter.ui.theme.theme.Purple40
 import com.example.currencyconverter.ui.theme.theme.Purple80
 import com.example.currencyconverter.viewModel.HomeViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import kotlin.coroutines.coroutineContext
 
 //fun convert(from: String?, to: String?, v: Float): Float {
 //    val fromVal: Float = repo.get(from)
@@ -60,7 +64,7 @@ import com.example.currencyconverter.viewModel.HomeViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) {
-
+    val coroutine = rememberCoroutineScope()
     val myList = listOf(
         valuesData.valute.aED.name,
         valuesData.valute.aMD.name,
@@ -157,7 +161,7 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(Dimens._150)
+                        .height(Dimens._156)
                         .padding(Dimens._8),
                 ) {
                     Column(
@@ -190,10 +194,6 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
                                         }, modifier = Modifier.background(Color.White))
                                     }
                                 }
-                                SideEffect {
-
-                                }
-
                             }
                         }
                         Row(
@@ -229,7 +229,7 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(Dimens._150)
+                        .height(Dimens._156)
                         .padding(Dimens._8)
                 ) {
                     Column(
@@ -303,13 +303,14 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
                 ) {
                     Button(
                         onClick = {
-                            val result = textOne
-                            val v = viewModel.recalculatingValues(result)
-                            textTow = v.toString()
 
-
-
-
+                            coroutine.launch {
+                                textTow = if (textOne > 0.toString()) {
+                                    val result = textOne
+                                    val resultFinish = viewModel.recalculatingValues(result)
+                                    String.format("%.3f", resultFinish)
+                                } else "0"
+                            }
                             Toast.makeText(context, "Конвертация", Toast.LENGTH_SHORT).show()
                         },
                         modifier = Modifier.width(Dimens._320),

@@ -2,11 +2,12 @@ package com.example.currencyconverter.data
 
 import com.example.convertmy.data.ValCurs
 import com.example.currencyconverter.ServiceLocator
+import com.example.currencyconverter.domain.repository.DataRepositoryImpl
 
-class DataRepository {
+class DataRepository: DataRepositoryImpl {
     private val dataApi: com.example.currencyconverter.data.DataApi = ServiceLocator.dataApi
 
-    suspend fun getValues(): ValCurs {
+    override suspend fun getValues(): ValCurs {
         return dataApi.getValues()
     }
 }
