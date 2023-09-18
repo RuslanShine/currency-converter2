@@ -1,7 +1,7 @@
 package com.example.currencyconverter.ui.theme
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -30,7 +30,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -51,6 +50,7 @@ import com.example.currencyconverter.ui.theme.theme.Purple40
 import com.example.currencyconverter.ui.theme.theme.Purple80
 import com.example.currencyconverter.viewModel.HomeViewModel
 import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
 
 //fun convert(from: String?, to: String?, v: Float): Float {
 //    val fromVal: Float = repo.get(from)
@@ -59,11 +59,13 @@ import kotlinx.coroutines.launch
 //}
 
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) {
     val coroutine = rememberCoroutineScope()
     val myList = listOf(
+        "Выберите валюту",
         valuesData.valute.aED.name,
         valuesData.valute.aMD.name,
         valuesData.valute.aUD.name,
@@ -114,6 +116,10 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
     val expandedOne = remember { mutableStateOf(false) }
     val currentValueOne = remember { mutableStateOf(listСurrencyOne[0]) }
     var textOne by remember { mutableStateOf("") }
+
+     var nameCurrency: String
+    var rez:String
+
 
     val listСurrencyTow = myList
     val expandedTow = remember { mutableStateOf(false) }
@@ -184,10 +190,19 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
                                 DropdownMenu(expanded = expandedOne.value,
                                     onDismissRequest = { expandedOne.value = false }) {
                                     listСurrencyOne.forEach {
+
+
+
                                         DropdownMenuItem(text = { Text(text = it) }, onClick = {
                                             currentValueOne.value = it
-                                            coroutine.launch {
+
+                                            coroutine.launch() {
                                                  viewModel.recalculatingValuesMyValute( myValute = it)
+                                            }
+
+
+                                            coroutine.launch {
+                                                viewModel.searchValue(it)
                                             }
 
                                             expandedOne.value = false
@@ -204,7 +219,7 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
                             horizontalArrangement = Arrangement.SpaceAround
                         ) {
                             Text(
-                                text = valuesData.valute.uSD.charCode,
+                                text =viewModel.setCurrencyName(),
                                 fontSize = FontSizes._24,
                                 color = Color.Black
                             )

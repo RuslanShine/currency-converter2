@@ -3,9 +3,9 @@ package com.example.currencyconverter.domain.usecase
 import com.example.currencyconverter.domain.repository.DataRepositoryImpl
 
 class GetValuesUseCase(private val dataRepository: DataRepositoryImpl) {
-    var point: Double = 0.0
+    private var point: Double = 0.0
 
-    suspend fun execute(param: String): Double {
+     fun execute(param: String): Double {
         val userParamConvert = param.toDouble()
         return userParamConvert * point
     }
@@ -58,6 +58,4 @@ class GetValuesUseCase(private val dataRepository: DataRepositoryImpl) {
             dataRepository.getValues().valute.zAR.name-> point = dataRepository.getValues().valute.zAR.value
         }
     }
-
-
 }

@@ -9,6 +9,7 @@ import com.example.currencyconverter.App
 import com.example.currencyconverter.data.DataRepository
 import com.example.currencyconverter.domain.Interactor
 import com.example.currencyconverter.domain.usecase.GetValuesUseCase
+import com.example.currencyconverter.domain.usecase.RecalculatingValuesUseCase
 import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
@@ -19,6 +20,7 @@ class HomeViewModel : ViewModel() {
 
     private val dataRepository = DataRepository()
     private val getValuesUseCase = GetValuesUseCase(dataRepository)
+    private val recalculatingValuesUseCase = RecalculatingValuesUseCase(dataRepository)
 
 
     private var interactor: Interactor = App.instance.interactor
@@ -39,16 +41,22 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    suspend fun recalculatingValues(result: String): Double {
+     fun recalculatingValues(result: String): Double {
         return getValuesUseCase.execute(result)
     }
 
     suspend fun recalculatingValuesMyValute(myValute: String) {
-        return getValuesUseCase.getMyValute(myValute)
-
+        getValuesUseCase.getMyValute(myValute)
     }
 
 
+    suspend fun searchValue(nameCurrencyScreen: String) {
+        recalculatingValuesUseCase.monitoringValue(nameCurrencyScreen)
+    }
+
+    fun setCurrencyName(): String {
+        return recalculatingValuesUseCase.execute()
+    }
 
 
 }
