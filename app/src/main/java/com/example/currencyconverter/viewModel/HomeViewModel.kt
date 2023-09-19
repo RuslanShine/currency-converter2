@@ -8,8 +8,8 @@ import com.example.convertmy.data.ValCurs
 import com.example.currencyconverter.App
 import com.example.currencyconverter.data.DataRepository
 import com.example.currencyconverter.domain.Interactor
-import com.example.currencyconverter.domain.usecase.GetValuesUseCase
 import com.example.currencyconverter.domain.usecase.RecalculatingValuesUseCase
+import com.example.currencyconverter.domain.usecase.SetCharCodeValuesUseCase
 import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
@@ -19,8 +19,8 @@ class HomeViewModel : ViewModel() {
     val valuesData get() = _valuesData
 
     private val dataRepository = DataRepository()
-    private val getValuesUseCase = GetValuesUseCase(dataRepository)
     private val recalculatingValuesUseCase = RecalculatingValuesUseCase(dataRepository)
+    private val setCharCodeValuesUseCase = SetCharCodeValuesUseCase(dataRepository)
 
 
     private var interactor: Interactor = App.instance.interactor
@@ -41,22 +41,32 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-     fun recalculatingValues(result: String): Double {
-        return getValuesUseCase.execute(result)
+    fun recalculatingValues(result: String): Double {
+        return recalculatingValuesUseCase.execute(result)
     }
 
-    suspend fun recalculatingValuesMyValute(myValute: String) {
-        getValuesUseCase.getMyValute(myValute)
+    suspend fun searchFromVal(nameCurrencyFromVal: String) {
+        recalculatingValuesUseCase.monitoringValueFromVal(nameCurrencyFromVal)
     }
 
-
-    suspend fun searchValue(nameCurrencyScreen: String) {
-        recalculatingValuesUseCase.monitoringValue(nameCurrencyScreen)
+    suspend fun searchToVal(nameCurrencyToVal: String) {
+        recalculatingValuesUseCase.monitoringValueToVal(nameCurrencyToVal)
     }
 
-    fun setCurrencyName(): String {
-        return recalculatingValuesUseCase.execute()
+    suspend fun searchValueFromVal(nameCurrencyScreen: String) {
+        setCharCodeValuesUseCase.monitoringValueFromVal(nameCurrencyScreen)
     }
 
+    fun setCurrencyNameFromVal(): String {
+        return setCharCodeValuesUseCase.executeFromVal()
+    }
+
+    suspend fun searchValueToVal(nameCurrencyScreenToVal: String) {
+        setCharCodeValuesUseCase.monitoringValueToVal(nameCurrencyScreenToVal)
+    }
+
+    fun setCurrencyNameToVal(): String {
+        return setCharCodeValuesUseCase.executeToVal()
+    }
 
 }

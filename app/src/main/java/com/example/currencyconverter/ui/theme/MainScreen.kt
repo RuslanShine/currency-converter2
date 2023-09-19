@@ -50,13 +50,6 @@ import com.example.currencyconverter.ui.theme.theme.Purple40
 import com.example.currencyconverter.ui.theme.theme.Purple80
 import com.example.currencyconverter.viewModel.HomeViewModel
 import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
-
-//fun convert(from: String?, to: String?, v: Float): Float {
-//    val fromVal: Float = repo.get(from)
-//    val toVal: Float = repo.get(to)
-//    return fromVal / toVal * v
-//}
 
 
 @SuppressLint("CoroutineCreationDuringComposition")
@@ -116,9 +109,6 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
     val expandedOne = remember { mutableStateOf(false) }
     val currentValueOne = remember { mutableStateOf(listСurrencyOne[0]) }
     var textOne by remember { mutableStateOf("") }
-
-     var nameCurrency: String
-    var rez:String
 
 
     val listСurrencyTow = myList
@@ -191,18 +181,15 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
                                     onDismissRequest = { expandedOne.value = false }) {
                                     listСurrencyOne.forEach {
 
-
-
                                         DropdownMenuItem(text = { Text(text = it) }, onClick = {
                                             currentValueOne.value = it
 
-                                            coroutine.launch() {
-                                                 viewModel.recalculatingValuesMyValute( myValute = it)
+                                            coroutine.launch {
+                                                 viewModel.searchFromVal(it)
                                             }
 
-
                                             coroutine.launch {
-                                                viewModel.searchValue(it)
+                                                viewModel.searchValueFromVal(it)
                                             }
 
                                             expandedOne.value = false
@@ -219,7 +206,7 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
                             horizontalArrangement = Arrangement.SpaceAround
                         ) {
                             Text(
-                                text =viewModel.setCurrencyName(),
+                                text =viewModel.setCurrencyNameFromVal(),
                                 fontSize = FontSizes._24,
                                 color = Color.Black
                             )
@@ -276,6 +263,15 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
                                         DropdownMenuItem(text = { Text(text = it) }, onClick = {
                                             currentValueTow.value = it
                                             expandedTow.value = false
+
+                                            coroutine.launch {
+                                                viewModel.searchToVal(it)
+                                            }
+
+                                            coroutine.launch {
+                                                viewModel.searchValueToVal(it)
+                                            }
+
                                         }, modifier = Modifier.background(Color.White))
                                     }
                                 }
@@ -290,7 +286,7 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
                             horizontalArrangement = Arrangement.SpaceAround
                         ) {
                             Text(
-                                text = valuesData.valute.aED.charCode,
+                                text = viewModel.setCurrencyNameToVal(),
                                 fontSize = FontSizes._24,
                                 color = Color.Black
                             )
