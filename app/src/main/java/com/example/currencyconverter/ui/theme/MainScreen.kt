@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -185,7 +186,7 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
                                             currentValueOne.value = it
 
                                             coroutine.launch {
-                                                 viewModel.searchFromVal(it)
+                                                viewModel.searchFromVal(it)
                                             }
 
                                             coroutine.launch {
@@ -206,12 +207,13 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
                             horizontalArrangement = Arrangement.SpaceAround
                         ) {
                             Text(
-                                text =viewModel.setCurrencyNameFromVal(),
+                                text = viewModel.setCurrencyNameFromVal(),
                                 fontSize = FontSizes._24,
                                 color = Color.Black
                             )
                             OutlinedTextField(value = textOne,
                                 onValueChange = { textOne = it },
+
                                 modifier = Modifier.width(Dimens._240),
                                 textStyle = androidx.compose.ui.text.TextStyle(
                                     fontSize = FontSizes._24
@@ -222,7 +224,17 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
                                     unfocusedBorderColor = Color.White,
                                     textColor = Color.Black
                                 ),
-                                placeholder = { Text("0") })
+                                placeholder = { Text("0") },
+                                trailingIcon = {
+                                    Icon(Icons.Default.Clear,
+                                        contentDescription = "clear text",
+                                        modifier = Modifier
+                                            .clickable {
+                                                textOne = ""
+                                            }
+                                    )
+                                }
+                            )
                         }
                     }
                 }
@@ -302,7 +314,17 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
                                     unfocusedBorderColor = Color.White,
                                     textColor = Color.Black
                                 ),
-                                placeholder = { Text("0") })
+                                placeholder = { Text("0") },
+                                trailingIcon = {
+                                    Icon(Icons.Default.Clear,
+                                        contentDescription = "clear text",
+                                        modifier = Modifier
+                                            .clickable {
+                                                textTow = ""
+                                            }
+                                    )
+                                }
+                            )
                         }
                     }
                 }
