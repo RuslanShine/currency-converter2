@@ -2,12 +2,6 @@ package com.example.currencyconverter.domain.usecase
 
 import com.example.currencyconverter.domain.repository.DataRepositoryImpl
 
-//fun convert(from: String?, to: String?, v: Float): Float {
-//    val fromVal: Float = repo.get(from)
-//    val toVal: Float = repo.get(to)
-//    return fromVal / toVal * v
-//}
-
 class RecalculatingValuesUseCase(private val dataRepository: DataRepositoryImpl) {
     private var fromVal: Double = 0.0
     private var toVal: Double = 0.0

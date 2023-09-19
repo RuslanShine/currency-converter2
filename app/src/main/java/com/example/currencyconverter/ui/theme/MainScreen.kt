@@ -336,7 +336,6 @@ fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) 
                 ) {
                     Button(
                         onClick = {
-
                             coroutine.launch {
                                 textTow = if (textOne > 0.toString()) {
                                     val result = textOne

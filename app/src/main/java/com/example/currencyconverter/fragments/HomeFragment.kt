@@ -32,12 +32,10 @@ class HomeFragment : Fragment() {
         viewModel.valuesData.observe(viewLifecycleOwner) { valuesData ->
             binding.composView.apply {
                 setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-                setContent { MainScreen(valuesData,context,viewModel) }
+                setContent { MainScreen(valuesData, context, viewModel) }
             }
 
         }
-
-
     }
 
     override fun onDestroyView() {

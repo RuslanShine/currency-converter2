@@ -14,7 +14,6 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
 
-
     private val _valuesData = MutableLiveData<ValCurs>()
     val valuesData get() = _valuesData
 
