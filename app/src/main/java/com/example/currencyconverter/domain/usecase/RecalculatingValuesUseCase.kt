@@ -1,8 +1,8 @@
 package com.example.currencyconverter.domain.usecase
 
-import com.example.currencyconverter.domain.repository.DataRepositoryImpl
+import com.example.currencyconverter.data.DataRepository
 
-class RecalculatingValuesUseCase(private val dataRepository: DataRepositoryImpl) {
+class RecalculatingValuesUseCase(private val dataRepository: DataRepository) {
     private var fromVal: Double = 0.0
     private var toVal: Double = 0.0
 

@@ -1,11 +1,10 @@
 package com.example.currencyconverter.domain.usecase
 
-import com.example.currencyconverter.domain.repository.DataRepositoryImpl
+import com.example.currencyconverter.data.DataRepository
 
-class SetCharCodeValuesUseCase (private val dataRepository: DataRepositoryImpl){
-
-        private var nameCurrency  = "VAL"
-        private var nameCurrencyToVal  = "VAL"
+class SetCharCodeValuesUseCase(private val dataRepository: DataRepository){
+    private var nameCurrency  = "VAL"
+    private var nameCurrencyToVal  = "VAL"
 
     fun executeFromVal():String{
         return nameCurrency

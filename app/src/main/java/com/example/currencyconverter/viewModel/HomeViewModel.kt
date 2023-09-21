@@ -5,34 +5,32 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.convertmy.data.ValCurs
-import com.example.currencyconverter.App
 import com.example.currencyconverter.data.DataRepository
-import com.example.currencyconverter.domain.Interactor
 import com.example.currencyconverter.domain.usecase.RecalculatingValuesUseCase
 import com.example.currencyconverter.domain.usecase.SetCharCodeValuesUseCase
-import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val repository: DataRepository) : ViewModel() {
 
     private val _valuesData = MutableLiveData<ValCurs>()
     val valuesData get() = _valuesData
 
-    private val dataRepository = DataRepository()
-    private val recalculatingValuesUseCase = RecalculatingValuesUseCase(dataRepository)
-    private val setCharCodeValuesUseCase = SetCharCodeValuesUseCase(dataRepository)
-
-
-    private var interactor: Interactor = App.instance.interactor
+    private val recalculatingValuesUseCase = RecalculatingValuesUseCase(repository)
+    private val setCharCodeValuesUseCase = SetCharCodeValuesUseCase(repository)
 
     init {
         loadPosts()
-
     }
 
     fun loadPosts() {
         viewModelScope.launch {
             try {
-                _valuesData.value = interactor.getValues()
+                _valuesData.value = repository.getValues()
             } catch (e: Exception) {
                 Log.e("HomeViewModel", e.message.toString())
                 e.printStackTrace()

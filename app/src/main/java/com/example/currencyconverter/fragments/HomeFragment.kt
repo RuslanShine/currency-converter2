@@ -7,15 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.fragment.app.viewModels
+import com.example.currencyconverter.data.DataRepository
 import com.example.currencyconverter.viewModel.HomeViewModel
 import com.example.currencyconverter.databinding.FragmentHomeBinding
 import com.example.currencyconverter.ui.theme.MainScreen
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding get() = checkNotNull(_binding)
-    private lateinit var viewModel: HomeViewModel
+
+    @Inject
+    lateinit var repository: DataRepository
+     private val viewModel by viewModels<HomeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +36,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         viewModel.valuesData.observe(viewLifecycleOwner) { valuesData ->
             binding.composView.apply {

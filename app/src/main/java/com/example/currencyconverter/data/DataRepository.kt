@@ -1,13 +1,13 @@
 package com.example.currencyconverter.data
 
 import com.example.convertmy.data.ValCurs
-import com.example.currencyconverter.ServiceLocator
-import com.example.currencyconverter.domain.repository.DataRepositoryImpl
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class DataRepository: DataRepositoryImpl {
-    private val dataApi: com.example.currencyconverter.data.DataApi = ServiceLocator.dataApi
+@Singleton
+class DataRepository @Inject constructor(private val dataApi: DataApi) {
 
-    override suspend fun getValues(): ValCurs {
+    suspend fun getValues(): ValCurs {
         return dataApi.getValues()
     }
 }

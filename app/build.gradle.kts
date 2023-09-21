@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -93,10 +94,11 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
 
+
     //Hilt
-    implementation ("com.google.dagger:hilt-android:2.45")
-    kapt ("com.google.dagger:hilt-android-compiler:2.38.1")
-    implementation ("com.google.dagger:hilt-android-gradle-plugin:2.38.1")
+    implementation ("com.google.dagger:hilt-android:2.44")
+    kapt ("com.google.dagger:hilt-compiler:2.44")
+    implementation ("com.google.dagger:hilt-android-gradle-plugin:2.44")
 
     implementation ("com.squareup.inject:assisted-inject-annotations-dagger2:0.5.2")
     kapt ("com.squareup.inject:assisted-inject-processor-dagger2:0.5.2")
