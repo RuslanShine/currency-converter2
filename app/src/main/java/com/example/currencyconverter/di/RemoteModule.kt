@@ -37,7 +37,7 @@ class RemoteModule {
     @Singleton
     fun provideTmdbApi(retrofit: Retrofit): DataApi = retrofit.create(DataApi::class.java)
 
-    @Provides
-    @Singleton
-    fun provideDataRepositoryApi(dataApi: DataApi): DataRepository = DataRepository(dataApi)
+//    @Provides
+//    @Singleton
+//    fun provideDataRepositoryApi(dataApi: DataApi): DataRepository = DataRepository(dataApi = dataApi)
 }

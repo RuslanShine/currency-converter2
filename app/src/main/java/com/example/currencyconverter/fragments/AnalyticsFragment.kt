@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.currencyconverter.viewModel.AnalyticsViewModel
 import com.example.currencyconverter.databinding.FragmentAnalyticsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AnalyticsFragment : Fragment() {
 
     private var _binding: FragmentAnalyticsBinding? = null

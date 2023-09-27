@@ -1,6 +1,5 @@
 package com.example.currencyconverter.fragments
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,8 +21,8 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding get() = checkNotNull(_binding)
 
-    @Inject
-    lateinit var repository: DataRepository
+//    @Inject
+//    lateinit var repository: DataRepository
      private val viewModel by viewModels<HomeViewModel>()
 
     override fun onCreateView(

@@ -3,6 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -86,7 +88,7 @@ dependencies {
     //Room
     val room_version = "2.5.2"
     implementation ("androidx.room:room-runtime:$room_version")
-    annotationProcessor ("androidx.room:room-compiler:$room_version")
+    ksp("androidx.room:room-compiler:2.5.0")
     implementation ("androidx.room:room-ktx:$room_version")
 
     //Coroutines

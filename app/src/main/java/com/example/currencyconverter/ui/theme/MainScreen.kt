@@ -44,6 +44,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.convertmy.data.ValCurs
 import com.example.currencyconverter.R
+import com.example.currencyconverter.data.entity.Currencies
 import com.example.currencyconverter.ui.theme.theme.ButtonColors
 import com.example.currencyconverter.ui.theme.theme.Dimens
 import com.example.currencyconverter.ui.theme.theme.FontSizes
@@ -56,53 +57,53 @@ import kotlinx.coroutines.launch
 @SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(valuesData: ValCurs, context: Context, viewModel: HomeViewModel) {
+fun MainScreen(valuesData: List<Currencies>, context: Context, viewModel: HomeViewModel) {
     val coroutine = rememberCoroutineScope()
     val myList = listOf(
         "Выберите валюту",
-        valuesData.valute.aED.name,
-        valuesData.valute.aMD.name,
-        valuesData.valute.aUD.name,
-        valuesData.valute.aZN.name,
-        valuesData.valute.bGN.name,
-        valuesData.valute.bRL.name,
-        valuesData.valute.bYN.name,
-        valuesData.valute.cAD.name,
-        valuesData.valute.cHF.name,
-        valuesData.valute.cNY.name,
-        valuesData.valute.cZK.name,
-        valuesData.valute.dKK.name,
-        valuesData.valute.eGP.name,
-        valuesData.valute.eUR.name,
-        valuesData.valute.gBP.name,
-        valuesData.valute.gEL.name,
-        valuesData.valute.hKD.name,
-        valuesData.valute.hUF.name,
-        valuesData.valute.iDR.name,
-        valuesData.valute.iNR.name,
-        valuesData.valute.jPY.name,
-        valuesData.valute.kGS.name,
-        valuesData.valute.kRW.name,
-        valuesData.valute.kZT.name,
-        valuesData.valute.mDL.name,
-        valuesData.valute.nOK.name,
-        valuesData.valute.nZD.name,
-        valuesData.valute.pLN.name,
-        valuesData.valute.qAR.name,
-        valuesData.valute.rON.name,
-        valuesData.valute.rSD.name,
-        valuesData.valute.sEK.name,
-        valuesData.valute.sGD.name,
-        valuesData.valute.tHB.name,
-        valuesData.valute.tJS.name,
-        valuesData.valute.tMT.name,
-        valuesData.valute.tRY.name,
-        valuesData.valute.uAH.name,
-        valuesData.valute.uSD.name,
-        valuesData.valute.uZS.name,
-        valuesData.valute.vND.name,
-        valuesData.valute.xDR.name,
-        valuesData.valute.zAR.name
+//        valuesData.valute.aED.name,
+//        valuesData.valute.aMD.name,
+//        valuesData.valute.aUD.name,
+//        valuesData.valute.aZN.name,
+//        valuesData.valute.bGN.name,
+//        valuesData.valute.bRL.name,
+//        valuesData.valute.bYN.name,
+//        valuesData.valute.cAD.name,
+//        valuesData.valute.cHF.name,
+//        valuesData.valute.cNY.name,
+//        valuesData.valute.cZK.name,
+//        valuesData.valute.dKK.name,
+//        valuesData.valute.eGP.name,
+//        valuesData.valute.eUR.name,
+//        valuesData.valute.gBP.name,
+//        valuesData.valute.gEL.name,
+//        valuesData.valute.hKD.name,
+//        valuesData.valute.hUF.name,
+//        valuesData.valute.iDR.name,
+//        valuesData.valute.iNR.name,
+//        valuesData.valute.jPY.name,
+//        valuesData.valute.kGS.name,
+//        valuesData.valute.kRW.name,
+//        valuesData.valute.kZT.name,
+//        valuesData.valute.mDL.name,
+//        valuesData.valute.nOK.name,
+//        valuesData.valute.nZD.name,
+//        valuesData.valute.pLN.name,
+//        valuesData.valute.qAR.name,
+//        valuesData.valute.rON.name,
+//        valuesData.valute.rSD.name,
+//        valuesData.valute.sEK.name,
+//        valuesData.valute.sGD.name,
+//        valuesData.valute.tHB.name,
+//        valuesData.valute.tJS.name,
+//        valuesData.valute.tMT.name,
+//        valuesData.valute.tRY.name,
+//        valuesData.valute.uAH.name,
+//        valuesData.valute.uSD.name,
+//        valuesData.valute.uZS.name,
+//        valuesData.valute.vND.name,
+//        valuesData.valute.xDR.name,
+//        valuesData.valute.zAR.name
     )
 
 
