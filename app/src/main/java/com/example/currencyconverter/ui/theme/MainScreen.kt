@@ -61,6 +61,10 @@ fun MainScreen(valuesData: List<Currencies>, context: Context, viewModel: HomeVi
     val coroutine = rememberCoroutineScope()
     val myList = listOf(
         "Выберите валюту",
+        "Выберите валюту",
+        "Выберите валюту",
+        "Выберите валюту",
+        "dfd",
 //        valuesData.valute.aED.name,
 //        valuesData.valute.aMD.name,
 //        valuesData.valute.aUD.name,
@@ -146,7 +150,7 @@ fun MainScreen(valuesData: List<Currencies>, context: Context, viewModel: HomeVi
                     ) {
                         Text(
                             modifier = Modifier.padding(Dimens._4),
-                            text = stringResource(R.string.currency_converter),
+                            text = valuesData.map { it.aED.name }.toString(),
                             color = Color.Black,
                             fontSize = FontSizes._24
                         )

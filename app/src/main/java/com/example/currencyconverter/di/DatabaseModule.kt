@@ -21,7 +21,7 @@ class DatabaseModule {
     fun provideCurrenciesDao(@ApplicationContext context: Context): CurrenciesDatabase {
         return Room.databaseBuilder(
             context, CurrenciesDatabase::class.java,
-            "currency_db"
+            "cached_currencies"
         ).build()
     }
 

@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.material3.Text
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.unit.sp
 import androidx.fragment.app.viewModels
 import com.example.currencyconverter.data.DataRepository
 import com.example.currencyconverter.viewModel.HomeViewModel
@@ -39,7 +41,11 @@ class HomeFragment : Fragment() {
         viewModel.valuesData.observe(viewLifecycleOwner) { valuesData ->
             binding.composView.apply {
                 setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-                setContent { MainScreen(valuesData, context, viewModel) }
+                setContent {
+                    Text(text = "TEst", fontSize = 30.sp)
+//                    MainScreen(valuesData, context, viewModel)
+
+                }
             }
 
         }

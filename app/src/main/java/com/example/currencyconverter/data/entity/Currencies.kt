@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.convertmy.data.AED
 import com.example.convertmy.data.AMD
 import com.example.convertmy.data.AUD
 import com.example.convertmy.data.AZN
@@ -44,6 +45,7 @@ import com.example.convertmy.data.UAH
 import com.example.convertmy.data.USD
 import com.example.convertmy.data.UZS
 import com.example.convertmy.data.VND
+import com.example.convertmy.data.Valute
 import com.example.convertmy.data.XDR
 import com.example.convertmy.data.ZAR
 
@@ -67,8 +69,8 @@ data class Currencies(
     @ColumnInfo(name = "previousDate") val previousDate: String,
     @ColumnInfo(name = "previousURL") val previousURL: String,
     @ColumnInfo(name = "timestamp") val timestamp: String,
-    @Embedded(prefix = "valute_") val valute: String,
-    @Embedded(prefix = "valute_res_aED_") val aED: String,
+//    @Embedded(prefix = "valute_") val valute: Valute,
+    @Embedded(prefix = "valute_res_aED_") val aED: AED,
     @Embedded(prefix = "valute_res_aMD_") val aMD: AMD,
     @Embedded(prefix = "valute_res_aUD_") val aUD: AUD,
     @Embedded(prefix = "valute_res_aZN_") val aZN: AZN,
@@ -139,7 +141,7 @@ data class Currencies(
 //    val previous: Double,
 //    val value: Double
 //)
-//
+////
 //data class AMD(
 //    val charCode: String,
 //    val iD: String,
