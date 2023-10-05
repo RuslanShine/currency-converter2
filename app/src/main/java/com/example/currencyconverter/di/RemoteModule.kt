@@ -12,6 +12,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -22,6 +23,8 @@ class RemoteModule {
     @Singleton
     fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient =
         OkHttpClient.Builder()
+            .callTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
             .addInterceptor(ChuckerInterceptor(context))
             .build()
 
@@ -37,7 +40,4 @@ class RemoteModule {
     @Singleton
     fun provideTmdbApi(retrofit: Retrofit): DataApi = retrofit.create(DataApi::class.java)
 
-//    @Provides
-//    @Singleton
-//    fun provideDataRepositoryApi(dataApi: DataApi): DataRepository = DataRepository(dataApi = dataApi)
 }

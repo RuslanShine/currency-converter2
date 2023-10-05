@@ -45,31 +45,16 @@ import com.example.convertmy.data.UAH
 import com.example.convertmy.data.USD
 import com.example.convertmy.data.UZS
 import com.example.convertmy.data.VND
-import com.example.convertmy.data.Valute
 import com.example.convertmy.data.XDR
 import com.example.convertmy.data.ZAR
 
-//@Entity(tableName = "cat_table")
-//data class Cat(
-//    @PrimaryKey(autoGenerate = true) val id: Int = 0,
-//    @ColumnInfo(name = "cat_name") val catName: String,
-//    @ColumnInfo(name = "cat_age") val catAge:Int,
-//    @Embedded(prefix = "parent_") val catParent: CatParent
-//)
-//
-//data class CatParent(
-//    val cat_name: String,
-//    val cat_age: String
-//)
-
 @Entity(tableName = "cached_currencies")
 data class Currencies(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) val id: Int = 1,
     @ColumnInfo(name = "date") val date: String,
     @ColumnInfo(name = "previousDate") val previousDate: String,
     @ColumnInfo(name = "previousURL") val previousURL: String,
     @ColumnInfo(name = "timestamp") val timestamp: String,
-//    @Embedded(prefix = "valute_") val valute: Valute,
     @Embedded(prefix = "valute_res_aED_") val aED: AED,
     @Embedded(prefix = "valute_res_aMD_") val aMD: AMD,
     @Embedded(prefix = "valute_res_aUD_") val aUD: AUD,
@@ -114,54 +99,3 @@ data class Currencies(
     @Embedded(prefix = "valute_res_xDR_") val xDR: XDR,
     @Embedded(prefix = "valute_res_zAR_") val zAR: ZAR
     )
-
-//data class Valute(
-//    val aED: AED,
-//    val aMD: AMD,
-//    val aUD: AUD,
-//    val aZN: AZN,
-//    val bGN: BGN,
-//    val bRL: BRL,
-//    val bYN: BYN,
-//    val cAD: CAD,
-//    val cHF: CHF,
-//    val cNY: CNY,
-//    val cZK: CZK,
-//    val dKK: DKK,
-//    val eGP: EGP,
-//    val eUR: EUR
-//)
-//
-//    data class AED(
-//    val charCode: String,
-//    val iD: String,
-//    val name: String,
-//    val nominal: Int,
-//    val numCode: String,
-//    val previous: Double,
-//    val value: Double
-//)
-////
-//data class AMD(
-//    val charCode: String,
-//    val iD: String,
-//    val name: String,
-//    val nominal: Int,
-//    val numCode: String,
-//    val previous: Double,
-//    val value: Double
-//)
-
-
-
-//@Entity(tableName = "cached_currencies")
-//data class Currencies(
-//    @PrimaryKey(autoGenerate = true) val id: Int = 0,
-//    @Ignore val iD: String,
-//    @ColumnInfo(name = "char_Code") val charCode: String,
-//    @ColumnInfo(name = "name_") val name: String,
-//    @ColumnInfo(name = "nominal_") val nominal: Int,
-//    @ColumnInfo(name = "numCode_") val numCode: String,
-//    @Ignore val previous: Double,
-//    @ColumnInfo(name = "value_") val value: Double,
-//)

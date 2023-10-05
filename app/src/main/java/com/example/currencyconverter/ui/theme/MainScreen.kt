@@ -31,6 +31,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -42,7 +43,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.example.convertmy.data.ValCurs
 import com.example.currencyconverter.R
 import com.example.currencyconverter.data.entity.Currencies
 import com.example.currencyconverter.ui.theme.theme.ButtonColors
@@ -51,65 +51,65 @@ import com.example.currencyconverter.ui.theme.theme.FontSizes
 import com.example.currencyconverter.ui.theme.theme.Purple40
 import com.example.currencyconverter.ui.theme.theme.Purple80
 import com.example.currencyconverter.viewModel.HomeViewModel
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.launch
 
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(valuesData: List<Currencies>, context: Context, viewModel: HomeViewModel) {
+fun MainScreen(context: Context, viewModel: HomeViewModel, db: Currencies) {
+
+//    val test by viewModel.valuesData.observeAsState()
+//    val uiState by viewModel._valuesData.collectAsState("")
+
     val coroutine = rememberCoroutineScope()
     val myList = listOf(
         "Выберите валюту",
-        "Выберите валюту",
-        "Выберите валюту",
-        "Выберите валюту",
-        "dfd",
-//        valuesData.valute.aED.name,
-//        valuesData.valute.aMD.name,
-//        valuesData.valute.aUD.name,
-//        valuesData.valute.aZN.name,
-//        valuesData.valute.bGN.name,
-//        valuesData.valute.bRL.name,
-//        valuesData.valute.bYN.name,
-//        valuesData.valute.cAD.name,
-//        valuesData.valute.cHF.name,
-//        valuesData.valute.cNY.name,
-//        valuesData.valute.cZK.name,
-//        valuesData.valute.dKK.name,
-//        valuesData.valute.eGP.name,
-//        valuesData.valute.eUR.name,
-//        valuesData.valute.gBP.name,
-//        valuesData.valute.gEL.name,
-//        valuesData.valute.hKD.name,
-//        valuesData.valute.hUF.name,
-//        valuesData.valute.iDR.name,
-//        valuesData.valute.iNR.name,
-//        valuesData.valute.jPY.name,
-//        valuesData.valute.kGS.name,
-//        valuesData.valute.kRW.name,
-//        valuesData.valute.kZT.name,
-//        valuesData.valute.mDL.name,
-//        valuesData.valute.nOK.name,
-//        valuesData.valute.nZD.name,
-//        valuesData.valute.pLN.name,
-//        valuesData.valute.qAR.name,
-//        valuesData.valute.rON.name,
-//        valuesData.valute.rSD.name,
-//        valuesData.valute.sEK.name,
-//        valuesData.valute.sGD.name,
-//        valuesData.valute.tHB.name,
-//        valuesData.valute.tJS.name,
-//        valuesData.valute.tMT.name,
-//        valuesData.valute.tRY.name,
-//        valuesData.valute.uAH.name,
-//        valuesData.valute.uSD.name,
-//        valuesData.valute.uZS.name,
-//        valuesData.valute.vND.name,
-//        valuesData.valute.xDR.name,
-//        valuesData.valute.zAR.name
+        db.aED.name,
+        db.aMD.name,
+        db.aUD.name,
+        db.aZN.name,
+        db.bGN.name,
+        db.bRL.name,
+        db.bYN.name,
+        db.cAD.name,
+        db.cHF.name,
+        db.cNY.name,
+        db.cZK.name,
+        db.dKK.name,
+        db.eGP.name,
+        db.eUR.name,
+        db.gBP.name,
+        db.gEL.name,
+        db.hKD.name,
+        db.hUF.name,
+        db.iDR.name,
+        db.iNR.name,
+        db.jPY.name,
+        db.kGS.name,
+        db.kRW.name,
+        db.kZT.name,
+        db.mDL.name,
+        db.nOK.name,
+        db.nZD.name,
+        db.pLN.name,
+        db.qAR.name,
+        db.rON.name,
+        db.rSD.name,
+        db.sEK.name,
+        db.sGD.name,
+        db.tHB.name,
+        db.tJS.name,
+        db.tMT.name,
+        db.tRY.name,
+        db.uAH.name,
+        db.uSD.name,
+        db.uZS.name,
+        db.vND.name,
+        db.xDR.name,
+        db.zAR.name
     )
-
 
     val listСurrencyOne = myList
     val expandedOne = remember { mutableStateOf(false) }
@@ -150,7 +150,7 @@ fun MainScreen(valuesData: List<Currencies>, context: Context, viewModel: HomeVi
                     ) {
                         Text(
                             modifier = Modifier.padding(Dimens._4),
-                            text = valuesData.map { it.aED.name }.toString(),
+                            text = stringResource(R.string.currency_converter),
                             color = Color.Black,
                             fontSize = FontSizes._24
                         )
@@ -186,24 +186,26 @@ fun MainScreen(valuesData: List<Currencies>, context: Context, viewModel: HomeVi
                                 DropdownMenu(expanded = expandedOne.value,
                                     onDismissRequest = { expandedOne.value = false }) {
                                     listСurrencyOne.forEach {
+                                        DropdownMenuItem(
+                                            text = { Text(text = it) },
+                                            onClick = {
+                                                currentValueOne.value = it
+                                                expandedOne.value = false
 
-                                        DropdownMenuItem(text = { Text(text = it) }, onClick = {
-                                            currentValueOne.value = it
-
-                                            coroutine.launch {
-                                                viewModel.searchFromVal(it)
-                                            }
-
-                                            coroutine.launch {
-                                                viewModel.searchValueFromVal(it)
-                                            }
-
-                                            expandedOne.value = false
-                                        }, modifier = Modifier.background(Color.White))
+                                                coroutine.launch {
+                                                    viewModel.searchFromVal(it)
+                                                }
+                                                coroutine.launch {
+                                                    viewModel.searchValueFromVal(currentValueOne.value)
+                                                }
+                                            },
+                                            modifier = Modifier.background(Color.White),
+                                        )
                                     }
                                 }
                             }
                         }
+
                         Row(
                             modifier = Modifier
                                 .fillMaxSize()

@@ -1,112 +1,129 @@
 package com.example.currencyconverter.domain.usecase
 
-import com.example.currencyconverter.data.DataRepository
+import com.example.currencyconverter.data.entity.Currencies
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 
-class SetCharCodeValuesUseCase(private val dataRepository: DataRepository){
-    private var nameCurrency  = "VAL"
-    private var nameCurrencyToVal  = "VAL"
+class SetCharCodeValuesUseCase(private val valuesData: Flow<Currencies>) {
+    private lateinit var scope: CoroutineScope
+    private var nameCurrency = "VAL"
+    private var nameCurrencyToVal = "VAL"
 
-    fun executeFromVal():String{
+    fun executeFromVal(): String {
         return nameCurrency
     }
 
-    fun executeToVal():String{
+    fun executeToVal(): String {
         return nameCurrencyToVal
     }
 
     suspend fun monitoringValueFromVal(nameCurrencyScreen: String) {
-        when(nameCurrencyScreen){
-                dataRepository.getValues().valute.aED.name-> nameCurrency = dataRepository.getValues().valute.aED.charCode
-                dataRepository.getValues().valute.aMD.name-> nameCurrency = dataRepository.getValues().valute.aMD.charCode
-                dataRepository.getValues().valute.aUD.name-> nameCurrency = dataRepository.getValues().valute.aUD.charCode
-                dataRepository.getValues().valute.aZN.name-> nameCurrency = dataRepository.getValues().valute.aZN.charCode
-                dataRepository.getValues().valute.bGN.name-> nameCurrency = dataRepository.getValues().valute.bGN.charCode
-                dataRepository.getValues().valute.bRL.name-> nameCurrency = dataRepository.getValues().valute.bRL.charCode
-                dataRepository.getValues().valute.bYN.name-> nameCurrency = dataRepository.getValues().valute.bYN.charCode
-                dataRepository.getValues().valute.cAD.name-> nameCurrency = dataRepository.getValues().valute.cAD.charCode
-                dataRepository.getValues().valute.cHF.name-> nameCurrency = dataRepository.getValues().valute.cHF.charCode
-                dataRepository.getValues().valute.cNY.name-> nameCurrency = dataRepository.getValues().valute.cNY.charCode
-                dataRepository.getValues().valute.cZK.name-> nameCurrency = dataRepository.getValues().valute.cZK.charCode
-                dataRepository.getValues().valute.dKK.name-> nameCurrency = dataRepository.getValues().valute.dKK.charCode
-                dataRepository.getValues().valute.eGP.name-> nameCurrency = dataRepository.getValues().valute.eGP.charCode
-                dataRepository.getValues().valute.eUR.name-> nameCurrency = dataRepository.getValues().valute.eUR.charCode
-                dataRepository.getValues().valute.gBP.name-> nameCurrency = dataRepository.getValues().valute.gBP.charCode
-                dataRepository.getValues().valute.gEL.name-> nameCurrency = dataRepository.getValues().valute.gEL.charCode
-                dataRepository.getValues().valute.hKD.name-> nameCurrency = dataRepository.getValues().valute.hKD.charCode
-                dataRepository.getValues().valute.hUF.name-> nameCurrency = dataRepository.getValues().valute.hUF.charCode
-                dataRepository.getValues().valute.iDR.name-> nameCurrency = dataRepository.getValues().valute.iDR.charCode
-                dataRepository.getValues().valute.iNR.name-> nameCurrency = dataRepository.getValues().valute.iNR.charCode
-                dataRepository.getValues().valute.jPY.name-> nameCurrency = dataRepository.getValues().valute.jPY.charCode
-                dataRepository.getValues().valute.kGS.name-> nameCurrency = dataRepository.getValues().valute.kGS.charCode
-                dataRepository.getValues().valute.kRW.name-> nameCurrency = dataRepository.getValues().valute.kRW.charCode
-                dataRepository.getValues().valute.kZT.name-> nameCurrency = dataRepository.getValues().valute.kZT.charCode
-                dataRepository.getValues().valute.mDL.name-> nameCurrency = dataRepository.getValues().valute.mDL.charCode
-                dataRepository.getValues().valute.nOK.name-> nameCurrency = dataRepository.getValues().valute.nOK.charCode
-                dataRepository.getValues().valute.nZD.name-> nameCurrency = dataRepository.getValues().valute.nZD.charCode
-                dataRepository.getValues().valute.pLN.name-> nameCurrency = dataRepository.getValues().valute.pLN.charCode
-                dataRepository.getValues().valute.qAR.name-> nameCurrency = dataRepository.getValues().valute.qAR.charCode
-                dataRepository.getValues().valute.rON.name-> nameCurrency = dataRepository.getValues().valute.rON.charCode
-                dataRepository.getValues().valute.rSD.name-> nameCurrency = dataRepository.getValues().valute.rSD.charCode
-                dataRepository.getValues().valute.sEK.name-> nameCurrency = dataRepository.getValues().valute.sEK.charCode
-                dataRepository.getValues().valute.sGD.name-> nameCurrency = dataRepository.getValues().valute.sGD.charCode
-                dataRepository.getValues().valute.tHB.name-> nameCurrency = dataRepository.getValues().valute.tHB.charCode
-                dataRepository.getValues().valute.tJS.name-> nameCurrency = dataRepository.getValues().valute.tJS.charCode
-                dataRepository.getValues().valute.tMT.name-> nameCurrency = dataRepository.getValues().valute.tMT.charCode
-                dataRepository.getValues().valute.tRY.name-> nameCurrency = dataRepository.getValues().valute.tRY.charCode
-                dataRepository.getValues().valute.uAH.name-> nameCurrency = dataRepository.getValues().valute.uAH.charCode
-                dataRepository.getValues().valute.uSD.name-> nameCurrency = dataRepository.getValues().valute.uSD.charCode
-                dataRepository.getValues().valute.uZS.name-> nameCurrency = dataRepository.getValues().valute.uZS.charCode
-                dataRepository.getValues().valute.vND.name-> nameCurrency = dataRepository.getValues().valute.vND.charCode
-                dataRepository.getValues().valute.xDR.name-> nameCurrency = dataRepository.getValues().valute.xDR.charCode
-                dataRepository.getValues().valute.zAR.name-> nameCurrency = dataRepository.getValues().valute.zAR.charCode
+        scope = CoroutineScope(Dispatchers.IO).also { scope ->
+            scope.launch {
+                valuesData.collect { db ->
+                    when (nameCurrencyScreen) {
+                        db.aED.name -> nameCurrency = db.aED.charCode
+                        db.aMD.name -> nameCurrency = db.aMD.charCode
+                        db.aUD.name -> nameCurrency = db.aUD.charCode
+                        db.aZN.name -> nameCurrency = db.aZN.charCode
+                        db.bGN.name -> nameCurrency = db.bGN.charCode
+                        db.bRL.name -> nameCurrency = db.bRL.charCode
+                        db.bYN.name -> nameCurrency = db.bYN.charCode
+                        db.cAD.name -> nameCurrency = db.cAD.charCode
+                        db.cHF.name -> nameCurrency = db.cHF.charCode
+                        db.cNY.name -> nameCurrency = db.cNY.charCode
+                        db.cZK.name -> nameCurrency = db.cZK.charCode
+                        db.dKK.name -> nameCurrency = db.dKK.charCode
+                        db.eGP.name -> nameCurrency = db.eGP.charCode
+                        db.eUR.name -> nameCurrency = db.eUR.charCode
+                        db.gBP.name -> nameCurrency = db.gBP.charCode
+                        db.gEL.name -> nameCurrency = db.gEL.charCode
+                        db.hKD.name -> nameCurrency = db.hKD.charCode
+                        db.hUF.name -> nameCurrency = db.hUF.charCode
+                        db.iDR.name -> nameCurrency = db.iDR.charCode
+                        db.iNR.name -> nameCurrency = db.iNR.charCode
+                        db.jPY.name -> nameCurrency = db.jPY.charCode
+                        db.kGS.name -> nameCurrency = db.kGS.charCode
+                        db.kRW.name -> nameCurrency = db.kRW.charCode
+                        db.kZT.name -> nameCurrency = db.kZT.charCode
+                        db.mDL.name -> nameCurrency = db.mDL.charCode
+                        db.nOK.name -> nameCurrency = db.nOK.charCode
+                        db.nZD.name -> nameCurrency = db.nZD.charCode
+                        db.pLN.name -> nameCurrency = db.pLN.charCode
+                        db.qAR.name -> nameCurrency = db.qAR.charCode
+                        db.rON.name -> nameCurrency = db.rON.charCode
+                        db.rSD.name -> nameCurrency = db.rSD.charCode
+                        db.sEK.name -> nameCurrency = db.sEK.charCode
+                        db.sGD.name -> nameCurrency = db.sGD.charCode
+                        db.tHB.name -> nameCurrency = db.tHB.charCode
+                        db.tJS.name -> nameCurrency = db.tJS.charCode
+                        db.tMT.name -> nameCurrency = db.tMT.charCode
+                        db.tRY.name -> nameCurrency = db.tRY.charCode
+                        db.uAH.name -> nameCurrency = db.uAH.charCode
+                        db.uSD.name -> nameCurrency = db.uSD.charCode
+                        db.uZS.name -> nameCurrency = db.uZS.charCode
+                        db.vND.name -> nameCurrency = db.vND.charCode
+                        db.xDR.name -> nameCurrency = db.xDR.charCode
+                        db.zAR.name -> nameCurrency = db.zAR.charCode
+                    }
+                }
+            }
         }
     }
-        suspend fun monitoringValueToVal(nameCurrencyScreenToVal: String) {
-                when(nameCurrencyScreenToVal){
-                        dataRepository.getValues().valute.aED.name-> nameCurrencyToVal = dataRepository.getValues().valute.aED.charCode
-                        dataRepository.getValues().valute.aMD.name-> nameCurrencyToVal = dataRepository.getValues().valute.aMD.charCode
-                        dataRepository.getValues().valute.aUD.name-> nameCurrencyToVal = dataRepository.getValues().valute.aUD.charCode
-                        dataRepository.getValues().valute.aZN.name-> nameCurrencyToVal = dataRepository.getValues().valute.aZN.charCode
-                        dataRepository.getValues().valute.bGN.name-> nameCurrencyToVal = dataRepository.getValues().valute.bGN.charCode
-                        dataRepository.getValues().valute.bRL.name-> nameCurrencyToVal = dataRepository.getValues().valute.bRL.charCode
-                        dataRepository.getValues().valute.bYN.name-> nameCurrencyToVal = dataRepository.getValues().valute.bYN.charCode
-                        dataRepository.getValues().valute.cAD.name-> nameCurrencyToVal = dataRepository.getValues().valute.cAD.charCode
-                        dataRepository.getValues().valute.cHF.name-> nameCurrencyToVal = dataRepository.getValues().valute.cHF.charCode
-                        dataRepository.getValues().valute.cNY.name-> nameCurrencyToVal = dataRepository.getValues().valute.cNY.charCode
-                        dataRepository.getValues().valute.cZK.name-> nameCurrencyToVal = dataRepository.getValues().valute.cZK.charCode
-                        dataRepository.getValues().valute.dKK.name-> nameCurrencyToVal = dataRepository.getValues().valute.dKK.charCode
-                        dataRepository.getValues().valute.eGP.name-> nameCurrencyToVal = dataRepository.getValues().valute.eGP.charCode
-                        dataRepository.getValues().valute.eUR.name-> nameCurrencyToVal = dataRepository.getValues().valute.eUR.charCode
-                        dataRepository.getValues().valute.gBP.name-> nameCurrencyToVal = dataRepository.getValues().valute.gBP.charCode
-                        dataRepository.getValues().valute.gEL.name-> nameCurrencyToVal = dataRepository.getValues().valute.gEL.charCode
-                        dataRepository.getValues().valute.hKD.name-> nameCurrencyToVal = dataRepository.getValues().valute.hKD.charCode
-                        dataRepository.getValues().valute.hUF.name-> nameCurrencyToVal = dataRepository.getValues().valute.hUF.charCode
-                        dataRepository.getValues().valute.iDR.name-> nameCurrencyToVal = dataRepository.getValues().valute.iDR.charCode
-                        dataRepository.getValues().valute.iNR.name-> nameCurrencyToVal = dataRepository.getValues().valute.iNR.charCode
-                        dataRepository.getValues().valute.jPY.name-> nameCurrencyToVal = dataRepository.getValues().valute.jPY.charCode
-                        dataRepository.getValues().valute.kGS.name-> nameCurrencyToVal = dataRepository.getValues().valute.kGS.charCode
-                        dataRepository.getValues().valute.kRW.name-> nameCurrencyToVal = dataRepository.getValues().valute.kRW.charCode
-                        dataRepository.getValues().valute.kZT.name-> nameCurrencyToVal = dataRepository.getValues().valute.kZT.charCode
-                        dataRepository.getValues().valute.mDL.name-> nameCurrencyToVal = dataRepository.getValues().valute.mDL.charCode
-                        dataRepository.getValues().valute.nOK.name-> nameCurrencyToVal = dataRepository.getValues().valute.nOK.charCode
-                        dataRepository.getValues().valute.nZD.name-> nameCurrencyToVal = dataRepository.getValues().valute.nZD.charCode
-                        dataRepository.getValues().valute.pLN.name-> nameCurrencyToVal = dataRepository.getValues().valute.pLN.charCode
-                        dataRepository.getValues().valute.qAR.name-> nameCurrencyToVal = dataRepository.getValues().valute.qAR.charCode
-                        dataRepository.getValues().valute.rON.name-> nameCurrencyToVal = dataRepository.getValues().valute.rON.charCode
-                        dataRepository.getValues().valute.rSD.name-> nameCurrencyToVal = dataRepository.getValues().valute.rSD.charCode
-                        dataRepository.getValues().valute.sEK.name-> nameCurrencyToVal = dataRepository.getValues().valute.sEK.charCode
-                        dataRepository.getValues().valute.sGD.name-> nameCurrencyToVal = dataRepository.getValues().valute.sGD.charCode
-                        dataRepository.getValues().valute.tHB.name-> nameCurrencyToVal = dataRepository.getValues().valute.tHB.charCode
-                        dataRepository.getValues().valute.tJS.name-> nameCurrencyToVal = dataRepository.getValues().valute.tJS.charCode
-                        dataRepository.getValues().valute.tMT.name-> nameCurrencyToVal = dataRepository.getValues().valute.tMT.charCode
-                        dataRepository.getValues().valute.tRY.name-> nameCurrencyToVal = dataRepository.getValues().valute.tRY.charCode
-                        dataRepository.getValues().valute.uAH.name-> nameCurrencyToVal = dataRepository.getValues().valute.uAH.charCode
-                        dataRepository.getValues().valute.uSD.name-> nameCurrencyToVal = dataRepository.getValues().valute.uSD.charCode
-                        dataRepository.getValues().valute.uZS.name-> nameCurrencyToVal = dataRepository.getValues().valute.uZS.charCode
-                        dataRepository.getValues().valute.vND.name-> nameCurrencyToVal = dataRepository.getValues().valute.vND.charCode
-                        dataRepository.getValues().valute.xDR.name-> nameCurrencyToVal = dataRepository.getValues().valute.xDR.charCode
-                        dataRepository.getValues().valute.zAR.name-> nameCurrencyToVal = dataRepository.getValues().valute.zAR.charCode
-                }
-        }
 
+    suspend fun monitoringValueToVal(nameCurrencyScreenToVal: String) {
+        scope = CoroutineScope(Dispatchers.IO).also { scope ->
+            scope.launch {
+                valuesData.collect { db ->
+                    when (nameCurrencyScreenToVal) {
+                        db.aED.name -> nameCurrencyToVal = db.aED.charCode
+                        db.aMD.name -> nameCurrencyToVal = db.aMD.charCode
+                        db.aUD.name -> nameCurrencyToVal = db.aUD.charCode
+                        db.aZN.name -> nameCurrencyToVal = db.aZN.charCode
+                        db.bGN.name -> nameCurrencyToVal = db.bGN.charCode
+                        db.bRL.name -> nameCurrencyToVal = db.bRL.charCode
+                        db.bYN.name -> nameCurrencyToVal = db.bYN.charCode
+                        db.cAD.name -> nameCurrencyToVal = db.cAD.charCode
+                        db.cHF.name -> nameCurrencyToVal = db.cHF.charCode
+                        db.cNY.name -> nameCurrencyToVal = db.cNY.charCode
+                        db.cZK.name -> nameCurrencyToVal = db.cZK.charCode
+                        db.dKK.name -> nameCurrencyToVal = db.dKK.charCode
+                        db.eGP.name -> nameCurrencyToVal = db.eGP.charCode
+                        db.eUR.name -> nameCurrencyToVal = db.eUR.charCode
+                        db.gBP.name -> nameCurrencyToVal = db.gBP.charCode
+                        db.gEL.name -> nameCurrencyToVal = db.gEL.charCode
+                        db.hKD.name -> nameCurrencyToVal = db.hKD.charCode
+                        db.hUF.name -> nameCurrencyToVal = db.hUF.charCode
+                        db.iDR.name -> nameCurrencyToVal = db.iDR.charCode
+                        db.iNR.name -> nameCurrencyToVal = db.iNR.charCode
+                        db.jPY.name -> nameCurrencyToVal = db.jPY.charCode
+                        db.kGS.name -> nameCurrencyToVal = db.kGS.charCode
+                        db.kRW.name -> nameCurrencyToVal = db.kRW.charCode
+                        db.kZT.name -> nameCurrencyToVal = db.kZT.charCode
+                        db.mDL.name -> nameCurrencyToVal = db.mDL.charCode
+                        db.nOK.name -> nameCurrencyToVal = db.nOK.charCode
+                        db.nZD.name -> nameCurrencyToVal = db.nZD.charCode
+                        db.pLN.name -> nameCurrencyToVal = db.pLN.charCode
+                        db.qAR.name -> nameCurrencyToVal = db.qAR.charCode
+                        db.rON.name -> nameCurrencyToVal = db.rON.charCode
+                        db.rSD.name -> nameCurrencyToVal = db.rSD.charCode
+                        db.sEK.name -> nameCurrencyToVal = db.sEK.charCode
+                        db.sGD.name -> nameCurrencyToVal = db.sGD.charCode
+                        db.tHB.name -> nameCurrencyToVal = db.tHB.charCode
+                        db.tJS.name -> nameCurrencyToVal = db.tJS.charCode
+                        db.tMT.name -> nameCurrencyToVal = db.tMT.charCode
+                        db.tRY.name -> nameCurrencyToVal = db.tRY.charCode
+                        db.uAH.name -> nameCurrencyToVal = db.uAH.charCode
+                        db.uSD.name -> nameCurrencyToVal = db.uSD.charCode
+                        db.uZS.name -> nameCurrencyToVal = db.uZS.charCode
+                        db.vND.name -> nameCurrencyToVal = db.vND.charCode
+                        db.xDR.name -> nameCurrencyToVal = db.xDR.charCode
+                        db.zAR.name -> nameCurrencyToVal = db.zAR.charCode
+                    }
+                }
+            }
+        }
+    }
 }
