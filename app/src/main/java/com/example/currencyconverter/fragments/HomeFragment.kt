@@ -26,14 +26,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding get() = checkNotNull(_binding)
     private lateinit var scope: CoroutineScope
-
-    //    @Inject
-//    lateinit var repository: DataRepository
     private val viewModel by viewModels<HomeViewModel>()
-
-    //////проверить
-    lateinit var db: Currencies
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

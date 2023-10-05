@@ -6,10 +6,9 @@
     android:background="#F1D6D6"
     tools:context=".fragments.AnalyticsFragment">
 
-    <TextView
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/compos_view_analytics_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Фрагмент Аналитики" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>
