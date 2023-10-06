@@ -6,7 +6,7 @@ import com.example.convertmy.data.Valute
 import com.example.currencyconverter.data.DAO.CurrenciesDAO
 import com.example.currencyconverter.data.db.CurrenciesDatabase
 import com.example.currencyconverter.data.entity.Currencies
-import com.example.currencyconverter.viewModel.HomeViewModel
+import com.example.currencyconverter.ui.viewModel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.qualifiers.ApplicationContext
 import hilt_aggregated_deps._dagger_hilt_android_internal_modules_ApplicationContextModule

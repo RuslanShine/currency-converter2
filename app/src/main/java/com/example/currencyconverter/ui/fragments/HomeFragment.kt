@@ -1,4 +1,4 @@
-package com.example.currencyconverter.fragments
+package com.example.currencyconverter.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,10 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.viewModels
-import com.example.currencyconverter.data.entity.Currencies
-import com.example.currencyconverter.viewModel.HomeViewModel
+import com.example.currencyconverter.ui.viewModel.HomeViewModel
 import com.example.currencyconverter.databinding.FragmentHomeBinding
-import com.example.currencyconverter.ui.theme.MainScreen
+import com.example.currencyconverter.ui.content.MainScreen
 
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope

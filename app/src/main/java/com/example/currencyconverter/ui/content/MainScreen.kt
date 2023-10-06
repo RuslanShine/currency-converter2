@@ -1,4 +1,4 @@
-package com.example.currencyconverter.ui.theme
+package com.example.currencyconverter.ui.content
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -31,32 +32,32 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.currencyconverter.R
 import com.example.currencyconverter.data.entity.Currencies
-import com.example.currencyconverter.ui.theme.theme.ButtonColors
-import com.example.currencyconverter.ui.theme.theme.Dimens
-import com.example.currencyconverter.ui.theme.theme.FontSizes
-import com.example.currencyconverter.ui.theme.theme.Purple40
-import com.example.currencyconverter.ui.theme.theme.Purple80
-import com.example.currencyconverter.viewModel.HomeViewModel
-import kotlinx.coroutines.CoroutineStart
+import com.example.currencyconverter.theme.ButtonColors
+import com.example.currencyconverter.theme.Dimens
+import com.example.currencyconverter.theme.FontSizes
+import com.example.currencyconverter.theme.Purple40
+import com.example.currencyconverter.theme.Purple80
+import com.example.currencyconverter.ui.viewModel.HomeViewModel
 import kotlinx.coroutines.launch
 
 
 @SuppressLint("CoroutineCreationDuringComposition")
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun MainScreen(context: Context, viewModel: HomeViewModel, db: Currencies) {
 
@@ -64,6 +65,7 @@ fun MainScreen(context: Context, viewModel: HomeViewModel, db: Currencies) {
 //    val uiState by viewModel._valuesData.collectAsState("")
 
     val coroutine = rememberCoroutineScope()
+    val keyboardController = LocalSoftwareKeyboardController.current
     val myList = listOf(
         "Выберите валюту",
         db.aED.name,
@@ -129,14 +131,14 @@ fun MainScreen(context: Context, viewModel: HomeViewModel, db: Currencies) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(Dimens._500)
+//                .height(Dimens._500)
                 .padding(Dimens._8),
             shape = RoundedCornerShape(Dimens._16),
             elevation = CardDefaults.cardElevation(defaultElevation = Dimens._4)
         ) {
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .wrapContentHeight()
                     .background(Color.White)
             ) {
                 Card(
@@ -338,7 +340,7 @@ fun MainScreen(context: Context, viewModel: HomeViewModel, db: Currencies) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = Dimens._36),
+                        .padding(top = Dimens._36, bottom = Dimens._36),
                     contentAlignment = Alignment.Center
                 ) {
                     Button(
@@ -350,6 +352,7 @@ fun MainScreen(context: Context, viewModel: HomeViewModel, db: Currencies) {
                                     String.format("%.3f", resultFinish)
                                 } else "0"
                             }
+                            keyboardController?.hide()
                             Toast.makeText(context, "Конвертация", Toast.LENGTH_SHORT).show()
                         },
                         modifier = Modifier.width(Dimens._320),

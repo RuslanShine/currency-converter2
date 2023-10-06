@@ -1,4 +1,4 @@
-package com.example.currencyconverter.ui.theme.theme
+package com.example.currencyconverter.theme
 
 import android.widget.Button
 import androidx.compose.material3.ButtonColors
