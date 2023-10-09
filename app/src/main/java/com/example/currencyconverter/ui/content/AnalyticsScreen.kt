@@ -55,6 +55,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.currencyconverter.R
+import com.example.currencyconverter.data.ItemAnalyticsModel
 import com.example.currencyconverter.data.entity.Currencies
 import com.example.currencyconverter.theme.ButtonColors
 import com.example.currencyconverter.theme.Dimens
@@ -91,7 +92,8 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: Currenc
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(Dimens._8), colors = CardDefaults.cardColors(Purple40)
+                        .padding(Dimens._8),
+                    colors = CardDefaults.cardColors(Purple40)
                 ) {
                     Box(
                         contentAlignment = Alignment.Center,
@@ -102,7 +104,7 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: Currenc
                             modifier = Modifier.padding(Dimens._4),
                             text = "Конвертер росссийского рубля",
                             color = Color.Black,
-                            fontSize = FontSizes._24,
+                            fontSize = FontSizes._22,
                             textAlign = TextAlign.Center
                         )
                     }
@@ -139,8 +141,10 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: Currenc
                                 color = Color.Black
                             )
                             OutlinedTextField(value = valueCurrencyRub,
-                                onValueChange = { valueCurrencyRub = it },
-
+                                onValueChange = {
+                                    valueCurrencyRub = it
+//                                    viewModel.inputValueRub(it)
+                                },
                                 modifier = Modifier.width(Dimens._240),
                                 textStyle = TextStyle(
                                     fontSize = FontSizes._24
@@ -174,10 +178,15 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: Currenc
                 ) {
                     Button(
                         onClick = {
+
+                            var rez = valueCurrencyRub
+
+                            viewModel.inputValueRub(rez)
+
 //                                    coroutine.launch {
 //                                        valueCurrencyResult = if (valueCurrencyRub > 0.toString()) {
 //                                            val result = valueCurrencyRub
-//                                            val resultFinish = viewModel.recalculatingValues(result)
+//                                            val resultFinish = viewModel.inputValueRub(result)
 //                                            String.format("%.3f", resultFinish)
 //                                        } else "0"
 //                                    }
@@ -200,12 +209,53 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: Currenc
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = Dimens._8)
         ) {
             itemsIndexed(
-                listOf("1", "2", "2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2",)
+                listOf(
+                    ItemAnalyticsModel(db.aED.name, db.aED.charCode, db.aED.value,viewModel.test()),
+//                    ItemAnalyticsModel(db.aMD.name, db.aMD.charCode, db.aMD.value),
+//                    ItemAnalyticsModel(db.aUD.name, db.aUD.charCode, db.aUD.value),
+//                    ItemAnalyticsModel(db.aZN.name, db.aZN.charCode, db.aZN.value),
+//                    ItemAnalyticsModel(db.bGN.name, db.bGN.charCode, db.bGN.value),
+//                    ItemAnalyticsModel(db.bRL.name, db.bRL.charCode, db.bRL.value),
+//                    ItemAnalyticsModel(db.bYN.name, db.bYN.charCode, db.bYN.value),
+//                    ItemAnalyticsModel(db.cAD.name, db.cAD.charCode, db.cAD.value),
+//                    ItemAnalyticsModel(db.cHF.name, db.cHF.charCode, db.cHF.value),
+//                    ItemAnalyticsModel(db.cNY.name, db.cNY.charCode, db.cNY.value),
+//                    ItemAnalyticsModel(db.cZK.name, db.cZK.charCode, db.cZK.value),
+//                    ItemAnalyticsModel(db.dKK.name, db.dKK.charCode, db.dKK.value),
+//                    ItemAnalyticsModel(db.eGP.name, db.eGP.charCode, db.eGP.value),
+//                    ItemAnalyticsModel(db.eUR.name, db.eUR.charCode, db.eUR.value),
+//                    ItemAnalyticsModel(db.gEL.name, db.gEL.charCode, db.gEL.value),
+//                    ItemAnalyticsModel(db.hKD.name, db.hKD.charCode, db.hKD.value),
+//                    ItemAnalyticsModel(db.hUF.name, db.hUF.charCode, db.hUF.value),
+//                    ItemAnalyticsModel(db.iDR.name, db.iDR.charCode, db.iDR.value),
+//                    ItemAnalyticsModel(db.iNR.name, db.iNR.charCode, db.iNR.value),
+//                    ItemAnalyticsModel(db.jPY.name, db.jPY.charCode, db.jPY.value),
+//                    ItemAnalyticsModel(db.kGS.name, db.kGS.charCode, db.kGS.value),
+//                    ItemAnalyticsModel(db.kRW.name, db.kRW.charCode, db.kRW.value),
+//                    ItemAnalyticsModel(db.kZT.name, db.kZT.charCode, db.kZT.value),
+//                    ItemAnalyticsModel(db.mDL.name, db.mDL.charCode, db.mDL.value),
+//                    ItemAnalyticsModel(db.nOK.name, db.nOK.charCode, db.nOK.value),
+//                    ItemAnalyticsModel(db.nZD.name, db.nZD.charCode, db.nZD.value),
+//                    ItemAnalyticsModel(db.pLN.name, db.pLN.charCode, db.pLN.value),
+//                    ItemAnalyticsModel(db.qAR.name, db.qAR.charCode, db.qAR.value),
+//                    ItemAnalyticsModel(db.rON.name, db.rON.charCode, db.rON.value),
+//                    ItemAnalyticsModel(db.rSD.name, db.rSD.charCode, db.rSD.value),
+//                    ItemAnalyticsModel(db.sEK.name, db.sEK.charCode, db.sEK.value),
+//                    ItemAnalyticsModel(db.sGD.name, db.sGD.charCode, db.sGD.value),
+//                    ItemAnalyticsModel(db.tHB.name, db.tHB.charCode, db.tHB.value),
+//                    ItemAnalyticsModel(db.tJS.name, db.tJS.charCode, db.tJS.value),
+//                    ItemAnalyticsModel(db.tMT.name, db.tMT.charCode, db.tMT.value),
+//                    ItemAnalyticsModel(db.tRY.name, db.tRY.charCode, db.tRY.value),
+//                    ItemAnalyticsModel(db.uAH.name, db.uAH.charCode, db.uAH.value),
+//                    ItemAnalyticsModel(db.uSD.name, db.uSD.charCode, db.uSD.value),
+//                    ItemAnalyticsModel(db.uZS.name, db.uZS.charCode, db.uZS.value),
+//                    ItemAnalyticsModel(db.vND.name, db.vND.charCode, db.vND.value),
+//                    ItemAnalyticsModel(db.zAR.name, db.zAR.charCode, db.zAR.value),
+                )
             ) { _, item ->
-                ItemAnalyticsScreen( )
+                ItemAnalyticsScreen(item = item)
             }
         }
 

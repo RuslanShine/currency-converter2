@@ -25,6 +25,9 @@ object FontSizes {
     val _20 = 20.sp
 
     @Stable
+    val _22 = 22.sp
+
+    @Stable
     val _24 = 24.sp
 
 //    @Stable

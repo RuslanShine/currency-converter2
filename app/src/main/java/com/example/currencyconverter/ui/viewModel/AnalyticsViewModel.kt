@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.currencyconverter.data.DataRepository
 import com.example.currencyconverter.data.entity.Currencies
+import com.example.currencyconverter.domain.usecase.RecalculatingRubUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -18,6 +19,8 @@ class AnalyticsViewModel@Inject constructor(private val repository: DataReposito
         loadPosts()
         valuesData = repository.getAllFromDB()
     }
+
+    private val recalculatingRubUseCase = RecalculatingRubUseCase(valuesData)
 
     fun loadPosts() {
         viewModelScope.launch {
@@ -41,6 +44,14 @@ class AnalyticsViewModel@Inject constructor(private val repository: DataReposito
     interface ApiCallback {
         fun onSuccess(сurrencies: Currencies)
         fun onFailure()
+    }
+
+    fun inputValueRub(valueRUB:String){
+        recalculatingRubUseCase.execute(valueRUB)
+    }
+
+    fun test():Double{
+        return recalculatingRubUseCase.getResult()
     }
 
 
