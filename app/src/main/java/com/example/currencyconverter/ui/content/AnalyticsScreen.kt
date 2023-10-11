@@ -3,25 +3,21 @@ package com.example.currencyconverter.ui.content
 import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Toast
-import androidx.compose.animation.splineBasedDecay
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
@@ -29,7 +25,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
@@ -45,16 +40,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.currencyconverter.R
 import com.example.currencyconverter.data.ItemAnalyticsModel
 import com.example.currencyconverter.data.entity.Currencies
 import com.example.currencyconverter.theme.ButtonColors
@@ -73,6 +64,19 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: Currenc
     var valueCurrencyResult by remember { mutableStateOf("") }
     val coroutine = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current
+
+    var resultAED by remember { mutableStateOf("") }
+    var resultAMD by remember { mutableStateOf("") }
+    var resultAUD by remember { mutableStateOf("") }
+    var resultAZN by remember { mutableStateOf("") }
+    var resultBGN by remember { mutableStateOf("") }
+    var resultBRL by remember { mutableStateOf("") }
+    var resultBYN by remember { mutableStateOf("") }
+    var resultCAD by remember { mutableStateOf("") }
+    var resultCHF by remember { mutableStateOf("") }
+    var resultCNY by remember { mutableStateOf("") }
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -143,7 +147,7 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: Currenc
                             OutlinedTextField(value = valueCurrencyRub,
                                 onValueChange = {
                                     valueCurrencyRub = it
-//                                    viewModel.inputValueRub(it)
+                                    viewModel.inputValueRub(it)
                                 },
                                 modifier = Modifier.width(Dimens._240),
                                 textStyle = TextStyle(
@@ -179,17 +183,71 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: Currenc
                     Button(
                         onClick = {
 
-                            var rez = valueCurrencyRub
+//                            val rez = valueCurrencyRub
+//                            viewModel.inputValueRub(rez)
 
-                            viewModel.inputValueRub(rez)
+//                            resultAED = viewModel.getValueAED()
+//                            resultAUD = viewModel.getValueAUD().toString()
 
-//                                    coroutine.launch {
-//                                        valueCurrencyResult = if (valueCurrencyRub > 0.toString()) {
-//                                            val result = valueCurrencyRub
-//                                            val resultFinish = viewModel.inputValueRub(result)
-//                                            String.format("%.3f", resultFinish)
-//                                        } else "0"
-//                                    }
+
+
+                            resultAED = if (valueCurrencyRub > 0.toString()) {
+                                val resultFinish = viewModel.getValueAED()
+                                String.format("%.3f", resultFinish)
+                            } else "0"
+
+                            resultAMD = if (valueCurrencyRub > 0.toString()) {
+                                val resultFinish = viewModel.getValueAMD()
+                                String.format("%.3f", resultFinish)
+                            } else "0"
+
+                            resultAUD = if (valueCurrencyRub > 0.toString()) {
+                                val resultFinish = viewModel.getValueAUD()
+                                String.format("%.3f", resultFinish)
+                            } else "0"
+
+                            resultAZN = if (valueCurrencyRub > 0.toString()) {
+                                val resultFinish = viewModel.getValueAZN()
+                                String.format("%.3f", resultFinish)
+                            } else "0"
+
+                            resultBGN = if (valueCurrencyRub > 0.toString()) {
+                                val resultFinish = viewModel.getValueBGN()
+                                String.format("%.3f", resultFinish)
+                            } else "0"
+
+                            resultBRL = if (valueCurrencyRub > 0.toString()) {
+                                val resultFinish = viewModel.getValueBRL()
+                                String.format("%.3f", resultFinish)
+                            } else "0"
+
+                            resultBYN = if (valueCurrencyRub > 0.toString()) {
+                                val resultFinish = viewModel.getValueBYN()
+                                String.format("%.3f", resultFinish)
+                            } else "0"
+
+                            resultCAD = if (valueCurrencyRub > 0.toString()) {
+                                val resultFinish = viewModel.getValueCAD()
+                                String.format("%.3f", resultFinish)
+                            } else "0"
+
+                            resultCHF = if (valueCurrencyRub > 0.toString()) {
+                                val resultFinish = viewModel.getValueCHF()
+                                String.format("%.3f", resultFinish)
+                            } else "0"
+
+                            resultCNY = if (valueCurrencyRub > 0.toString()) {
+                                val resultFinish = viewModel.getValueCNY()
+                                String.format("%.3f", resultFinish)
+                            } else "0"
+
+
+
+
+
+
+
+
                             keyboardController?.hide()
                             Toast.makeText(context, "Конвертация", Toast.LENGTH_SHORT).show()
                         },
@@ -211,17 +269,17 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: Currenc
                 .fillMaxSize()
         ) {
             itemsIndexed(
-                listOf(
-                    ItemAnalyticsModel(db.aED.name, db.aED.charCode, db.aED.value,viewModel.test()),
-//                    ItemAnalyticsModel(db.aMD.name, db.aMD.charCode, db.aMD.value),
-//                    ItemAnalyticsModel(db.aUD.name, db.aUD.charCode, db.aUD.value),
-//                    ItemAnalyticsModel(db.aZN.name, db.aZN.charCode, db.aZN.value),
-//                    ItemAnalyticsModel(db.bGN.name, db.bGN.charCode, db.bGN.value),
-//                    ItemAnalyticsModel(db.bRL.name, db.bRL.charCode, db.bRL.value),
-//                    ItemAnalyticsModel(db.bYN.name, db.bYN.charCode, db.bYN.value),
-//                    ItemAnalyticsModel(db.cAD.name, db.cAD.charCode, db.cAD.value),
-//                    ItemAnalyticsModel(db.cHF.name, db.cHF.charCode, db.cHF.value),
-//                    ItemAnalyticsModel(db.cNY.name, db.cNY.charCode, db.cNY.value),
+                mutableListOf(
+                    ItemAnalyticsModel(db.aED.name, db.aED.charCode, db.aED.value,resultAED),
+                    ItemAnalyticsModel(db.aMD.name, db.aMD.charCode, db.aMD.value,resultAMD),
+                    ItemAnalyticsModel(db.aUD.name, db.aUD.charCode, db.aUD.value,resultAUD),
+                    ItemAnalyticsModel(db.aZN.name, db.aZN.charCode, db.aZN.value,resultAZN),
+                    ItemAnalyticsModel(db.bGN.name, db.bGN.charCode, db.bGN.value,resultBGN),
+                    ItemAnalyticsModel(db.bRL.name, db.bRL.charCode, db.bRL.value,resultBRL),
+                    ItemAnalyticsModel(db.bYN.name, db.bYN.charCode, db.bYN.value,resultBYN),
+                    ItemAnalyticsModel(db.cAD.name, db.cAD.charCode, db.cAD.value,resultCAD),
+                    ItemAnalyticsModel(db.cHF.name, db.cHF.charCode, db.cHF.value,resultCHF),
+                    ItemAnalyticsModel(db.cNY.name, db.cNY.charCode, db.cNY.value,resultCNY),
 //                    ItemAnalyticsModel(db.cZK.name, db.cZK.charCode, db.cZK.value),
 //                    ItemAnalyticsModel(db.dKK.name, db.dKK.charCode, db.dKK.value),
 //                    ItemAnalyticsModel(db.eGP.name, db.eGP.charCode, db.eGP.value),

@@ -50,9 +50,47 @@ class AnalyticsViewModel@Inject constructor(private val repository: DataReposito
         recalculatingRubUseCase.execute(valueRUB)
     }
 
-    fun test():Double{
-        return recalculatingRubUseCase.getResult()
+    fun getValueAED(): Double {
+        return recalculatingRubUseCase.getResultAed()
     }
+
+    fun getValueAMD(): Double {
+        return recalculatingRubUseCase.getResultAmd()
+    }
+
+    fun getValueAUD(): Double {
+        return recalculatingRubUseCase.getResultAud()
+    }
+
+    fun getValueAZN(): Double {
+        return recalculatingRubUseCase.getResultAzn()
+    }
+
+    fun getValueBGN(): Double {
+        return recalculatingRubUseCase.getResultBgn()
+    }
+
+    fun getValueBRL(): Double {
+        return recalculatingRubUseCase.getResultBrl()
+    }
+
+    fun getValueBYN(): Double {
+        return recalculatingRubUseCase.getResultByn()
+    }
+
+    fun getValueCAD(): Double {
+        return recalculatingRubUseCase.getResultCad()
+    }
+
+    fun getValueCHF(): Double {
+        return recalculatingRubUseCase.getResultChf()
+    }
+
+    fun getValueCNY(): Double {
+        return recalculatingRubUseCase.getResultCny()
+    }
+
+
 
 
 }
