@@ -6,9 +6,9 @@
     android:background="#F1D6D6"
     tools:context=".ui.fragments.AnalyticsFragment">
 
-    <androidx.compose.ui.platform.ComposeView
-        android:id="@+id/compos_view_analytics_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/compos_view_analytics_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 </FrameLayout>

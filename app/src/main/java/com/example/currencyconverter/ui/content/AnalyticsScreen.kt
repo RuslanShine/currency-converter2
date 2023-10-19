@@ -53,7 +53,6 @@ import com.example.currencyconverter.theme.Dimens
 import com.example.currencyconverter.theme.FontSizes
 import com.example.currencyconverter.theme.Purple40
 import com.example.currencyconverter.ui.viewModel.AnalyticsViewModel
-import kotlinx.coroutines.launch
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
@@ -106,7 +105,6 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: Currenc
     var resultUZS by remember { mutableStateOf("") }
     var resultVND by remember { mutableStateOf("") }
     var resultZAR by remember { mutableStateOf("") }
-
 
     Column(
         modifier = Modifier

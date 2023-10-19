@@ -1,6 +1,7 @@
 package com.example.currencyconverter.domain.usecase
 
 import com.example.currencyconverter.data.entity.Currencies
+import com.example.currencyconverter.domain.usecase.ParametersСurrency.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -9,7 +10,6 @@ import kotlin.properties.Delegates
 
 class RecalculatingRubUseCase(private val valuesData: Flow<Currencies>) {
     private lateinit var scope: CoroutineScope
-
     private var resultAED by Delegates.notNull<Double>()
     private var resultAMD by Delegates.notNull<Double>()
     private var resultAUD by Delegates.notNull<Double>()
@@ -57,47 +57,47 @@ class RecalculatingRubUseCase(private val valuesData: Flow<Currencies>) {
         scope = CoroutineScope(Dispatchers.IO).also { scope ->
             scope.launch {
                 valuesData.collect { db ->
-                    resultAED = userParamsConvert / db.aED.value * db.aED.nominal
-                    resultAMD = userParamsConvert / db.aMD.value * db.aMD.nominal
-                    resultAUD = userParamsConvert / db.aUD.value * db.aUD.nominal
-                    resultAZN = userParamsConvert / db.aZN.value * db.aZN.nominal
-                    resultBGN = userParamsConvert / db.bGN.value * db.bGN.nominal
-                    resultBRL = userParamsConvert / db.bRL.value * db.bRL.nominal
-                    resultBYN = userParamsConvert / db.bYN.value * db.bYN.nominal
-                    resultCAD = userParamsConvert / db.cAD.value * db.cAD.nominal
-                    resultCHF = userParamsConvert / db.cHF.value * db.cHF.nominal
-                    resultCNY = userParamsConvert / db.cNY.value * db.cNY.nominal
-                    resultCZK = userParamsConvert / db.cZK.value * db.cZK.nominal
-                    resultDKK = userParamsConvert / db.dKK.value * db.dKK.nominal
-                    resultEGP = userParamsConvert / db.eGP.value * db.eGP.nominal
-                    resultEUR = userParamsConvert / db.eUR.value * db.eUR.nominal
-                    resultGEL = userParamsConvert / db.gEL.value * db.gEL.nominal
-                    resultHKD = userParamsConvert / db.hKD.value * db.hKD.nominal
-                    resultHUF = userParamsConvert / db.hUF.value * db.hUF.nominal
-                    resultIDR = userParamsConvert / db.iDR.value * db.iDR.nominal
-                    resultINR = userParamsConvert / db.iNR.value * db.iNR.nominal
-                    resultJPY = userParamsConvert / db.jPY.value * db.jPY.nominal
-                    resultKGS = userParamsConvert / db.kGS.value * db.kGS.nominal
-                    resultKRW = userParamsConvert / db.kRW.value * db.kRW.nominal
-                    resultKZT = userParamsConvert / db.kZT.value * db.kZT.nominal
-                    resultMDL = userParamsConvert / db.mDL.value * db.mDL.nominal
-                    resultNOK = userParamsConvert / db.nOK.value * db.nOK.nominal
-                    resultNZD = userParamsConvert / db.nZD.value * db.nZD.nominal
-                    resultPLN = userParamsConvert / db.pLN.value * db.pLN.nominal
-                    resultQAR = userParamsConvert / db.qAR.value * db.qAR.nominal
-                    resultRON = userParamsConvert / db.rON.value * db.rON.nominal
-                    resultRSD = userParamsConvert / db.rSD.value * db.rSD.nominal
-                    resultSEK = userParamsConvert / db.sEK.value * db.sEK.nominal
-                    resultSGD = userParamsConvert / db.sGD.value * db.sGD.nominal
-                    resultTHB = userParamsConvert / db.tHB.value * db.tHB.nominal
-                    resultTJS = userParamsConvert / db.tJS.value * db.tJS.nominal
-                    resultTMT = userParamsConvert / db.tMT.value * db.tMT.nominal
-                    resultTRY = userParamsConvert / db.tRY.value * db.tRY.nominal
-                    resultUAH = userParamsConvert / db.uAH.value * db.uAH.nominal
-                    resultUSD = userParamsConvert / db.uSD.value * db.uSD.nominal
-                    resultUZS = userParamsConvert / db.uZS.value * db.uZS.nominal
-                    resultVND = userParamsConvert / db.vND.value * db.vND.nominal
-                    resultZAR = userParamsConvert / db.zAR.value * db.zAR.nominal
+                    resultAED = AED_VALUE.getValueRUB(db, userParamsConvert)
+                    resultAMD = AMD_VALUE.getValueRUB(db, userParamsConvert)
+                    resultAUD = AUD_VALUE.getValueRUB(db, userParamsConvert)
+                    resultAZN = AZN_VALUE.getValueRUB(db, userParamsConvert)
+                    resultBGN = BGN_VALUE.getValueRUB(db, userParamsConvert)
+                    resultBRL = BRL_VALUE.getValueRUB(db, userParamsConvert)
+                    resultBYN = BYN_VALUE.getValueRUB(db, userParamsConvert)
+                    resultCAD = CAD_VALUE.getValueRUB(db, userParamsConvert)
+                    resultCHF = CHF_VALUE.getValueRUB(db, userParamsConvert)
+                    resultCNY = CNY_VALUE.getValueRUB(db, userParamsConvert)
+                    resultCZK = CZK_VALUE.getValueRUB(db, userParamsConvert)
+                    resultDKK = DKK_VALUE.getValueRUB(db, userParamsConvert)
+                    resultEGP = EGP_VALUE.getValueRUB(db, userParamsConvert)
+                    resultEUR = EUR_VALUE.getValueRUB(db, userParamsConvert)
+                    resultGEL = GEL_VALUE.getValueRUB(db, userParamsConvert)
+                    resultHKD = HKD_VALUE.getValueRUB(db, userParamsConvert)
+                    resultHUF = HUF_VALUE.getValueRUB(db, userParamsConvert)
+                    resultIDR = IDR_VALUE.getValueRUB(db, userParamsConvert)
+                    resultINR = INR_VALUE.getValueRUB(db, userParamsConvert)
+                    resultJPY = JPY_VALUE.getValueRUB(db, userParamsConvert)
+                    resultKGS = KGS_VALUE.getValueRUB(db, userParamsConvert)
+                    resultKRW = KRW_VALUE.getValueRUB(db, userParamsConvert)
+                    resultKZT = KZT_VALUE.getValueRUB(db, userParamsConvert)
+                    resultMDL = MDL_VALUE.getValueRUB(db, userParamsConvert)
+                    resultNOK = NOK_VALUE.getValueRUB(db, userParamsConvert)
+                    resultNZD = NZD_VALUE.getValueRUB(db, userParamsConvert)
+                    resultPLN = PLN_VALUE.getValueRUB(db, userParamsConvert)
+                    resultQAR = QAR_VALUE.getValueRUB(db, userParamsConvert)
+                    resultRON = RON_VALUE.getValueRUB(db, userParamsConvert)
+                    resultRSD = RSD_VALUE.getValueRUB(db, userParamsConvert)
+                    resultSEK = SEK_VALUE.getValueRUB(db, userParamsConvert)
+                    resultSGD = SGD_VALUE.getValueRUB(db, userParamsConvert)
+                    resultTHB = THB_VALUE.getValueRUB(db, userParamsConvert)
+                    resultTJS = TJS_VALUE.getValueRUB(db, userParamsConvert)
+                    resultTMT = TMT_VALUE.getValueRUB(db, userParamsConvert)
+                    resultTRY = TRY_VALUE.getValueRUB(db, userParamsConvert)
+                    resultUAH = UAH_VALUE.getValueRUB(db, userParamsConvert)
+                    resultUSD = USD_VALUE.getValueRUB(db, userParamsConvert)
+                    resultUZS = UZS_VALUE.getValueRUB(db, userParamsConvert)
+                    resultVND = VND_VALUE.getValueRUB(db, userParamsConvert)
+                    resultZAR = ZAR_VALUE.getValueRUB(db, userParamsConvert)
 
                 }
             }
