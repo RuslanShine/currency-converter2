@@ -1,95 +1,96 @@
 package com.example.convertmy.data
 
 
+import com.example.currencyconverter.data.modelData.UniversalCurrency
 import com.google.gson.annotations.SerializedName
 
 
 
 data class Valute(
     @SerializedName("AED")
-    val aED: AED,
+    val aED: UniversalCurrency,
     @SerializedName("AMD")
-    val aMD: AMD,
+    val aMD: UniversalCurrency,
     @SerializedName("AUD")
-    val aUD: AUD,
+    val aUD: UniversalCurrency,
     @SerializedName("AZN")
-    val aZN: AZN,
+    val aZN: UniversalCurrency,
     @SerializedName("BGN")
-    val bGN: BGN,
+    val bGN: UniversalCurrency,
     @SerializedName("BRL")
-    val bRL: BRL,
+    val bRL: UniversalCurrency,
     @SerializedName("BYN")
-    val bYN: BYN,
+    val bYN: UniversalCurrency,
     @SerializedName("CAD")
-    val cAD: CAD,
+    val cAD: UniversalCurrency,
     @SerializedName("CHF")
-    val cHF: CHF,
+    val cHF: UniversalCurrency,
     @SerializedName("CNY")
-    val cNY: CNY,
+    val cNY: UniversalCurrency,
     @SerializedName("CZK")
-    val cZK: CZK,
+    val cZK: UniversalCurrency,
     @SerializedName("DKK")
-    val dKK: DKK,
+    val dKK: UniversalCurrency,
     @SerializedName("EGP")
-    val eGP: EGP,
+    val eGP: UniversalCurrency,
     @SerializedName("EUR")
-    val eUR: EUR,
+    val eUR: UniversalCurrency,
     @SerializedName("GBP")
-    val gBP: GBP,
+    val gBP: UniversalCurrency,
     @SerializedName("GEL")
-    val gEL: GEL,
+    val gEL: UniversalCurrency,
     @SerializedName("HKD")
-    val hKD: HKD,
+    val hKD: UniversalCurrency,
     @SerializedName("HUF")
-    val hUF: HUF,
+    val hUF: UniversalCurrency,
     @SerializedName("IDR")
-    val iDR: IDR,
+    val iDR: UniversalCurrency,
     @SerializedName("INR")
-    val iNR: INR,
+    val iNR: UniversalCurrency,
     @SerializedName("JPY")
-    val jPY: JPY,
+    val jPY: UniversalCurrency,
     @SerializedName("KGS")
-    val kGS: KGS,
+    val kGS: UniversalCurrency,
     @SerializedName("KRW")
-    val kRW: KRW,
+    val kRW: UniversalCurrency,
     @SerializedName("KZT")
-    val kZT: KZT,
+    val kZT: UniversalCurrency,
     @SerializedName("MDL")
-    val mDL: MDL,
+    val mDL: UniversalCurrency,
     @SerializedName("NOK")
-    val nOK: NOK,
+    val nOK: UniversalCurrency,
     @SerializedName("NZD")
-    val nZD: NZD,
+    val nZD: UniversalCurrency,
     @SerializedName("PLN")
-    val pLN: PLN,
+    val pLN: UniversalCurrency,
     @SerializedName("QAR")
-    val qAR: QAR,
+    val qAR: UniversalCurrency,
     @SerializedName("RON")
-    val rON: RON,
+    val rON: UniversalCurrency,
     @SerializedName("RSD")
-    val rSD: RSD,
+    val rSD: UniversalCurrency,
     @SerializedName("SEK")
-    val sEK: SEK,
+    val sEK: UniversalCurrency,
     @SerializedName("SGD")
-    val sGD: SGD,
+    val sGD: UniversalCurrency,
     @SerializedName("THB")
-    val tHB: THB,
+    val tHB: UniversalCurrency,
     @SerializedName("TJS")
-    val tJS: TJS,
+    val tJS: UniversalCurrency,
     @SerializedName("TMT")
-    val tMT: TMT,
+    val tMT: UniversalCurrency,
     @SerializedName("TRY")
-    val tRY: TRY,
+    val tRY: UniversalCurrency,
     @SerializedName("UAH")
-    val uAH: UAH,
+    val uAH: UniversalCurrency,
     @SerializedName("USD")
-    val uSD: USD,
+    val uSD: UniversalCurrency,
     @SerializedName("UZS")
-    val uZS: UZS,
+    val uZS: UniversalCurrency,
     @SerializedName("VND")
-    val vND: VND,
+    val vND: UniversalCurrency,
     @SerializedName("XDR")
-    val xDR: XDR,
+    val xDR: UniversalCurrency,
     @SerializedName("ZAR")
-    val zAR: ZAR
+    val zAR: UniversalCurrency
 )

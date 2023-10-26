@@ -41,11 +41,13 @@ fun ItemAnalyticsScreen(item: ItemAnalyticsModel) {
                     .padding(start = 4.dp),
                 horizontalAlignment = Alignment.Start
             ) {
-                Text(
-                    text = item.nameCurrency,
-                    color = Color.Black,
-                    fontSize = 18.sp
-                )
+                item.nameCurrency?.let {
+                    Text(
+                        text = it,
+                        color = Color.Black,
+                        fontSize = 18.sp
+                    )
+                }
                 Text(
                     text = "${item.codCurrency}/RUB: ${item.exchangeRate}",
                     fontSize = 14.sp,
@@ -57,7 +59,7 @@ fun ItemAnalyticsScreen(item: ItemAnalyticsModel) {
                     .fillMaxSize()
                     .padding(Dimens._8)
                     .padding(end = 4.dp),
-                text = item.result.toString(),
+                text = item.result,
                 color = Color.Black,
                 fontSize = 18.sp, textAlign = TextAlign.End
             )

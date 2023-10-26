@@ -5,9 +5,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import kotlin.properties.Delegates
 
-class SetCharCodeValuesUseCase(private val valuesData: Flow<Currencies>) {
+class SetCharCodeValuesUseCase(private val valuesData: Flow<List<Currencies>>) {
     private lateinit var scope: CoroutineScope
     private var nameCurrency = "VAL"
     private var nameCurrencyToVal = "VAL"
@@ -25,49 +24,47 @@ class SetCharCodeValuesUseCase(private val valuesData: Flow<Currencies>) {
             scope.launch {
                 valuesData.collect { db ->
                     when (nameCurrencyScreen) {
-                        db.aED.name -> nameCurrency = db.aED.charCode
-                        db.aMD.name -> nameCurrency = db.aMD.charCode
-                        db.aUD.name -> nameCurrency = db.aUD.charCode
-                        db.aZN.name -> nameCurrency = db.aZN.charCode
-                        db.bGN.name -> nameCurrency = db.bGN.charCode
-                        db.bRL.name -> nameCurrency = db.bRL.charCode
-                        db.bYN.name -> nameCurrency = db.bYN.charCode
-                        db.cAD.name -> nameCurrency = db.cAD.charCode
-                        db.cHF.name -> nameCurrency = db.cHF.charCode
-                        db.cNY.name -> nameCurrency = db.cNY.charCode
-                        db.cZK.name -> nameCurrency = db.cZK.charCode
-                        db.dKK.name -> nameCurrency = db.dKK.charCode
-                        db.eGP.name -> nameCurrency = db.eGP.charCode
-                        db.eUR.name -> nameCurrency = db.eUR.charCode
-                        db.gBP.name -> nameCurrency = db.gBP.charCode
-                        db.gEL.name -> nameCurrency = db.gEL.charCode
-                        db.hKD.name -> nameCurrency = db.hKD.charCode
-                        db.hUF.name -> nameCurrency = db.hUF.charCode
-                        db.iDR.name -> nameCurrency = db.iDR.charCode
-                        db.iNR.name -> nameCurrency = db.iNR.charCode
-                        db.jPY.name -> nameCurrency = db.jPY.charCode
-                        db.kGS.name -> nameCurrency = db.kGS.charCode
-                        db.kRW.name -> nameCurrency = db.kRW.charCode
-                        db.kZT.name -> nameCurrency = db.kZT.charCode
-                        db.mDL.name -> nameCurrency = db.mDL.charCode
-                        db.nOK.name -> nameCurrency = db.nOK.charCode
-                        db.nZD.name -> nameCurrency = db.nZD.charCode
-                        db.pLN.name -> nameCurrency = db.pLN.charCode
-                        db.qAR.name -> nameCurrency = db.qAR.charCode
-                        db.rON.name -> nameCurrency = db.rON.charCode
-                        db.rSD.name -> nameCurrency = db.rSD.charCode
-                        db.sEK.name -> nameCurrency = db.sEK.charCode
-                        db.sGD.name -> nameCurrency = db.sGD.charCode
-                        db.tHB.name -> nameCurrency = db.tHB.charCode
-                        db.tJS.name -> nameCurrency = db.tJS.charCode
-                        db.tMT.name -> nameCurrency = db.tMT.charCode
-                        db.tRY.name -> nameCurrency = db.tRY.charCode
-                        db.uAH.name -> nameCurrency = db.uAH.charCode
-                        db.uSD.name -> nameCurrency = db.uSD.charCode
-                        db.uZS.name -> nameCurrency = db.uZS.charCode
-                        db.vND.name -> nameCurrency = db.vND.charCode
-                        db.xDR.name -> nameCurrency = db.xDR.charCode
-                        db.zAR.name -> nameCurrency = db.zAR.charCode
+                        db.find { it.charCode =="AED"}?.name ->nameCurrency = db.find { it.charCode =="AED"}?.charCode!!
+                        db.find { it.charCode =="AMD"}?.name ->nameCurrency = db.find { it.charCode =="AMD"}?.charCode!!
+                        db.find { it.charCode =="AUD"}?.name ->nameCurrency = db.find { it.charCode =="AUD"}?.charCode!!
+                        db.find { it.charCode =="AZN"}?.name ->nameCurrency = db.find { it.charCode =="AZN"}?.charCode!!
+                        db.find { it.charCode =="BGN"}?.name ->nameCurrency = db.find { it.charCode =="BGN"}?.charCode!!
+                        db.find { it.charCode =="BRL"}?.name ->nameCurrency = db.find { it.charCode =="BRL"}?.charCode!!
+                        db.find { it.charCode =="BYN"}?.name ->nameCurrency = db.find { it.charCode =="BYN"}?.charCode!!
+                        db.find { it.charCode =="CAD"}?.name ->nameCurrency = db.find { it.charCode =="CAD"}?.charCode!!
+                        db.find { it.charCode =="CHF"}?.name ->nameCurrency = db.find { it.charCode =="CHF"}?.charCode!!
+                        db.find { it.charCode =="CNY"}?.name ->nameCurrency = db.find { it.charCode =="CNY"}?.charCode!!
+                        db.find { it.charCode =="CZK"}?.name ->nameCurrency = db.find { it.charCode =="CZK"}?.charCode!!
+                        db.find { it.charCode =="DKK"}?.name ->nameCurrency = db.find { it.charCode =="DKK"}?.charCode!!
+                        db.find { it.charCode =="EGP"}?.name ->nameCurrency = db.find { it.charCode =="EGP"}?.charCode!!
+                        db.find { it.charCode =="EUR"}?.name ->nameCurrency = db.find { it.charCode =="EUR"}?.charCode!!
+                        db.find { it.charCode =="GEL"}?.name ->nameCurrency = db.find { it.charCode =="GEL"}?.charCode!!
+                        db.find { it.charCode =="HKD"}?.name ->nameCurrency = db.find { it.charCode =="HKD"}?.charCode!!
+                        db.find { it.charCode =="HUF"}?.name ->nameCurrency = db.find { it.charCode =="HUF"}?.charCode!!
+                        db.find { it.charCode =="IDR"}?.name ->nameCurrency = db.find { it.charCode =="IDR"}?.charCode!!
+                        db.find { it.charCode =="INR"}?.name ->nameCurrency = db.find { it.charCode =="INR"}?.charCode!!
+                        db.find { it.charCode =="JPY"}?.name ->nameCurrency = db.find { it.charCode =="JPY"}?.charCode!!
+                        db.find { it.charCode =="KGS"}?.name ->nameCurrency = db.find { it.charCode =="KGS"}?.charCode!!
+                        db.find { it.charCode =="KRW"}?.name ->nameCurrency = db.find { it.charCode =="KRW"}?.charCode!!
+                        db.find { it.charCode =="KZT"}?.name ->nameCurrency = db.find { it.charCode =="KZT"}?.charCode!!
+                        db.find { it.charCode =="MDL"}?.name ->nameCurrency = db.find { it.charCode =="MDL"}?.charCode!!
+                        db.find { it.charCode =="NOK"}?.name ->nameCurrency = db.find { it.charCode =="NOK"}?.charCode!!
+                        db.find { it.charCode =="NZD"}?.name ->nameCurrency = db.find { it.charCode =="NZD"}?.charCode!!
+                        db.find { it.charCode =="PLN"}?.name ->nameCurrency = db.find { it.charCode =="PLN"}?.charCode!!
+                        db.find { it.charCode =="QAR"}?.name ->nameCurrency = db.find { it.charCode =="QAR"}?.charCode!!
+                        db.find { it.charCode =="RON"}?.name ->nameCurrency = db.find { it.charCode =="RON"}?.charCode!!
+                        db.find { it.charCode =="RSD"}?.name ->nameCurrency = db.find { it.charCode =="RSD"}?.charCode!!
+                        db.find { it.charCode =="SEK"}?.name ->nameCurrency = db.find { it.charCode =="SEK"}?.charCode!!
+                        db.find { it.charCode =="SGD"}?.name ->nameCurrency = db.find { it.charCode =="SGD"}?.charCode!!
+                        db.find { it.charCode =="THB"}?.name ->nameCurrency = db.find { it.charCode =="THB"}?.charCode!!
+                        db.find { it.charCode =="TJS"}?.name ->nameCurrency = db.find { it.charCode =="TJS"}?.charCode!!
+                        db.find { it.charCode =="TMT"}?.name ->nameCurrency = db.find { it.charCode =="TMT"}?.charCode!!
+                        db.find { it.charCode =="TRY"}?.name ->nameCurrency = db.find { it.charCode =="TRY"}?.charCode!!
+                        db.find { it.charCode =="UAH"}?.name ->nameCurrency = db.find { it.charCode =="UAH"}?.charCode!!
+                        db.find { it.charCode =="USD"}?.name ->nameCurrency = db.find { it.charCode =="USD"}?.charCode!!
+                        db.find { it.charCode =="UZS"}?.name ->nameCurrency = db.find { it.charCode =="UZS"}?.charCode!!
+                        db.find { it.charCode =="VND"}?.name ->nameCurrency = db.find { it.charCode =="VND"}?.charCode!!
+                        db.find { it.charCode =="ZAR"}?.name ->nameCurrency = db.find { it.charCode =="ZAR"}?.charCode!!
                     }
                 }
             }
@@ -79,54 +76,50 @@ class SetCharCodeValuesUseCase(private val valuesData: Flow<Currencies>) {
             scope.launch {
                 valuesData.collect { db ->
                     when (nameCurrencyScreenToVal) {
-                        db.aED.name -> nameCurrencyToVal = db.aED.charCode
-                        db.aMD.name -> nameCurrencyToVal = db.aMD.charCode
-                        db.aUD.name -> nameCurrencyToVal = db.aUD.charCode
-                        db.aZN.name -> nameCurrencyToVal = db.aZN.charCode
-                        db.bGN.name -> nameCurrencyToVal = db.bGN.charCode
-                        db.bRL.name -> nameCurrencyToVal = db.bRL.charCode
-                        db.bYN.name -> nameCurrencyToVal = db.bYN.charCode
-                        db.cAD.name -> nameCurrencyToVal = db.cAD.charCode
-                        db.cHF.name -> nameCurrencyToVal = db.cHF.charCode
-                        db.cNY.name -> nameCurrencyToVal = db.cNY.charCode
-                        db.cZK.name -> nameCurrencyToVal = db.cZK.charCode
-                        db.dKK.name -> nameCurrencyToVal = db.dKK.charCode
-                        db.eGP.name -> nameCurrencyToVal = db.eGP.charCode
-                        db.eUR.name -> nameCurrencyToVal = db.eUR.charCode
-                        db.gBP.name -> nameCurrencyToVal = db.gBP.charCode
-                        db.gEL.name -> nameCurrencyToVal = db.gEL.charCode
-                        db.hKD.name -> nameCurrencyToVal = db.hKD.charCode
-                        db.hUF.name -> nameCurrencyToVal = db.hUF.charCode
-                        db.iDR.name -> nameCurrencyToVal = db.iDR.charCode
-                        db.iNR.name -> nameCurrencyToVal = db.iNR.charCode
-                        db.jPY.name -> nameCurrencyToVal = db.jPY.charCode
-                        db.kGS.name -> nameCurrencyToVal = db.kGS.charCode
-                        db.kRW.name -> nameCurrencyToVal = db.kRW.charCode
-                        db.kZT.name -> nameCurrencyToVal = db.kZT.charCode
-                        db.mDL.name -> nameCurrencyToVal = db.mDL.charCode
-                        db.nOK.name -> nameCurrencyToVal = db.nOK.charCode
-                        db.nZD.name -> nameCurrencyToVal = db.nZD.charCode
-                        db.pLN.name -> nameCurrencyToVal = db.pLN.charCode
-                        db.qAR.name -> nameCurrencyToVal = db.qAR.charCode
-                        db.rON.name -> nameCurrencyToVal = db.rON.charCode
-                        db.rSD.name -> nameCurrencyToVal = db.rSD.charCode
-                        db.sEK.name -> nameCurrencyToVal = db.sEK.charCode
-                        db.sGD.name -> nameCurrencyToVal = db.sGD.charCode
-                        db.tHB.name -> nameCurrencyToVal = db.tHB.charCode
-                        db.tJS.name -> nameCurrencyToVal = db.tJS.charCode
-                        db.tMT.name -> nameCurrencyToVal = db.tMT.charCode
-                        db.tRY.name -> nameCurrencyToVal = db.tRY.charCode
-                        db.uAH.name -> nameCurrencyToVal = db.uAH.charCode
-                        db.uSD.name -> nameCurrencyToVal = db.uSD.charCode
-                        db.uZS.name -> nameCurrencyToVal = db.uZS.charCode
-                        db.vND.name -> nameCurrencyToVal = db.vND.charCode
-                        db.xDR.name -> nameCurrencyToVal = db.xDR.charCode
-                        db.zAR.name -> nameCurrencyToVal = db.zAR.charCode
+                        db.find { it.charCode =="AED"}?.name ->nameCurrencyToVal = db.find { it.charCode =="AED"}?.charCode!!
+                        db.find { it.charCode =="AMD"}?.name ->nameCurrencyToVal = db.find { it.charCode =="AMD"}?.charCode!!
+                        db.find { it.charCode =="AUD"}?.name ->nameCurrencyToVal = db.find { it.charCode =="AUD"}?.charCode!!
+                        db.find { it.charCode =="AZN"}?.name ->nameCurrencyToVal = db.find { it.charCode =="AZN"}?.charCode!!
+                        db.find { it.charCode =="BGN"}?.name ->nameCurrencyToVal = db.find { it.charCode =="BGN"}?.charCode!!
+                        db.find { it.charCode =="BRL"}?.name ->nameCurrencyToVal = db.find { it.charCode =="BRL"}?.charCode!!
+                        db.find { it.charCode =="BYN"}?.name ->nameCurrencyToVal = db.find { it.charCode =="BYN"}?.charCode!!
+                        db.find { it.charCode =="CAD"}?.name ->nameCurrencyToVal = db.find { it.charCode =="CAD"}?.charCode!!
+                        db.find { it.charCode =="CHF"}?.name ->nameCurrencyToVal = db.find { it.charCode =="CHF"}?.charCode!!
+                        db.find { it.charCode =="CNY"}?.name ->nameCurrencyToVal = db.find { it.charCode =="CNY"}?.charCode!!
+                        db.find { it.charCode =="CZK"}?.name ->nameCurrencyToVal = db.find { it.charCode =="CZK"}?.charCode!!
+                        db.find { it.charCode =="DKK"}?.name ->nameCurrencyToVal = db.find { it.charCode =="DKK"}?.charCode!!
+                        db.find { it.charCode =="EGP"}?.name ->nameCurrencyToVal = db.find { it.charCode =="EGP"}?.charCode!!
+                        db.find { it.charCode =="EUR"}?.name ->nameCurrencyToVal = db.find { it.charCode =="EUR"}?.charCode!!
+                        db.find { it.charCode =="GEL"}?.name ->nameCurrencyToVal = db.find { it.charCode =="GEL"}?.charCode!!
+                        db.find { it.charCode =="HKD"}?.name ->nameCurrencyToVal = db.find { it.charCode =="HKD"}?.charCode!!
+                        db.find { it.charCode =="HUF"}?.name ->nameCurrencyToVal = db.find { it.charCode =="HUF"}?.charCode!!
+                        db.find { it.charCode =="IDR"}?.name ->nameCurrencyToVal = db.find { it.charCode =="IDR"}?.charCode!!
+                        db.find { it.charCode =="INR"}?.name ->nameCurrencyToVal = db.find { it.charCode =="INR"}?.charCode!!
+                        db.find { it.charCode =="JPY"}?.name ->nameCurrencyToVal = db.find { it.charCode =="JPY"}?.charCode!!
+                        db.find { it.charCode =="KGS"}?.name ->nameCurrencyToVal = db.find { it.charCode =="KGS"}?.charCode!!
+                        db.find { it.charCode =="KRW"}?.name ->nameCurrencyToVal = db.find { it.charCode =="KRW"}?.charCode!!
+                        db.find { it.charCode =="KZT"}?.name ->nameCurrencyToVal = db.find { it.charCode =="KZT"}?.charCode!!
+                        db.find { it.charCode =="MDL"}?.name ->nameCurrencyToVal = db.find { it.charCode =="MDL"}?.charCode!!
+                        db.find { it.charCode =="NOK"}?.name ->nameCurrencyToVal = db.find { it.charCode =="NOK"}?.charCode!!
+                        db.find { it.charCode =="NZD"}?.name ->nameCurrencyToVal = db.find { it.charCode =="NZD"}?.charCode!!
+                        db.find { it.charCode =="PLN"}?.name ->nameCurrencyToVal = db.find { it.charCode =="PLN"}?.charCode!!
+                        db.find { it.charCode =="QAR"}?.name ->nameCurrencyToVal = db.find { it.charCode =="QAR"}?.charCode!!
+                        db.find { it.charCode =="RON"}?.name ->nameCurrencyToVal = db.find { it.charCode =="RON"}?.charCode!!
+                        db.find { it.charCode =="RSD"}?.name ->nameCurrencyToVal = db.find { it.charCode =="RSD"}?.charCode!!
+                        db.find { it.charCode =="SEK"}?.name ->nameCurrencyToVal = db.find { it.charCode =="SEK"}?.charCode!!
+                        db.find { it.charCode =="SGD"}?.name ->nameCurrencyToVal = db.find { it.charCode =="SGD"}?.charCode!!
+                        db.find { it.charCode =="THB"}?.name ->nameCurrencyToVal = db.find { it.charCode =="THB"}?.charCode!!
+                        db.find { it.charCode =="TJS"}?.name ->nameCurrencyToVal = db.find { it.charCode =="TJS"}?.charCode!!
+                        db.find { it.charCode =="TMT"}?.name ->nameCurrencyToVal = db.find { it.charCode =="TMT"}?.charCode!!
+                        db.find { it.charCode =="TRY"}?.name ->nameCurrencyToVal = db.find { it.charCode =="TRY"}?.charCode!!
+                        db.find { it.charCode =="UAH"}?.name ->nameCurrencyToVal = db.find { it.charCode =="UAH"}?.charCode!!
+                        db.find { it.charCode =="USD"}?.name ->nameCurrencyToVal = db.find { it.charCode =="USD"}?.charCode!!
+                        db.find { it.charCode =="UZS"}?.name ->nameCurrencyToVal = db.find { it.charCode =="UZS"}?.charCode!!
+                        db.find { it.charCode =="VND"}?.name ->nameCurrencyToVal = db.find { it.charCode =="VND"}?.charCode!!
+                        db.find { it.charCode =="ZAR"}?.name ->nameCurrencyToVal = db.find { it.charCode =="ZAR"}?.charCode!!
                     }
                 }
             }
         }
     }
-
-
 }

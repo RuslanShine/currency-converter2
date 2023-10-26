@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AnalyticsViewModel@Inject constructor(private val repository: DataRepository) : ViewModel() {
-    var valuesData: Flow<Currencies>
+    var valuesData: Flow<List<Currencies>>
 
     init {
         loadPosts()
@@ -26,7 +26,7 @@ class AnalyticsViewModel@Inject constructor(private val repository: DataReposito
         viewModelScope.launch {
             try {
                 repository.getCurrenciesFromApi(object : HomeViewModel.ApiCallback {
-                    override fun onSuccess(сurrencies: Currencies) {
+                    override fun onSuccess(сurrencies: MutableList<Currencies>) {
 //                        valuesData
                     }
 

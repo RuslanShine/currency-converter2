@@ -57,7 +57,7 @@ import com.example.currencyconverter.ui.viewModel.AnalyticsViewModel
 @SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: Currencies) {
+fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: List<Currencies>) {
 
     var valueCurrencyRub by remember { mutableStateOf("") }
     var valueCurrencyResult by remember { mutableStateOf("") }
@@ -321,7 +321,7 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: Currenc
                                 String.format("%.3f", resultFinish)
                             } else "0"
 
-                            resultKZT= if (valueCurrencyRub > 0.toString()) {
+                            resultKZT = if (valueCurrencyRub > 0.toString()) {
                                 val resultFinish = viewModel.getValueKZT()
                                 String.format("%.3f", resultFinish)
                             } else "0"
@@ -435,50 +435,52 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: Currenc
         ) {
             itemsIndexed(
                 mutableListOf(
-                    ItemAnalyticsModel(db.aED.name, db.aED.charCode, db.aED.value, resultAED),
-                    ItemAnalyticsModel(db.aMD.name, db.aMD.charCode, db.aMD.value, resultAMD),
-                    ItemAnalyticsModel(db.aUD.name, db.aUD.charCode, db.aUD.value, resultAUD),
-                    ItemAnalyticsModel(db.aZN.name, db.aZN.charCode, db.aZN.value, resultAZN),
-                    ItemAnalyticsModel(db.bGN.name, db.bGN.charCode, db.bGN.value, resultBGN),
-                    ItemAnalyticsModel(db.bRL.name, db.bRL.charCode, db.bRL.value, resultBRL),
-                    ItemAnalyticsModel(db.bYN.name, db.bYN.charCode, db.bYN.value, resultBYN),
-                    ItemAnalyticsModel(db.cAD.name, db.cAD.charCode, db.cAD.value, resultCAD),
-                    ItemAnalyticsModel(db.cHF.name, db.cHF.charCode, db.cHF.value, resultCHF),
-                    ItemAnalyticsModel(db.cNY.name, db.cNY.charCode, db.cNY.value, resultCNY),
-                    ItemAnalyticsModel(db.cZK.name, db.cZK.charCode, db.cZK.value, resultCZK),
-                    ItemAnalyticsModel(db.dKK.name, db.dKK.charCode, db.dKK.value, resultDKK),
-                    ItemAnalyticsModel(db.eGP.name, db.eGP.charCode, db.eGP.value, resultEGP),
-                    ItemAnalyticsModel(db.eUR.name, db.eUR.charCode, db.eUR.value, resultEUR),
-                    ItemAnalyticsModel(db.gEL.name, db.gEL.charCode, db.gEL.value, resultGEL),
-                    ItemAnalyticsModel(db.hKD.name, db.hKD.charCode, db.hKD.value, resultHKD),
-                    ItemAnalyticsModel(db.hUF.name, db.hUF.charCode, db.hUF.value, resultHUF),
-                    ItemAnalyticsModel(db.iDR.name, db.iDR.charCode, db.iDR.value, resultIDR),
-                    ItemAnalyticsModel(db.iNR.name, db.iNR.charCode, db.iNR.value, resultINR),
-                    ItemAnalyticsModel(db.jPY.name, db.jPY.charCode, db.jPY.value, resultJPY),
-                    ItemAnalyticsModel(db.kGS.name, db.kGS.charCode, db.kGS.value, resultKGS),
-                    ItemAnalyticsModel(db.kRW.name, db.kRW.charCode, db.kRW.value, resultKRW),
-                    ItemAnalyticsModel(db.kZT.name, db.kZT.charCode, db.kZT.value, resultKZT),
-                    ItemAnalyticsModel(db.mDL.name, db.mDL.charCode, db.mDL.value, resultMDL),
-                    ItemAnalyticsModel(db.nOK.name, db.nOK.charCode, db.nOK.value, resultNOK),
-                    ItemAnalyticsModel(db.nZD.name, db.nZD.charCode, db.nZD.value, resultNZD),
-                    ItemAnalyticsModel(db.pLN.name, db.pLN.charCode, db.pLN.value, resultPLN),
-                    ItemAnalyticsModel(db.qAR.name, db.qAR.charCode, db.qAR.value, resultQAR),
-                    ItemAnalyticsModel(db.rON.name, db.rON.charCode, db.rON.value, resultRON),
-                    ItemAnalyticsModel(db.rSD.name, db.rSD.charCode, db.rSD.value, resultRSD),
-                    ItemAnalyticsModel(db.sEK.name, db.sEK.charCode, db.sEK.value, resultSEK),
-                    ItemAnalyticsModel(db.sGD.name, db.sGD.charCode, db.sGD.value, resultSGD),
-                    ItemAnalyticsModel(db.tHB.name, db.tHB.charCode, db.tHB.value, resultTHB),
-                    ItemAnalyticsModel(db.tJS.name, db.tJS.charCode, db.tJS.value, resultTJS),
-                    ItemAnalyticsModel(db.tMT.name, db.tMT.charCode, db.tMT.value, resultTMT),
-                    ItemAnalyticsModel(db.tRY.name, db.tRY.charCode, db.tRY.value, resultTRY),
-                    ItemAnalyticsModel(db.uAH.name, db.uAH.charCode, db.uAH.value, resultUAH),
-                    ItemAnalyticsModel(db.uSD.name, db.uSD.charCode, db.uSD.value, resultUSD),
-                    ItemAnalyticsModel(db.uZS.name, db.uZS.charCode, db.uZS.value, resultUZS),
-                    ItemAnalyticsModel(db.vND.name, db.vND.charCode, db.vND.value, resultVND),
-                    ItemAnalyticsModel(db.zAR.name, db.zAR.charCode, db.zAR.value, resultZAR)
+                    ItemAnalyticsModel(db.find { it.charCode == "AED" }?.name, db.find { it.charCode == "AED" }?.charCode, db.find { it.charCode == "AED" }?.value, resultAED),
+                    ItemAnalyticsModel(db.find { it.charCode == "AMD" }?.name, db.find { it.charCode == "AMD" }?.charCode, db.find { it.charCode == "AMD" }?.value, resultAMD),
+                    ItemAnalyticsModel(db.find { it.charCode == "AUD" }?.name, db.find { it.charCode == "AUD" }?.charCode, db.find { it.charCode == "AUD" }?.value, resultAUD),
+                    ItemAnalyticsModel(db.find { it.charCode == "AZN" }?.name, db.find { it.charCode == "AZN" }?.charCode, db.find { it.charCode == "AZN" }?.value, resultAZN),
+                    ItemAnalyticsModel(db.find { it.charCode == "BGN" }?.name, db.find { it.charCode == "BGN" }?.charCode, db.find { it.charCode == "BGN" }?.value, resultBGN),
+                    ItemAnalyticsModel(db.find { it.charCode == "BRL" }?.name, db.find { it.charCode == "BRL" }?.charCode, db.find { it.charCode == "BRL" }?.value, resultBRL),
+                    ItemAnalyticsModel(db.find { it.charCode == "BYN" }?.name, db.find { it.charCode == "BYN" }?.charCode, db.find { it.charCode == "BYN" }?.value, resultBYN),
+                    ItemAnalyticsModel(db.find { it.charCode == "CAD" }?.name, db.find { it.charCode == "CAD" }?.charCode, db.find { it.charCode == "CAD" }?.value, resultCAD),
+                    ItemAnalyticsModel(db.find { it.charCode == "CHF" }?.name, db.find { it.charCode == "CHF" }?.charCode, db.find { it.charCode == "CHF" }?.value, resultCHF),
+                    ItemAnalyticsModel(db.find { it.charCode == "CNY" }?.name, db.find { it.charCode == "CNY" }?.charCode, db.find { it.charCode == "CNY" }?.value, resultCNY),
+                    ItemAnalyticsModel(db.find { it.charCode == "CZK" }?.name, db.find { it.charCode == "CZK" }?.charCode, db.find { it.charCode == "CZK" }?.value, resultCZK),
+                    ItemAnalyticsModel(db.find { it.charCode == "DKK" }?.name, db.find { it.charCode == "DKK" }?.charCode, db.find { it.charCode == "DKK" }?.value, resultDKK),
+                    ItemAnalyticsModel(db.find { it.charCode == "EGP" }?.name, db.find { it.charCode == "EGP" }?.charCode, db.find { it.charCode == "EGP" }?.value, resultEGP),
+                    ItemAnalyticsModel(db.find { it.charCode == "EUR" }?.name, db.find { it.charCode == "EUR" }?.charCode, db.find { it.charCode == "EUR" }?.value, resultEUR),
+                    ItemAnalyticsModel(db.find { it.charCode == "GEL" }?.name, db.find { it.charCode == "GEL" }?.charCode, db.find { it.charCode == "GEL" }?.value, resultGEL),
+                    ItemAnalyticsModel(db.find { it.charCode == "HKD" }?.name, db.find { it.charCode == "HKD" }?.charCode, db.find { it.charCode == "HKD" }?.value, resultHKD),
+                    ItemAnalyticsModel(db.find { it.charCode == "HUF" }?.name, db.find { it.charCode == "HUF" }?.charCode, db.find { it.charCode == "HUF" }?.value, resultHUF),
+                    ItemAnalyticsModel(db.find { it.charCode == "IDR" }?.name, db.find { it.charCode == "IDR" }?.charCode, db.find { it.charCode == "IDR" }?.value, resultIDR),
+                    ItemAnalyticsModel(db.find { it.charCode == "INR" }?.name, db.find { it.charCode == "INR" }?.charCode, db.find { it.charCode == "INR" }?.value, resultINR),
+                    ItemAnalyticsModel(db.find { it.charCode == "JPY" }?.name, db.find { it.charCode == "JPY" }?.charCode, db.find { it.charCode == "JPY" }?.value, resultJPY),
+                    ItemAnalyticsModel(db.find { it.charCode == "KGS" }?.name, db.find { it.charCode == "KGS" }?.charCode, db.find { it.charCode == "KGS" }?.value, resultKGS),
+                    ItemAnalyticsModel(db.find { it.charCode == "KRW" }?.name, db.find { it.charCode == "KRW" }?.charCode, db.find { it.charCode == "KRW" }?.value, resultKRW),
+                    ItemAnalyticsModel(db.find { it.charCode == "KZT" }?.name, db.find { it.charCode == "KZT" }?.charCode, db.find { it.charCode == "KZT" }?.value, resultKZT),
+                    ItemAnalyticsModel(db.find { it.charCode == "MDL" }?.name, db.find { it.charCode == "MDL" }?.charCode, db.find { it.charCode == "MDL" }?.value, resultMDL),
+                    ItemAnalyticsModel(db.find { it.charCode == "NOK" }?.name, db.find { it.charCode == "NOK" }?.charCode, db.find { it.charCode == "NOK" }?.value, resultNOK),
+                    ItemAnalyticsModel(db.find { it.charCode == "NZD" }?.name, db.find { it.charCode == "NZD" }?.charCode, db.find { it.charCode == "NZD" }?.value, resultNZD),
+                    ItemAnalyticsModel(db.find { it.charCode == "PLN" }?.name, db.find { it.charCode == "PLN" }?.charCode, db.find { it.charCode == "PLN" }?.value, resultPLN),
+                    ItemAnalyticsModel(db.find { it.charCode == "QAR" }?.name, db.find { it.charCode == "QAR" }?.charCode, db.find { it.charCode == "QAR" }?.value, resultQAR),
+                    ItemAnalyticsModel(db.find { it.charCode == "RON" }?.name, db.find { it.charCode == "RON" }?.charCode, db.find { it.charCode == "RON" }?.value, resultRON),
+                    ItemAnalyticsModel(db.find { it.charCode == "RSD" }?.name, db.find { it.charCode == "RSD" }?.charCode, db.find { it.charCode == "RSD" }?.value, resultRSD),
+                    ItemAnalyticsModel(db.find { it.charCode == "SEK" }?.name, db.find { it.charCode == "SEK" }?.charCode, db.find { it.charCode == "SEK" }?.value, resultSEK),
+                    ItemAnalyticsModel(db.find { it.charCode == "SGD" }?.name, db.find { it.charCode == "SGD" }?.charCode, db.find { it.charCode == "SGD" }?.value, resultSGD),
+                    ItemAnalyticsModel(db.find { it.charCode == "THB" }?.name, db.find { it.charCode == "THB" }?.charCode, db.find { it.charCode == "THB" }?.value, resultTHB),
+                    ItemAnalyticsModel(db.find { it.charCode == "TJS" }?.name, db.find { it.charCode == "TJS" }?.charCode, db.find { it.charCode == "TJS" }?.value, resultTJS),
+                    ItemAnalyticsModel(db.find { it.charCode == "TMT" }?.name, db.find { it.charCode == "TMT" }?.charCode, db.find { it.charCode == "TMT" }?.value, resultTMT),
+                    ItemAnalyticsModel(db.find { it.charCode == "TRY" }?.name, db.find { it.charCode == "TRY" }?.charCode, db.find { it.charCode == "TRY" }?.value, resultTRY),
+                    ItemAnalyticsModel(db.find { it.charCode == "UAH" }?.name, db.find { it.charCode == "UAH" }?.charCode, db.find { it.charCode == "UAH" }?.value, resultUAH),
+                    ItemAnalyticsModel(db.find { it.charCode == "USD" }?.name, db.find { it.charCode == "USD" }?.charCode, db.find { it.charCode == "USD" }?.value, resultUSD),
+                    ItemAnalyticsModel(db.find { it.charCode == "UZS" }?.name, db.find { it.charCode == "UZS" }?.charCode, db.find { it.charCode == "UZS" }?.value, resultUZS),
+                    ItemAnalyticsModel(db.find { it.charCode == "VND" }?.name, db.find { it.charCode == "VND" }?.charCode, db.find { it.charCode == "VND" }?.value, resultVND),
+                    ItemAnalyticsModel(db.find { it.charCode == "ZAR" }?.name, db.find { it.charCode == "ZAR" }?.charCode, db.find { it.charCode == "ZAR" }?.value, resultZAR),
                 )
             ) { _, item ->
-                ItemAnalyticsScreen(item = item)
+                if (item != null) {
+                    ItemAnalyticsScreen(item = item)
+                }
             }
         }
     }

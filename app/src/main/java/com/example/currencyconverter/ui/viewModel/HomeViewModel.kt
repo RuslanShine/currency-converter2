@@ -7,8 +7,6 @@ import com.example.currencyconverter.data.DataRepository
 import com.example.currencyconverter.data.entity.Currencies
 import com.example.currencyconverter.domain.usecase.RecalculatingValuesUseCase
 import com.example.currencyconverter.domain.usecase.SetCharCodeValuesUseCase
-
-
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -16,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: DataRepository) : ViewModel() {
-    var valuesData:Flow<Currencies>
+    var valuesData: Flow<List<Currencies>>
 
     init {
         loadPosts()
@@ -33,7 +31,7 @@ class HomeViewModel @Inject constructor(private val repository: DataRepository) 
         viewModelScope.launch {
             try {
                 repository.getCurrenciesFromApi(object : ApiCallback {
-                    override fun onSuccess(сurrencies: Currencies) {
+                    override fun onSuccess(сurrencies: MutableList<Currencies>) {
 //                        valuesData
                     }
 
@@ -49,7 +47,7 @@ class HomeViewModel @Inject constructor(private val repository: DataRepository) 
     }
 
     interface ApiCallback {
-        fun onSuccess(сurrencies: Currencies)
+        fun onSuccess(сurrencies: MutableList<Currencies>)
         fun onFailure()
     }
 

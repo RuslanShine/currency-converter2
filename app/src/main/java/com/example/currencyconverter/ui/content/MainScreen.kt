@@ -59,7 +59,7 @@ import kotlinx.coroutines.launch
 @SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun MainScreen(context: Context, viewModel: HomeViewModel, db: Currencies) {
+fun MainScreen(context: Context, viewModel: HomeViewModel, db: List<Currencies>) {
 
 //    val test by viewModel.valuesData.observeAsState()
 //    val uiState by viewModel._valuesData.collectAsState("")
@@ -68,49 +68,47 @@ fun MainScreen(context: Context, viewModel: HomeViewModel, db: Currencies) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val myList = listOf(
         "Выберите валюту",
-        db.aED.name,
-        db.aMD.name,
-        db.aUD.name,
-        db.aZN.name,
-        db.bGN.name,
-        db.bRL.name,
-        db.bYN.name,
-        db.cAD.name,
-        db.cHF.name,
-        db.cNY.name,
-        db.cZK.name,
-        db.dKK.name,
-        db.eGP.name,
-        db.eUR.name,
-        db.gBP.name,
-        db.gEL.name,
-        db.hKD.name,
-        db.hUF.name,
-        db.iDR.name,
-        db.iNR.name,
-        db.jPY.name,
-        db.kGS.name,
-        db.kRW.name,
-        db.kZT.name,
-        db.mDL.name,
-        db.nOK.name,
-        db.nZD.name,
-        db.pLN.name,
-        db.qAR.name,
-        db.rON.name,
-        db.rSD.name,
-        db.sEK.name,
-        db.sGD.name,
-        db.tHB.name,
-        db.tJS.name,
-        db.tMT.name,
-        db.tRY.name,
-        db.uAH.name,
-        db.uSD.name,
-        db.uZS.name,
-        db.vND.name,
-        db.xDR.name,
-        db.zAR.name
+        db.find { it.charCode == "AED" }?.let { it.name },
+        db.find { it.charCode == "AMD" }?.let { it.name },
+        db.find { it.charCode == "AUD" }?.let { it.name },
+        db.find { it.charCode == "AZN" }?.let { it.name },
+        db.find { it.charCode == "BGN" }?.let { it.name },
+        db.find { it.charCode == "BRL" }?.let { it.name },
+        db.find { it.charCode == "BYN" }?.let { it.name },
+        db.find { it.charCode == "CAD" }?.let { it.name },
+        db.find { it.charCode == "CHF" }?.let { it.name },
+        db.find { it.charCode == "CNY" }?.let { it.name },
+        db.find { it.charCode == "CZK" }?.let { it.name },
+        db.find { it.charCode == "DKK" }?.let { it.name },
+        db.find { it.charCode == "EGP" }?.let { it.name },
+        db.find { it.charCode == "EUR" }?.let { it.name },
+        db.find { it.charCode == "GEL" }?.let { it.name },
+        db.find { it.charCode == "HKD" }?.let { it.name },
+        db.find { it.charCode == "HUF" }?.let { it.name },
+        db.find { it.charCode == "IDR" }?.let { it.name },
+        db.find { it.charCode == "INR" }?.let { it.name },
+        db.find { it.charCode == "JPY" }?.let { it.name },
+        db.find { it.charCode == "KGS" }?.let { it.name },
+        db.find { it.charCode == "KRW" }?.let { it.name },
+        db.find { it.charCode == "KZT" }?.let { it.name },
+        db.find { it.charCode == "MDL" }?.let { it.name },
+        db.find { it.charCode == "NOK" }?.let { it.name },
+        db.find { it.charCode == "NZD" }?.let { it.name },
+        db.find { it.charCode == "PLN" }?.let { it.name },
+        db.find { it.charCode == "QAR" }?.let { it.name },
+        db.find { it.charCode == "RON" }?.let { it.name },
+        db.find { it.charCode == "RSD" }?.let { it.name },
+        db.find { it.charCode == "SEK" }?.let { it.name },
+        db.find { it.charCode == "SGD" }?.let { it.name },
+        db.find { it.charCode == "THB" }?.let { it.name },
+        db.find { it.charCode == "TJS" }?.let { it.name },
+        db.find { it.charCode == "TMT" }?.let { it.name },
+        db.find { it.charCode == "TRY" }?.let { it.name },
+        db.find { it.charCode == "UAH" }?.let { it.name },
+        db.find { it.charCode == "USD" }?.let { it.name },
+        db.find { it.charCode == "UZS" }?.let { it.name },
+        db.find { it.charCode == "VND" }?.let { it.name },
+        db.find { it.charCode == "ZAR" }?.let { it.name }
     )
 
     val listСurrencyOne = myList
@@ -177,7 +175,7 @@ fun MainScreen(context: Context, viewModel: HomeViewModel, db: Currencies) {
                                 expandedOne.value = !expandedOne.value
                             }, verticalAlignment = Alignment.CenterVertically) {
                                 Text(
-                                    text = currentValueOne.value,
+                                    text = currentValueOne.value.toString(),
                                     fontSize = FontSizes._18,
                                     color = Color.Black
                                 )
@@ -189,16 +187,20 @@ fun MainScreen(context: Context, viewModel: HomeViewModel, db: Currencies) {
                                     onDismissRequest = { expandedOne.value = false }) {
                                     listСurrencyOne.forEach {
                                         DropdownMenuItem(
-                                            text = { Text(text = it) },
+                                            text = { Text(text = it.toString()) },
                                             onClick = {
                                                 currentValueOne.value = it
                                                 expandedOne.value = false
 
                                                 coroutine.launch {
-                                                    viewModel.searchFromVal(it)
+                                                    if (it != null) {
+                                                        viewModel.searchFromVal(it)
+                                                    }
                                                 }
                                                 coroutine.launch {
-                                                    viewModel.searchValueFromVal(currentValueOne.value)
+                                                    if (it != null) {
+                                                        viewModel.searchValueFromVal(it)
+                                                    }
                                                 }
                                             },
                                             modifier = Modifier.background(Color.White),
@@ -270,7 +272,7 @@ fun MainScreen(context: Context, viewModel: HomeViewModel, db: Currencies) {
                                 expandedTow.value = !expandedTow.value
                             }, verticalAlignment = Alignment.CenterVertically) {
                                 Text(
-                                    text = currentValueTow.value,
+                                    text = currentValueTow.value.toString(),
                                     fontSize = FontSizes._18,
                                     color = Color.Black
                                 )
@@ -281,19 +283,26 @@ fun MainScreen(context: Context, viewModel: HomeViewModel, db: Currencies) {
                                 DropdownMenu(expanded = expandedTow.value,
                                     onDismissRequest = { expandedTow.value = false }) {
                                     listСurrencyTow.forEach {
-                                        DropdownMenuItem(text = { Text(text = it) }, onClick = {
-                                            currentValueTow.value = it
-                                            expandedTow.value = false
+                                        DropdownMenuItem(
+                                            text = { Text(text = it.toString()) },
+                                            onClick = {
+                                                currentValueTow.value = it
+                                                expandedTow.value = false
 
                                             coroutine.launch {
-                                                viewModel.searchToVal(it)
+                                                if (it != null) {
+                                                    viewModel.searchToVal(it)
+                                                }
                                             }
-
                                             coroutine.launch {
-                                                viewModel.searchValueToVal(it)
+                                                if (it != null) {
+                                                    viewModel.searchValueToVal(it)
+                                                }
                                             }
 
-                                        }, modifier = Modifier.background(Color.White))
+                                            },
+                                            modifier = Modifier.background(Color.White)
+                                        )
                                     }
                                 }
 

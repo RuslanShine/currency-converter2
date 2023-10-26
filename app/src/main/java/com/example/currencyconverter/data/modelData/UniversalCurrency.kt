@@ -1,10 +1,8 @@
-package com.example.convertmy.data
-
+package com.example.currencyconverter.data.modelData
 
 import com.google.gson.annotations.SerializedName
 
-
-data class IDR(
+data class UniversalCurrency(
     @SerializedName("CharCode")
     val charCode: String,
     @SerializedName("ID")

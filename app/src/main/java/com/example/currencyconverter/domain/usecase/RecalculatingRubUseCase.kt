@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlin.properties.Delegates
 
-class RecalculatingRubUseCase(private val valuesData: Flow<Currencies>) {
+class RecalculatingRubUseCase(private val valuesData: Flow<List<Currencies>>) {
     private lateinit var scope: CoroutineScope
     private var resultAED by Delegates.notNull<Double>()
     private var resultAMD by Delegates.notNull<Double>()
@@ -267,5 +267,4 @@ class RecalculatingRubUseCase(private val valuesData: Flow<Currencies>) {
     fun getResultZar(): Double {
         return resultZAR
     }
-
 }
