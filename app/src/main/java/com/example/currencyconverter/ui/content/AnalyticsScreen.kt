@@ -435,6 +435,8 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: List<Cu
         ) {
             itemsIndexed(
                 mutableListOf(
+//                    ItemAnalyticsModel("Имя1", "КОД1", 123.1, "456.1"),
+//                    ItemAnalyticsModel("Имя2", "КОД2", 123.1, "456.1"),
                     ItemAnalyticsModel(db.find { it.charCode == "AED" }?.name, db.find { it.charCode == "AED" }?.charCode, db.find { it.charCode == "AED" }?.value, resultAED),
                     ItemAnalyticsModel(db.find { it.charCode == "AMD" }?.name, db.find { it.charCode == "AMD" }?.charCode, db.find { it.charCode == "AMD" }?.value, resultAMD),
                     ItemAnalyticsModel(db.find { it.charCode == "AUD" }?.name, db.find { it.charCode == "AUD" }?.charCode, db.find { it.charCode == "AUD" }?.value, resultAUD),
