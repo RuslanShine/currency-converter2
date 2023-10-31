@@ -43,7 +43,7 @@ fun ItemAnalyticsScreen(item: ItemAnalyticsModel) {
             ) {
                 item.nameCurrency?.let {
                     Text(
-                        text = it,
+                        text = it.toString(),
                         color = Color.Black,
                         fontSize = 18.sp
                     )
@@ -59,7 +59,7 @@ fun ItemAnalyticsScreen(item: ItemAnalyticsModel) {
                     .fillMaxSize()
                     .padding(Dimens._8)
                     .padding(end = 4.dp),
-                text = item.result,
+                text = item.result.toString(),
                 color = Color.Black,
                 fontSize = 18.sp, textAlign = TextAlign.End
             )

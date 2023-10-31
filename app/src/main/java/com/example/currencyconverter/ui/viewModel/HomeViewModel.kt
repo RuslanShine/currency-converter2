@@ -14,11 +14,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: DataRepository) : ViewModel() {
-    var valuesData: Flow<List<Currencies>>
+
+    private val _valuesData: Flow<List<Currencies>>
+    val valuesData get() = _valuesData
 
     init {
         loadPosts()
-        valuesData = repository.getAllFromDB()
+        _valuesData = repository.getCurrenciesFromDB()
     }
 
 //    val uiState: StateFlow<List<Currencies>> get() = _uiState.asStateFlow()
@@ -55,15 +57,15 @@ class HomeViewModel @Inject constructor(private val repository: DataRepository) 
         return recalculatingValuesUseCase.execute(result)
     }
 
-    suspend fun searchFromVal(nameCurrencyFromVal: String) {
+    suspend fun searchFromVal(nameCurrencyFromVal: Any) {
         recalculatingValuesUseCase.monitoringValueFromVal(nameCurrencyFromVal)
     }
 
-    suspend fun searchToVal(nameCurrencyToVal: String) {
+    suspend fun searchToVal(nameCurrencyToVal: Any) {
         recalculatingValuesUseCase.monitoringValueToVal(nameCurrencyToVal)
     }
 
-    suspend fun searchValueFromVal(nameCurrencyScreen: String) {
+    suspend fun searchValueFromVal(nameCurrencyScreen: Any) {
         setCharCodeValuesUseCase.monitoringValueFromVal(nameCurrencyScreen)
     }
 
@@ -71,7 +73,7 @@ class HomeViewModel @Inject constructor(private val repository: DataRepository) 
         return setCharCodeValuesUseCase.executeFromVal()
     }
 
-    suspend fun searchValueToVal(nameCurrencyScreenToVal: String) {
+    suspend fun searchValueToVal(nameCurrencyScreenToVal: Any) {
         setCharCodeValuesUseCase.monitoringValueToVal(nameCurrencyScreenToVal)
     }
 

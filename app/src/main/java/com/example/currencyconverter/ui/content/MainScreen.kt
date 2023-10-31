@@ -67,60 +67,18 @@ fun MainScreen(context: Context, viewModel: HomeViewModel, db: List<Currencies>)
 
     val coroutine = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current
-    val myList = listOf(
-        "Выберите валюту",
-        ParametersСurrency.AED_VALUE.nameCurrency,
-        ParametersСurrency.AMD_VALUE.nameCurrency,
-        ParametersСurrency.AUD_VALUE.nameCurrency,
-        ParametersСurrency.AZN_VALUE.nameCurrency,
-        ParametersСurrency.BGN_VALUE.nameCurrency,
-        ParametersСurrency.BRL_VALUE.nameCurrency,
-        ParametersСurrency.BYN_VALUE.nameCurrency,
-        ParametersСurrency.CAD_VALUE.nameCurrency,
-        ParametersСurrency.CHF_VALUE.nameCurrency,
-        ParametersСurrency.CNY_VALUE.nameCurrency,
-        ParametersСurrency.CZK_VALUE.nameCurrency,
-        ParametersСurrency.DKK_VALUE.nameCurrency,
-        ParametersСurrency.EGP_VALUE.nameCurrency,
-        ParametersСurrency.EUR_VALUE.nameCurrency,
-        ParametersСurrency.GEL_VALUE.nameCurrency,
-        ParametersСurrency.HKD_VALUE.nameCurrency,
-        ParametersСurrency.HUF_VALUE.nameCurrency,
-        ParametersСurrency.IDR_VALUE.nameCurrency,
-        ParametersСurrency.INR_VALUE.nameCurrency,
-        ParametersСurrency.JPY_VALUE.nameCurrency,
-        ParametersСurrency.KGS_VALUE.nameCurrency,
-        ParametersСurrency.KRW_VALUE.nameCurrency,
-        ParametersСurrency.KZT_VALUE.nameCurrency,
-        ParametersСurrency.MDL_VALUE.nameCurrency,
-        ParametersСurrency.NOK_VALUE.nameCurrency,
-        ParametersСurrency.NZD_VALUE.nameCurrency,
-        ParametersСurrency.PLN_VALUE.nameCurrency,
-        ParametersСurrency.QAR_VALUE.nameCurrency,
-        ParametersСurrency.RON_VALUE.nameCurrency,
-        ParametersСurrency.RSD_VALUE.nameCurrency,
-        ParametersСurrency.SEK_VALUE.nameCurrency,
-        ParametersСurrency.SGD_VALUE.nameCurrency,
-        ParametersСurrency.THB_VALUE.nameCurrency,
-        ParametersСurrency.TJS_VALUE.nameCurrency,
-        ParametersСurrency.TMT_VALUE.nameCurrency,
-        ParametersСurrency.TRY_VALUE.nameCurrency,
-        ParametersСurrency.UAH_VALUE.nameCurrency,
-        ParametersСurrency.USD_VALUE.nameCurrency,
-        ParametersСurrency.UZS_VALUE.nameCurrency,
-        ParametersСurrency.VND_VALUE.nameCurrency,
-        ParametersСurrency.ZAR_VALUE.nameCurrency
-    )
+    val listСurrencyName =ParametersСurrency.values().map { it.nameCurrency } + "Выберите валюту"
 
-    val listСurrencyOne = myList
+
+    val listСurrencyOne = listСurrencyName
     val expandedOne = remember { mutableStateOf(false) }
-    val currentValueOne = remember { mutableStateOf(listСurrencyOne[0]) }
+    val currentValueOne = remember { mutableStateOf(listСurrencyOne[41]) }
     var textOne by remember { mutableStateOf("") }
 
 
-    val listСurrencyTow = myList
+    val listСurrencyTow = listСurrencyName
     val expandedTow = remember { mutableStateOf(false) }
-    val currentValueTow = remember { mutableStateOf(listСurrencyTow[0]) }
+    val currentValueTow = remember { mutableStateOf(listСurrencyTow[41]) }
     var textTow by remember { mutableStateOf("") }
 
 
@@ -194,14 +152,14 @@ fun MainScreen(context: Context, viewModel: HomeViewModel, db: List<Currencies>)
                                                 expandedOne.value = false
 
                                                 coroutine.launch {
-                                                    if (it != null) {
+
                                                         viewModel.searchFromVal(it)
-                                                    }
+
                                                 }
                                                 coroutine.launch {
-                                                    if (it != null) {
+
                                                         viewModel.searchValueFromVal(it)
-                                                    }
+
                                                 }
                                             },
                                             modifier = Modifier.background(Color.White),
@@ -291,14 +249,14 @@ fun MainScreen(context: Context, viewModel: HomeViewModel, db: List<Currencies>)
                                                 expandedTow.value = false
 
                                             coroutine.launch {
-                                                if (it != null) {
+
                                                     viewModel.searchToVal(it)
-                                                }
+
                                             }
                                             coroutine.launch {
-                                                if (it != null) {
+
                                                     viewModel.searchValueToVal(it)
-                                                }
+
                                             }
 
                                             },

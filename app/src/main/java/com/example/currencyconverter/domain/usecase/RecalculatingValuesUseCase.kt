@@ -18,7 +18,7 @@ class RecalculatingValuesUseCase(private val valuesData: Flow<List<Currencies>>)
         return resultConvert
     }
 
-    suspend fun monitoringValueToVal(nameCurrencyToVal: String) {
+    suspend fun monitoringValueToVal(nameCurrencyToVal: Any) {
         scope = CoroutineScope(Dispatchers.IO).also { scope ->
             scope.launch {
                 valuesData.collect { db ->
@@ -28,7 +28,7 @@ class RecalculatingValuesUseCase(private val valuesData: Flow<List<Currencies>>)
         }
     }
 
-    suspend fun monitoringValueFromVal(nameCurrencyFromVal: String) {
+    suspend fun monitoringValueFromVal(nameCurrencyFromVal: Any) {
         scope = CoroutineScope(Dispatchers.IO).also { scope ->
             scope.launch {
                 valuesData.collect { db ->

@@ -29,12 +29,12 @@ class DataRepository @Inject constructor(private val currenciesDao: CurrenciesDA
     }
 
     //  кладем список в БД
-    fun putToDb(currencies: List<Currencies>) {
+    fun putCurrenciesToDb(currencies: List<Currencies>) {
         scope.launch { currenciesDao.insertAll(currencies) }
     }
 
     // забирает все из БД
-    fun getAllFromDB(): Flow<List<Currencies>> {
+    fun getCurrenciesFromDB(): Flow<List<Currencies>> {
         return currenciesDao.getCachedCurrencies()
     }
 
@@ -125,7 +125,7 @@ class DataRepository @Inject constructor(private val currenciesDao: CurrenciesDA
 //
 //        )
 
-        putToDb(db)
+        putCurrenciesToDb(db)
 
         object : Callback<Valute> {
             override fun onResponse(call: Call<Valute>, response: Response<Valute>) {

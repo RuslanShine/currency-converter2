@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -48,6 +49,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.currencyconverter.data.ItemAnalyticsModel
 import com.example.currencyconverter.data.entity.Currencies
+import com.example.currencyconverter.domain.usecase.ParametersСurrency
 import com.example.currencyconverter.theme.ButtonColors
 import com.example.currencyconverter.theme.Dimens
 import com.example.currencyconverter.theme.FontSizes
@@ -57,12 +59,19 @@ import com.example.currencyconverter.ui.viewModel.AnalyticsViewModel
 @SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: List<Currencies>) {
+fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: List<Currencies>, cardCurrencies:List<ItemAnalyticsModel>) {
+
+
+
 
     var valueCurrencyRub by remember { mutableStateOf("") }
     var valueCurrencyResult by remember { mutableStateOf("") }
     val coroutine = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current
+
+//    val listСurrency = viewModel.getValueAED()
+//    var resultList = remember { mutableStateOf(listСurrency[0]) }
+    var resultList  by remember { mutableStateOf("213") }
 
     var resultAED by remember { mutableStateOf("") }
     var resultAMD by remember { mutableStateOf("") }
@@ -211,210 +220,214 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: List<Cu
                 ) {
                     Button(
                         onClick = {
-                            resultAED = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueAED()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
 
-                            resultAMD = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueAMD()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
+                            resultList = viewModel.getValueListReZ().toString()
 
-                            resultAUD = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueAUD()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
 
-                            resultAZN = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueAZN()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
+//                            resultAED = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueAED()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
 
-                            resultBGN = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueBGN()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultBRL = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueBRL()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultBYN = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueBYN()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultCAD = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueCAD()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultCHF = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueCHF()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultCNY = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueCNY()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultCZK = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueCZK()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultDKK = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueDKK()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultEGP = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueEGP()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultEUR = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueEUR()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultGEL = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueGEL()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultHKD = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueHKD()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultHUF = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueHUF()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultIDR = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueIDR()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultINR = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueINR()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultJPY = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueJPY()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultKGS = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueKGS()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultKRW = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueKRW()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultKZT = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueKZT()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultMDL = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueMDL()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultNOK = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueNOK()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultNZD = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueNZD()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultPLN = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValuePLN()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultQAR = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueQAR()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultRON = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueRON()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultRSD = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueRSD()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultSEK = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueSEK()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultSGD = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueSGD()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultTHB = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueTHB()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultTJS = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueTJS()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultTMT = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueTMT()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultTRY = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueTRY()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultUAH = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueUAH()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultUSD = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueUSD()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultUZS = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueUZS()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultVND = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueVND()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
-
-                            resultZAR = if (valueCurrencyRub > 0.toString()) {
-                                val resultFinish = viewModel.getValueZAR()
-                                String.format("%.3f", resultFinish)
-                            } else "0"
+//                            resultAMD = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueAMD()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultAUD = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueAUD()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultAZN = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueAZN()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultBGN = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueBGN()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultBRL = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueBRL()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultBYN = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueBYN()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultCAD = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueCAD()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultCHF = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueCHF()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultCNY = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueCNY()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultCZK = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueCZK()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultDKK = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueDKK()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultEGP = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueEGP()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultEUR = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueEUR()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultGEL = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueGEL()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultHKD = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueHKD()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultHUF = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueHUF()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultIDR = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueIDR()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultINR = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueINR()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultJPY = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueJPY()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultKGS = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueKGS()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultKRW = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueKRW()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultKZT = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueKZT()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultMDL = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueMDL()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultNOK = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueNOK()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultNZD = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueNZD()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultPLN = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValuePLN()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultQAR = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueQAR()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultRON = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueRON()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultRSD = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueRSD()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultSEK = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueSEK()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultSGD = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueSGD()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultTHB = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueTHB()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultTJS = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueTJS()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultTMT = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueTMT()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultTRY = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueTRY()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultUAH = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueUAH()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultUSD = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueUSD()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultUZS = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueUZS()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultVND = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueVND()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
+//
+//                            resultZAR = if (valueCurrencyRub > 0.toString()) {
+//                                val resultFinish = viewModel.getValueZAR()
+//                                String.format("%.3f", resultFinish)
+//                            } else "0"
 
                             keyboardController?.hide()
                             Toast.makeText(context, "Конвертация", Toast.LENGTH_SHORT).show()
@@ -433,57 +446,76 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: List<Cu
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            itemsIndexed(
-                mutableListOf(
-//                    ItemAnalyticsModel("Имя1", "КОД1", 123.1, "456.1"),
-//                    ItemAnalyticsModel("Имя2", "КОД2", 123.1, "456.1"),
-                    ItemAnalyticsModel(db.find { it.charCode == "AED" }?.name, db.find { it.charCode == "AED" }?.charCode, db.find { it.charCode == "AED" }?.value, resultAED),
-                    ItemAnalyticsModel(db.find { it.charCode == "AMD" }?.name, db.find { it.charCode == "AMD" }?.charCode, db.find { it.charCode == "AMD" }?.value, resultAMD),
-                    ItemAnalyticsModel(db.find { it.charCode == "AUD" }?.name, db.find { it.charCode == "AUD" }?.charCode, db.find { it.charCode == "AUD" }?.value, resultAUD),
-                    ItemAnalyticsModel(db.find { it.charCode == "AZN" }?.name, db.find { it.charCode == "AZN" }?.charCode, db.find { it.charCode == "AZN" }?.value, resultAZN),
-                    ItemAnalyticsModel(db.find { it.charCode == "BGN" }?.name, db.find { it.charCode == "BGN" }?.charCode, db.find { it.charCode == "BGN" }?.value, resultBGN),
-                    ItemAnalyticsModel(db.find { it.charCode == "BRL" }?.name, db.find { it.charCode == "BRL" }?.charCode, db.find { it.charCode == "BRL" }?.value, resultBRL),
-                    ItemAnalyticsModel(db.find { it.charCode == "BYN" }?.name, db.find { it.charCode == "BYN" }?.charCode, db.find { it.charCode == "BYN" }?.value, resultBYN),
-                    ItemAnalyticsModel(db.find { it.charCode == "CAD" }?.name, db.find { it.charCode == "CAD" }?.charCode, db.find { it.charCode == "CAD" }?.value, resultCAD),
-                    ItemAnalyticsModel(db.find { it.charCode == "CHF" }?.name, db.find { it.charCode == "CHF" }?.charCode, db.find { it.charCode == "CHF" }?.value, resultCHF),
-                    ItemAnalyticsModel(db.find { it.charCode == "CNY" }?.name, db.find { it.charCode == "CNY" }?.charCode, db.find { it.charCode == "CNY" }?.value, resultCNY),
-                    ItemAnalyticsModel(db.find { it.charCode == "CZK" }?.name, db.find { it.charCode == "CZK" }?.charCode, db.find { it.charCode == "CZK" }?.value, resultCZK),
-                    ItemAnalyticsModel(db.find { it.charCode == "DKK" }?.name, db.find { it.charCode == "DKK" }?.charCode, db.find { it.charCode == "DKK" }?.value, resultDKK),
-                    ItemAnalyticsModel(db.find { it.charCode == "EGP" }?.name, db.find { it.charCode == "EGP" }?.charCode, db.find { it.charCode == "EGP" }?.value, resultEGP),
-                    ItemAnalyticsModel(db.find { it.charCode == "EUR" }?.name, db.find { it.charCode == "EUR" }?.charCode, db.find { it.charCode == "EUR" }?.value, resultEUR),
-                    ItemAnalyticsModel(db.find { it.charCode == "GEL" }?.name, db.find { it.charCode == "GEL" }?.charCode, db.find { it.charCode == "GEL" }?.value, resultGEL),
-                    ItemAnalyticsModel(db.find { it.charCode == "HKD" }?.name, db.find { it.charCode == "HKD" }?.charCode, db.find { it.charCode == "HKD" }?.value, resultHKD),
-                    ItemAnalyticsModel(db.find { it.charCode == "HUF" }?.name, db.find { it.charCode == "HUF" }?.charCode, db.find { it.charCode == "HUF" }?.value, resultHUF),
-                    ItemAnalyticsModel(db.find { it.charCode == "IDR" }?.name, db.find { it.charCode == "IDR" }?.charCode, db.find { it.charCode == "IDR" }?.value, resultIDR),
-                    ItemAnalyticsModel(db.find { it.charCode == "INR" }?.name, db.find { it.charCode == "INR" }?.charCode, db.find { it.charCode == "INR" }?.value, resultINR),
-                    ItemAnalyticsModel(db.find { it.charCode == "JPY" }?.name, db.find { it.charCode == "JPY" }?.charCode, db.find { it.charCode == "JPY" }?.value, resultJPY),
-                    ItemAnalyticsModel(db.find { it.charCode == "KGS" }?.name, db.find { it.charCode == "KGS" }?.charCode, db.find { it.charCode == "KGS" }?.value, resultKGS),
-                    ItemAnalyticsModel(db.find { it.charCode == "KRW" }?.name, db.find { it.charCode == "KRW" }?.charCode, db.find { it.charCode == "KRW" }?.value, resultKRW),
-                    ItemAnalyticsModel(db.find { it.charCode == "KZT" }?.name, db.find { it.charCode == "KZT" }?.charCode, db.find { it.charCode == "KZT" }?.value, resultKZT),
-                    ItemAnalyticsModel(db.find { it.charCode == "MDL" }?.name, db.find { it.charCode == "MDL" }?.charCode, db.find { it.charCode == "MDL" }?.value, resultMDL),
-                    ItemAnalyticsModel(db.find { it.charCode == "NOK" }?.name, db.find { it.charCode == "NOK" }?.charCode, db.find { it.charCode == "NOK" }?.value, resultNOK),
-                    ItemAnalyticsModel(db.find { it.charCode == "NZD" }?.name, db.find { it.charCode == "NZD" }?.charCode, db.find { it.charCode == "NZD" }?.value, resultNZD),
-                    ItemAnalyticsModel(db.find { it.charCode == "PLN" }?.name, db.find { it.charCode == "PLN" }?.charCode, db.find { it.charCode == "PLN" }?.value, resultPLN),
-                    ItemAnalyticsModel(db.find { it.charCode == "QAR" }?.name, db.find { it.charCode == "QAR" }?.charCode, db.find { it.charCode == "QAR" }?.value, resultQAR),
-                    ItemAnalyticsModel(db.find { it.charCode == "RON" }?.name, db.find { it.charCode == "RON" }?.charCode, db.find { it.charCode == "RON" }?.value, resultRON),
-                    ItemAnalyticsModel(db.find { it.charCode == "RSD" }?.name, db.find { it.charCode == "RSD" }?.charCode, db.find { it.charCode == "RSD" }?.value, resultRSD),
-                    ItemAnalyticsModel(db.find { it.charCode == "SEK" }?.name, db.find { it.charCode == "SEK" }?.charCode, db.find { it.charCode == "SEK" }?.value, resultSEK),
-                    ItemAnalyticsModel(db.find { it.charCode == "SGD" }?.name, db.find { it.charCode == "SGD" }?.charCode, db.find { it.charCode == "SGD" }?.value, resultSGD),
-                    ItemAnalyticsModel(db.find { it.charCode == "THB" }?.name, db.find { it.charCode == "THB" }?.charCode, db.find { it.charCode == "THB" }?.value, resultTHB),
-                    ItemAnalyticsModel(db.find { it.charCode == "TJS" }?.name, db.find { it.charCode == "TJS" }?.charCode, db.find { it.charCode == "TJS" }?.value, resultTJS),
-                    ItemAnalyticsModel(db.find { it.charCode == "TMT" }?.name, db.find { it.charCode == "TMT" }?.charCode, db.find { it.charCode == "TMT" }?.value, resultTMT),
-                    ItemAnalyticsModel(db.find { it.charCode == "TRY" }?.name, db.find { it.charCode == "TRY" }?.charCode, db.find { it.charCode == "TRY" }?.value, resultTRY),
-                    ItemAnalyticsModel(db.find { it.charCode == "UAH" }?.name, db.find { it.charCode == "UAH" }?.charCode, db.find { it.charCode == "UAH" }?.value, resultUAH),
-                    ItemAnalyticsModel(db.find { it.charCode == "USD" }?.name, db.find { it.charCode == "USD" }?.charCode, db.find { it.charCode == "USD" }?.value, resultUSD),
-                    ItemAnalyticsModel(db.find { it.charCode == "UZS" }?.name, db.find { it.charCode == "UZS" }?.charCode, db.find { it.charCode == "UZS" }?.value, resultUZS),
-                    ItemAnalyticsModel(db.find { it.charCode == "VND" }?.name, db.find { it.charCode == "VND" }?.charCode, db.find { it.charCode == "VND" }?.value, resultVND),
-                    ItemAnalyticsModel(db.find { it.charCode == "ZAR" }?.name, db.find { it.charCode == "ZAR" }?.charCode, db.find { it.charCode == "ZAR" }?.value, resultZAR),
-                )
-            ) { _, item ->
-                if (item != null) {
-                    ItemAnalyticsScreen(item = item)
+            items(
+                items = viewModel.getListCardCurrencies(),
+                itemContent = {it.result = resultList
+
+                    ItemAnalyticsScreen(item = it)
                 }
-            }
+            )
+
+
+//            itemsIndexed(
+////                for (i in)
+////
+////                mutableListOf(
+//////                coroutine.launch {  ItemAnalyticsModel(viewModel.valuesData.collect{it.map { it.name }},viewModel.valuesData.collect{it.map { it.charCode }},viewModel.valuesData.collect{it.map { it.value }},"123") }
+////ItemAnalyticsModel(viewModel.valuesData.collect{it.map { it.name } },"КОД1", 123.1, "456.1")
+////            )
+//
+////                mutableListOf(
+//////                    ItemAnalyticsModel("Имя1", "КОД1", 123.1, "456.1"),
+//////                    ItemAnalyticsModel("Имя2", "КОД2", 123.1, "456.1"),
+////                    ItemAnalyticsModel(db.find { it.charCode == "AED" }?.name, db.find { it.charCode == "AED" }?.charCode, db.find { it.charCode == "AED" }?.value, resultAED),
+////                    ItemAnalyticsModel(db.find { it.charCode == "AMD" }?.name, db.find { it.charCode == "AMD" }?.charCode, db.find { it.charCode == "AMD" }?.value, resultAMD),
+////                    ItemAnalyticsModel(db.find { it.charCode == "AUD" }?.name, db.find { it.charCode == "AUD" }?.charCode, db.find { it.charCode == "AUD" }?.value, resultAUD),
+////                    ItemAnalyticsModel(db.find { it.charCode == "AZN" }?.name, db.find { it.charCode == "AZN" }?.charCode, db.find { it.charCode == "AZN" }?.value, resultAZN),
+////                    ItemAnalyticsModel(db.find { it.charCode == "BGN" }?.name, db.find { it.charCode == "BGN" }?.charCode, db.find { it.charCode == "BGN" }?.value, resultBGN),
+////                    ItemAnalyticsModel(db.find { it.charCode == "BRL" }?.name, db.find { it.charCode == "BRL" }?.charCode, db.find { it.charCode == "BRL" }?.value, resultBRL),
+////                    ItemAnalyticsModel(db.find { it.charCode == "BYN" }?.name, db.find { it.charCode == "BYN" }?.charCode, db.find { it.charCode == "BYN" }?.value, resultBYN),
+////                    ItemAnalyticsModel(db.find { it.charCode == "CAD" }?.name, db.find { it.charCode == "CAD" }?.charCode, db.find { it.charCode == "CAD" }?.value, resultCAD),
+////                    ItemAnalyticsModel(db.find { it.charCode == "CHF" }?.name, db.find { it.charCode == "CHF" }?.charCode, db.find { it.charCode == "CHF" }?.value, resultCHF),
+////                    ItemAnalyticsModel(db.find { it.charCode == "CNY" }?.name, db.find { it.charCode == "CNY" }?.charCode, db.find { it.charCode == "CNY" }?.value, resultCNY),
+////                    ItemAnalyticsModel(db.find { it.charCode == "CZK" }?.name, db.find { it.charCode == "CZK" }?.charCode, db.find { it.charCode == "CZK" }?.value, resultCZK),
+////                    ItemAnalyticsModel(db.find { it.charCode == "DKK" }?.name, db.find { it.charCode == "DKK" }?.charCode, db.find { it.charCode == "DKK" }?.value, resultDKK),
+////                    ItemAnalyticsModel(db.find { it.charCode == "EGP" }?.name, db.find { it.charCode == "EGP" }?.charCode, db.find { it.charCode == "EGP" }?.value, resultEGP),
+////                    ItemAnalyticsModel(db.find { it.charCode == "EUR" }?.name, db.find { it.charCode == "EUR" }?.charCode, db.find { it.charCode == "EUR" }?.value, resultEUR),
+////                    ItemAnalyticsModel(db.find { it.charCode == "GEL" }?.name, db.find { it.charCode == "GEL" }?.charCode, db.find { it.charCode == "GEL" }?.value, resultGEL),
+////                    ItemAnalyticsModel(db.find { it.charCode == "HKD" }?.name, db.find { it.charCode == "HKD" }?.charCode, db.find { it.charCode == "HKD" }?.value, resultHKD),
+////                    ItemAnalyticsModel(db.find { it.charCode == "HUF" }?.name, db.find { it.charCode == "HUF" }?.charCode, db.find { it.charCode == "HUF" }?.value, resultHUF),
+////                    ItemAnalyticsModel(db.find { it.charCode == "IDR" }?.name, db.find { it.charCode == "IDR" }?.charCode, db.find { it.charCode == "IDR" }?.value, resultIDR),
+////                    ItemAnalyticsModel(db.find { it.charCode == "INR" }?.name, db.find { it.charCode == "INR" }?.charCode, db.find { it.charCode == "INR" }?.value, resultINR),
+////                    ItemAnalyticsModel(db.find { it.charCode == "JPY" }?.name, db.find { it.charCode == "JPY" }?.charCode, db.find { it.charCode == "JPY" }?.value, resultJPY),
+////                    ItemAnalyticsModel(db.find { it.charCode == "KGS" }?.name, db.find { it.charCode == "KGS" }?.charCode, db.find { it.charCode == "KGS" }?.value, resultKGS),
+////                    ItemAnalyticsModel(db.find { it.charCode == "KRW" }?.name, db.find { it.charCode == "KRW" }?.charCode, db.find { it.charCode == "KRW" }?.value, resultKRW),
+////                    ItemAnalyticsModel(db.find { it.charCode == "KZT" }?.name, db.find { it.charCode == "KZT" }?.charCode, db.find { it.charCode == "KZT" }?.value, resultKZT),
+////                    ItemAnalyticsModel(db.find { it.charCode == "MDL" }?.name, db.find { it.charCode == "MDL" }?.charCode, db.find { it.charCode == "MDL" }?.value, resultMDL),
+////                    ItemAnalyticsModel(db.find { it.charCode == "NOK" }?.name, db.find { it.charCode == "NOK" }?.charCode, db.find { it.charCode == "NOK" }?.value, resultNOK),
+////                    ItemAnalyticsModel(db.find { it.charCode == "NZD" }?.name, db.find { it.charCode == "NZD" }?.charCode, db.find { it.charCode == "NZD" }?.value, resultNZD),
+////                    ItemAnalyticsModel(db.find { it.charCode == "PLN" }?.name, db.find { it.charCode == "PLN" }?.charCode, db.find { it.charCode == "PLN" }?.value, resultPLN),
+////                    ItemAnalyticsModel(db.find { it.charCode == "QAR" }?.name, db.find { it.charCode == "QAR" }?.charCode, db.find { it.charCode == "QAR" }?.value, resultQAR),
+////                    ItemAnalyticsModel(db.find { it.charCode == "RON" }?.name, db.find { it.charCode == "RON" }?.charCode, db.find { it.charCode == "RON" }?.value, resultRON),
+////                    ItemAnalyticsModel(db.find { it.charCode == "RSD" }?.name, db.find { it.charCode == "RSD" }?.charCode, db.find { it.charCode == "RSD" }?.value, resultRSD),
+////                    ItemAnalyticsModel(db.find { it.charCode == "SEK" }?.name, db.find { it.charCode == "SEK" }?.charCode, db.find { it.charCode == "SEK" }?.value, resultSEK),
+////                    ItemAnalyticsModel(db.find { it.charCode == "SGD" }?.name, db.find { it.charCode == "SGD" }?.charCode, db.find { it.charCode == "SGD" }?.value, resultSGD),
+////                    ItemAnalyticsModel(db.find { it.charCode == "THB" }?.name, db.find { it.charCode == "THB" }?.charCode, db.find { it.charCode == "THB" }?.value, resultTHB),
+////                    ItemAnalyticsModel(db.find { it.charCode == "TJS" }?.name, db.find { it.charCode == "TJS" }?.charCode, db.find { it.charCode == "TJS" }?.value, resultTJS),
+////                    ItemAnalyticsModel(db.find { it.charCode == "TMT" }?.name, db.find { it.charCode == "TMT" }?.charCode, db.find { it.charCode == "TMT" }?.value, resultTMT),
+////                    ItemAnalyticsModel(db.find { it.charCode == "TRY" }?.name, db.find { it.charCode == "TRY" }?.charCode, db.find { it.charCode == "TRY" }?.value, resultTRY),
+////                    ItemAnalyticsModel(db.find { it.charCode == "UAH" }?.name, db.find { it.charCode == "UAH" }?.charCode, db.find { it.charCode == "UAH" }?.value, resultUAH),
+////                    ItemAnalyticsModel(db.find { it.charCode == "USD" }?.name, db.find { it.charCode == "USD" }?.charCode, db.find { it.charCode == "USD" }?.value, resultUSD),
+////                    ItemAnalyticsModel(db.find { it.charCode == "UZS" }?.name, db.find { it.charCode == "UZS" }?.charCode, db.find { it.charCode == "UZS" }?.value, resultUZS),
+////                    ItemAnalyticsModel(db.find { it.charCode == "VND" }?.name, db.find { it.charCode == "VND" }?.charCode, db.find { it.charCode == "VND" }?.value, resultVND),
+////                    ItemAnalyticsModel(db.find { it.charCode == "ZAR" }?.name, db.find { it.charCode == "ZAR" }?.charCode, db.find { it.charCode == "ZAR" }?.value, resultZAR),
+////                )
+//            )
+
+
+//            { _, item ->
+//                if (item != null) {
+//                    ItemAnalyticsScreen(item = item)
+//                }
+//            }
         }
     }
 }
