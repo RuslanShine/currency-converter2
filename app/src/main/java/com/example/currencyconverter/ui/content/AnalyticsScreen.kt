@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -32,6 +31,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,7 +49,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.currencyconverter.data.ItemAnalyticsModel
 import com.example.currencyconverter.data.entity.Currencies
-import com.example.currencyconverter.domain.usecase.ParametersСurrency
 import com.example.currencyconverter.theme.ButtonColors
 import com.example.currencyconverter.theme.Dimens
 import com.example.currencyconverter.theme.FontSizes
@@ -69,9 +68,15 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: List<Cu
     val coroutine = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current
 
-//    val listСurrency = viewModel.getValueAED()
+//    var listСurrency = mutableListOf<String>()
 //    var resultList = remember { mutableStateOf(listСurrency[0]) }
-    var resultList  by remember { mutableStateOf("213") }
+    var resultList  by remember { mutableStateOf("") }
+
+    val uiState by viewModel.uiState.collectAsState()
+//    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+
+
 
     var resultAED by remember { mutableStateOf("") }
     var resultAMD by remember { mutableStateOf("") }
@@ -442,13 +447,27 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel, db: List<Cu
             }
         }
 
+
+
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
         ) {
             items(
-                items = viewModel.getListCardCurrencies(),
-                itemContent = {it.result = resultList
+
+//                items = viewModel.uiState.replayCache.map {
+//                    it.map.map {
+//                        it.value
+//                    }
+//                },
+
+                items = uiState.listCard.map {
+                    it
+                },
+
+                itemContent = {
+//                    it.result = resultList
+
 
                     ItemAnalyticsScreen(item = it)
                 }

@@ -7,6 +7,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import java.util.Collections
 import kotlin.properties.Delegates
 
 class RecalculatingRubUseCase(private val valuesData: Flow<List<Currencies>>) {
@@ -15,7 +16,7 @@ class RecalculatingRubUseCase(private val valuesData: Flow<List<Currencies>>) {
 
 
 
-    private val resulTest = mutableListOf<Double>()
+    private val resulTest = mutableListOf<String>()
 
 //    private var resultAED by Delegates.notNull<Double>()
 //    private var resultAMD by Delegates.notNull<Double>()
@@ -68,10 +69,27 @@ class RecalculatingRubUseCase(private val valuesData: Flow<List<Currencies>>) {
         scope = CoroutineScope(Dispatchers.IO).also { scope ->
             scope.launch {
                 valuesData.collect { db ->
-                    resulTest.add(AED.rubleСonversion(db, userParamsConvert))
-                    resulTest.add(AMD.rubleСonversion(db, userParamsConvert))
-                    resulTest.add(AUD.rubleСonversion(db, userParamsConvert))
-//                    rezulTEst.clear()
+
+
+                    resulTest.add(AED.rubleСonversion(db, userParamsConvert).toString())
+                    resulTest.add(AMD.rubleСonversion(db, userParamsConvert).toString())
+                    resulTest.add(AUD.rubleСonversion(db, userParamsConvert).toString())
+
+//                    if (resulTest.isEmpty()){
+//                        resulTest.put(AED.name,AED.rubleСonversion(db, userParamsConvert))
+//                        resulTest.put(AMD.name,AMD.rubleСonversion(db, userParamsConvert))
+//                        resulTest.put(AUD.name,AUD.rubleСonversion(db, userParamsConvert))
+//                    }
+//                    else{
+//                        resulTest.set(AED.name,AED.rubleСonversion(db, userParamsConvert))
+//                        resulTest.set(AMD.name,AMD.rubleСonversion(db, userParamsConvert))
+//                        resulTest.set(AUD.name,AUD.rubleСonversion(db, userParamsConvert))
+//
+//
+//
+//                    }
+
+
 
 //                    resultAED = AED.rubleСonversion(db, userParamsConvert)
 //                    resultAMD = AMD.rubleСonversion(db, userParamsConvert)
@@ -119,7 +137,7 @@ class RecalculatingRubUseCase(private val valuesData: Flow<List<Currencies>>) {
         }
     }
 
-fun testRes():List<Double>{
+fun testRes(): MutableList<String> {
     return resulTest
 }
 

@@ -7,18 +7,25 @@ import com.example.currencyconverter.data.DataRepository
 import com.example.currencyconverter.data.ItemAnalyticsModel
 import com.example.currencyconverter.data.entity.Currencies
 import com.example.currencyconverter.domain.usecase.RecalculatingRubUseCase
+import com.example.currencyconverter.domain.usecase.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AnalyticsViewModel@Inject constructor(private val repository: DataRepository) : ViewModel() {
+class AnalyticsViewModel @Inject constructor(private val repository: DataRepository) : ViewModel() {
 
     private val cardCurrencies = mutableListOf<ItemAnalyticsModel>()
 
     private val _valuesData: Flow<List<Currencies>>
     val valuesData get() = _valuesData
+
+    val uiState: StateFlow<UIState> get() = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(UIState(listOf()))
 
     init {
         loadPosts()
@@ -29,6 +36,34 @@ class AnalyticsViewModel@Inject constructor(private val repository: DataReposito
 
     fun loadPosts() {
         viewModelScope.launch {
+            _valuesData.collect {
+                    _uiState.value.listCard = it.map {
+                        ItemAnalyticsModel(
+                            id = it.id,
+                            nameCurrency = it.name,
+                            codCurrency = it.charCode,
+                            exchangeRate = it.value,
+                            result = " "
+
+                        )
+                    }
+
+
+
+
+
+//                        mapOf(
+//                        enam to ItemAnalyticsModel(
+//                            id = it.id,
+//                            nameCurrency = it.name,
+//                            codCurrency = it.charCode,
+//                            exchangeRate = it.value,
+//                            result = ""
+//                        )
+//                    )
+
+            }
+
             try {
                 repository.getCurrenciesFromApi(object : HomeViewModel.ApiCallback {
                     override fun onSuccess(сurrencies: MutableList<Currencies>) {
@@ -46,39 +81,41 @@ class AnalyticsViewModel@Inject constructor(private val repository: DataReposito
         }
     }
 
-    fun getListCardCurrencies():List<ItemAnalyticsModel> {
-        viewModelScope.launch {
-            valuesData.collect { db ->
+//    fun getListCardCurrencies(): List<ItemAnalyticsModel> {
+//        viewModelScope.launch {
+//            valuesData.collect { db ->
+//
+//                var id = 0
+//                for (i in 1..41) {
+//                    id++
+//                    cardCurrencies.add(
+//                        ItemAnalyticsModel(
+//                            id = id,
+//                            nameCurrency = db.find { it.id == id }?.name,
+//                            codCurrency = db.find { it.id == id }?.charCode,
+//                            exchangeRate = db.find { it.id == id }?.value,
+//                            result = ""
+//
+//                        )
+//                    )
+//                }
+//            }
+//        }
+//        return cardCurrencies
+//    }
 
-                var id = 0
-                for (i in 1..41) {
-                    id++
-                    cardCurrencies.add(
-                        ItemAnalyticsModel(
-                            id = id,
-                            nameCurrency = db.find { it.id == id }?.name,
-                            codCurrency = db.find { it.id == id }?.charCode,
-                            exchangeRate = db.find { it.id == id }?.value,
-                            result = ""
-
-                        )
-                    )
-                }
-            }
-        }
-        return cardCurrencies
-    }
+    private val listRes = getValueListReZ()
 
     interface ApiCallback {
         fun onSuccess(сurrencies: Currencies)
         fun onFailure()
     }
 
-    fun inputValueRub(valueRUB:String){
+    fun inputValueRub(valueRUB: String) {
         recalculatingRubUseCase.execute(valueRUB)
     }
 
-    fun getValueListReZ(): List<Double> {
+    fun getValueListReZ(): MutableList<String> {
         return recalculatingRubUseCase.testRes()
     }
 

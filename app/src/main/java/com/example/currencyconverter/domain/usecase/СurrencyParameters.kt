@@ -44,7 +44,13 @@ enum class ParametersСurrency(val nameCurrency: String) {
     USD("Доллар США"),
     UZS("Узбекских сумов"),
     VND("Вьетнамских донгов"),
-    ZAR("Южноафриканских рэндов");
+    ZAR("Южноафриканских рэндов"),
+    OTHER("");
+
+    companion object{
+        fun getBayIndex(index:String): ParametersСurrency= values().find { it.nameCurrency == index }?: OTHER
+    }
+
 
     fun rubleСonversion(db: List<Currencies>, userParamsConvert: Double): Double {
         return userParamsConvert / db.find { it.name == nameCurrency }?.value!! * db.find { it.name == nameCurrency }?.nominal!!

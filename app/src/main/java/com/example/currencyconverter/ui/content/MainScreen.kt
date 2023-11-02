@@ -63,7 +63,7 @@ import kotlinx.coroutines.launch
 fun MainScreen(context: Context, viewModel: HomeViewModel, db: List<Currencies>) {
 
 //    val test by viewModel.valuesData.observeAsState()
-//    val uiState by viewModel._valuesData.collectAsState("")
+//    val uiState bya viewModel._vluesData.collectAsState("")
 
     val coroutine = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current

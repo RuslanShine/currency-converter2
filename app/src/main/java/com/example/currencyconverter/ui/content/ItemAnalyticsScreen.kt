@@ -41,28 +41,32 @@ fun ItemAnalyticsScreen(item: ItemAnalyticsModel) {
                     .padding(start = 4.dp),
                 horizontalAlignment = Alignment.Start
             ) {
-                item.nameCurrency?.let {
-                    Text(
-                        text = it.toString(),
-                        color = Color.Black,
-                        fontSize = 18.sp
-                    )
-                }
+
+                    item.nameCurrency?.let {
+                        Text(
+                            text = it,
+                            color = Color.Black,
+                            fontSize = 18.sp
+                        )
+                    }
+
                 Text(
-                    text = "${item.codCurrency}/RUB: ${item.exchangeRate}",
+                    text = "${item.codCurrency }/RUB: ${item.exchangeRate }",
                     fontSize = 14.sp,
                     color = Color.Gray
                 )
             }
-            Text(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(Dimens._8)
-                    .padding(end = 4.dp),
-                text = item.result.toString(),
-                color = Color.Black,
-                fontSize = 18.sp, textAlign = TextAlign.End
-            )
+            item.result?.let {
+                Text(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(Dimens._8)
+                        .padding(end = 4.dp),
+                    text = it.toString(),
+                    color = Color.Black,
+                    fontSize = 18.sp, textAlign = TextAlign.End
+                )
+            }
         }
     }
 }
