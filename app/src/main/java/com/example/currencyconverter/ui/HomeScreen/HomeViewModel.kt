@@ -1,12 +1,12 @@
-package com.example.currencyconverter.ui.viewModel
+package com.example.currencyconverter.ui.HomeScreen
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.currencyconverter.data.DataRepository
 import com.example.currencyconverter.data.entity.Currencies
-import com.example.currencyconverter.domain.usecase.RecalculatingValuesUseCase
-import com.example.currencyconverter.domain.usecase.SetCharCodeValuesUseCase
+import com.example.currencyconverter.domain.usecases.RecalculatingValuesUseCase
+import com.example.currencyconverter.domain.usecases.SetCharCodeValuesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -22,9 +22,6 @@ class HomeViewModel @Inject constructor(private val repository: DataRepository) 
         loadPosts()
         _valuesData = repository.getCurrenciesFromDB()
     }
-
-//    val uiState: StateFlow<List<Currencies>> get() = _uiState.asStateFlow()
-//    private val _uiState = MutableStateFlow<List<Currencies>>()
 
     private val recalculatingValuesUseCase = RecalculatingValuesUseCase(valuesData)
     private val setCharCodeValuesUseCase = SetCharCodeValuesUseCase(valuesData)

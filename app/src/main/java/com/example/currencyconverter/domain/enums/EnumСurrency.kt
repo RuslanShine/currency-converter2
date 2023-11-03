@@ -1,8 +1,6 @@
-package com.example.currencyconverter.domain.usecase
+package com.example.currencyconverter.domain.enums
 
-import com.example.currencyconverter.data.entity.Currencies
-
-enum class ParametersСurrency(val nameCurrency: String) {
+enum class EnumСurrency(val nameCurrency: String) {
 
     AED("Дирхам ОАЭ"),
     AMD("Армянских драмов"),
@@ -45,15 +43,5 @@ enum class ParametersСurrency(val nameCurrency: String) {
     UZS("Узбекских сумов"),
     VND("Вьетнамских донгов"),
     ZAR("Южноафриканских рэндов"),
-    OTHER("");
-
-    companion object{
-        fun getBayIndex(index:String): ParametersСurrency= values().find { it.nameCurrency == index }?: OTHER
-    }
-
-
-    fun rubleСonversion(db: List<Currencies>, userParamsConvert: Double): Double {
-        return userParamsConvert / db.find { it.name == nameCurrency }?.value!! * db.find { it.name == nameCurrency }?.nominal!!
-    }
 }
 

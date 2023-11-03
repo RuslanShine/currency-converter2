@@ -1,4 +1,4 @@
-package com.example.currencyconverter.ui.content
+package com.example.currencyconverter.ui.Analytics.content
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.currencyconverter.data.ItemAnalyticsModel
+import com.example.currencyconverter.ui.Analytics.model.ItemAnalyticsModel
 import com.example.currencyconverter.theme.Dimens
 
 @Composable
@@ -41,32 +41,27 @@ fun ItemAnalyticsScreen(item: ItemAnalyticsModel) {
                     .padding(start = 4.dp),
                 horizontalAlignment = Alignment.Start
             ) {
-
-                    item.nameCurrency?.let {
-                        Text(
-                            text = it,
-                            color = Color.Black,
-                            fontSize = 18.sp
-                        )
-                    }
-
                 Text(
-                    text = "${item.codCurrency }/RUB: ${item.exchangeRate }",
+                    text = item.nameCurrency,
+                    color = Color.Black,
+                    fontSize = 18.sp
+                )
+                Text(
+                    text = "${item.codCurrency}/RUB: ${item.exchangeRate}",
                     fontSize = 14.sp,
                     color = Color.Gray
                 )
             }
-            item.result?.let {
-                Text(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(Dimens._8)
-                        .padding(end = 4.dp),
-                    text = it.toString(),
-                    color = Color.Black,
-                    fontSize = 18.sp, textAlign = TextAlign.End
-                )
-            }
+            Text(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(Dimens._8)
+                    .padding(end = 4.dp),
+                text = String.format("%.3f", item.result.toDouble()),
+                color = Color.Black,
+                fontSize = 18.sp, textAlign = TextAlign.End
+            )
+
         }
     }
 }

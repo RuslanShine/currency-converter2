@@ -1,4 +1,4 @@
-package com.example.currencyconverter.ui.content
+package com.example.currencyconverter.ui.HomeScreen.content
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -46,35 +46,29 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.example.currencyconverter.R
-import com.example.currencyconverter.data.entity.Currencies
-import com.example.currencyconverter.domain.usecase.ParametersСurrency
+import com.example.currencyconverter.domain.enums.EnumСurrency
 import com.example.currencyconverter.theme.ButtonColors
 import com.example.currencyconverter.theme.Dimens
 import com.example.currencyconverter.theme.FontSizes
 import com.example.currencyconverter.theme.Purple40
 import com.example.currencyconverter.theme.Purple80
-import com.example.currencyconverter.ui.viewModel.HomeViewModel
+import com.example.currencyconverter.ui.HomeScreen.HomeViewModel
 import kotlinx.coroutines.launch
 
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun MainScreen(context: Context, viewModel: HomeViewModel, db: List<Currencies>) {
-
-//    val test by viewModel.valuesData.observeAsState()
-//    val uiState bya viewModel._vluesData.collectAsState("")
+fun MainScreen(context: Context, viewModel: HomeViewModel) {
 
     val coroutine = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current
-    val listСurrencyName =ParametersСurrency.values().map { it.nameCurrency } + "Выберите валюту"
-
+    val listСurrencyName = EnumСurrency.values().map { it.nameCurrency } + "Выберите валюту"
 
     val listСurrencyOne = listСurrencyName
     val expandedOne = remember { mutableStateOf(false) }
     val currentValueOne = remember { mutableStateOf(listСurrencyOne[41]) }
     var textOne by remember { mutableStateOf("") }
-
 
     val listСurrencyTow = listСurrencyName
     val expandedTow = remember { mutableStateOf(false) }
@@ -88,7 +82,6 @@ fun MainScreen(context: Context, viewModel: HomeViewModel, db: List<Currencies>)
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-//                .height(Dimens._500)
                 .padding(Dimens._8),
             shape = RoundedCornerShape(Dimens._16),
             elevation = CardDefaults.cardElevation(defaultElevation = Dimens._4)

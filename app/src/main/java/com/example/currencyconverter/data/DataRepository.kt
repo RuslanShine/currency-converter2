@@ -5,7 +5,7 @@ import com.example.convertmy.data.Valute
 import com.example.currencyconverter.data.DAO.CurrenciesDAO
 import com.example.currencyconverter.data.entity.Currencies
 import com.example.currencyconverter.data.modelData.UniversalCurrency
-import com.example.currencyconverter.ui.viewModel.HomeViewModel
+import com.example.currencyconverter.ui.HomeScreen.HomeViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -96,34 +96,7 @@ class DataRepository @Inject constructor(private val currenciesDao: CurrenciesDA
             db.add(valute.uZS.maptodb())
             db.add(valute.vND.maptodb())
             db.add(valute.zAR.maptodb())
-
         }
-
-
-//        api.forEach {
-//            it.valute.forEach {
-//                db.add(
-//                    it.aED.maptodb()
-//                )
-//                db.add(
-//                    it.aMD.maptodb()
-//                )
-//
-//
-//            }
-//
-//        }
-//        val db = Currencies(
-//            charCode =api.valute.aMD.
-//            iD = ,
-//            name = ,
-//            nominal = ,
-//            numCode = ,
-//            previous = ,
-//            value =,
-//            aED = api.map { it.valute }
-//
-//        )
 
         putCurrenciesToDb(db)
 
@@ -138,9 +111,5 @@ class DataRepository @Inject constructor(private val currenciesDao: CurrenciesDA
         }
 
     }
-
-
-//    db.find { it.name == "AED" }?.let {  }
-
 }
 

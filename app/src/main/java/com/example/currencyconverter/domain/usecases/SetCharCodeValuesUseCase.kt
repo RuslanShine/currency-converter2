@@ -1,4 +1,4 @@
-package com.example.currencyconverter.domain.usecase
+package com.example.currencyconverter.domain.usecases
 
 import com.example.currencyconverter.data.entity.Currencies
 import kotlinx.coroutines.CoroutineScope
