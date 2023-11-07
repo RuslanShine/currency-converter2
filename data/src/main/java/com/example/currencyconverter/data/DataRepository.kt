@@ -1,18 +1,13 @@
 package com.example.currencyconverter.data
 
 import com.example.convertmy.data.ValCurs
-import com.example.convertmy.data.Valute
 import com.example.currencyconverter.data.DAO.CurrenciesDAO
 import com.example.currencyconverter.data.entity.Currencies
 import com.example.currencyconverter.data.modelData.UniversalCurrency
-import com.example.currencyconverter.ui.HomeScreen.HomeViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -49,7 +44,7 @@ class DataRepository @Inject constructor(private val currenciesDao: CurrenciesDA
             value = value
         )
 
-    suspend fun getCurrenciesFromApi(callback: HomeViewModel.ApiCallback) {
+    suspend fun getCurrenciesFromApi() {
 
         val api = dataApi.getValues()
         val db = mutableListOf<Currencies>()
@@ -97,19 +92,7 @@ class DataRepository @Inject constructor(private val currenciesDao: CurrenciesDA
             db.add(valute.vND.maptodb())
             db.add(valute.zAR.maptodb())
         }
-
         putCurrenciesToDb(db)
-
-        object : Callback<Valute> {
-            override fun onResponse(call: Call<Valute>, response: Response<Valute>) {
-                callback.onSuccess(db)
-            }
-
-            override fun onFailure(call: Call<Valute>, t: Throwable) {
-                callback.onFailure()
-            }
-        }
-
     }
 }
 

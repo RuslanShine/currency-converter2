@@ -3,7 +3,6 @@ package com.example.currencyconverter.di
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.currencyconverter.data.DataApi
-import com.example.currencyconverter.data.DataRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,6 +37,7 @@ class RemoteModule {
 
     @Provides
     @Singleton
-    fun provideTmdbApi(retrofit: Retrofit): DataApi = retrofit.create(DataApi::class.java)
+    fun provideTmdbApi(retrofit: Retrofit): com.example.currencyconverter.data.DataApi = retrofit.create(
+        com.example.currencyconverter.data.DataApi::class.java)
 
 }

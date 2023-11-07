@@ -13,7 +13,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val repository: DataRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(private val repository: com.example.currencyconverter.data.DataRepository) :
+    ViewModel() {
 
     private val _valuesData: Flow<List<Currencies>>
     val valuesData get() = _valuesData
@@ -29,25 +30,12 @@ class HomeViewModel @Inject constructor(private val repository: DataRepository) 
     fun loadPosts() {
         viewModelScope.launch {
             try {
-                repository.getCurrenciesFromApi(object : ApiCallback {
-                    override fun onSuccess(сurrencies: MutableList<Currencies>) {
-//                        valuesData
-                    }
-
-                    override fun onFailure() {
-//                         valuesData = repository.getAllFromDB()
-                    }
-                })
+                repository.getCurrenciesFromApi()
             } catch (e: Exception) {
                 Log.e("HomeViewModel", e.message.toString())
                 e.printStackTrace()
             }
         }
-    }
-
-    interface ApiCallback {
-        fun onSuccess(сurrencies: MutableList<Currencies>)
-        fun onFailure()
     }
 
     fun recalculatingValues(result: String): Double {
