@@ -3,9 +3,8 @@ package com.example.currencyconverter.ui.HomeScreen
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.currencyconverter.data.DataRepository
 import com.example.currencyconverter.data.entity.Currencies
-import com.example.currencyconverter.domain.usecases.RecalculatingValuesUseCase
+import com.example.currencyconverter.domain.usecases.RecalculatingValuesСhoiceUseCase
 import com.example.currencyconverter.domain.usecases.SetCharCodeValuesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -21,10 +20,10 @@ class HomeViewModel @Inject constructor(private val repository: com.example.curr
 
     init {
         loadPosts()
-        _valuesData = repository.getCurrenciesFromDB()
+        _valuesData = repository.getCurrenciesFromDb()
     }
 
-    private val recalculatingValuesUseCase = RecalculatingValuesUseCase(valuesData)
+    private val recalculatingValuesUseCase = RecalculatingValuesСhoiceUseCase(valuesData)
     private val setCharCodeValuesUseCase = SetCharCodeValuesUseCase(valuesData)
 
     fun loadPosts() {
@@ -42,11 +41,11 @@ class HomeViewModel @Inject constructor(private val repository: com.example.curr
         return recalculatingValuesUseCase.execute(result)
     }
 
-    suspend fun searchFromVal(nameCurrencyFromVal: Any) {
+    suspend fun searchFromValRecalculating(nameCurrencyFromVal: Any) {
         recalculatingValuesUseCase.monitoringValueFromVal(nameCurrencyFromVal)
     }
 
-    suspend fun searchToVal(nameCurrencyToVal: Any) {
+    suspend fun searchToValRecalculating(nameCurrencyToVal: Any) {
         recalculatingValuesUseCase.monitoringValueToVal(nameCurrencyToVal)
     }
 

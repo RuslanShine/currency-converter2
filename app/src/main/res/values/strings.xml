@@ -1,7 +1,10 @@
 <resources>
-    <string name="app_name">Currency Converter</string>
+    <string name="app_name">Конвертер валют</string>
     <string name="currency">Currency</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="currency_converter">Конвертер валют</string>
+    <string name="enter_quantity">Введите количество средств:</string>
+    <string name="russian_ruble_converter">Конвертер росссийского рубля</string>
+    <string name="rubCod">RUB</string>
 </resources>

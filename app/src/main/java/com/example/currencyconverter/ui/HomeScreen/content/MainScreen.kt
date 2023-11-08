@@ -145,14 +145,10 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                                                 expandedOne.value = false
 
                                                 coroutine.launch {
-
-                                                        viewModel.searchFromVal(it)
-
+                                                    viewModel.searchFromValRecalculating(it)
                                                 }
                                                 coroutine.launch {
-
-                                                        viewModel.searchValueFromVal(it)
-
+                                                    viewModel.searchValueFromVal(it)
                                                 }
                                             },
                                             modifier = Modifier.background(Color.White),
@@ -241,16 +237,12 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                                                 currentValueTow.value = it
                                                 expandedTow.value = false
 
-                                            coroutine.launch {
-
-                                                    viewModel.searchToVal(it)
-
-                                            }
-                                            coroutine.launch {
-
+                                                coroutine.launch {
+                                                    viewModel.searchToValRecalculating(it)
+                                                }
+                                                coroutine.launch {
                                                     viewModel.searchValueToVal(it)
-
-                                            }
+                                                }
 
                                             },
                                             modifier = Modifier.background(Color.White)

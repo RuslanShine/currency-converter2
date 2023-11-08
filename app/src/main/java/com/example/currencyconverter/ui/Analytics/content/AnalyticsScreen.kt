@@ -41,11 +41,13 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.currencyconverter.R
 import com.example.currencyconverter.theme.ButtonColors
 import com.example.currencyconverter.theme.Dimens
 import com.example.currencyconverter.theme.FontSizes
@@ -89,7 +91,7 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel) {
                     ) {
                         Text(
                             modifier = Modifier.padding(Dimens._4),
-                            text = "Конвертер росссийского рубля",
+                            text = stringResource(R.string.russian_ruble_converter),
                             color = Color.Black,
                             fontSize = FontSizes._22,
                             textAlign = TextAlign.Center
@@ -110,7 +112,7 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel) {
                             contentAlignment = Alignment.TopCenter
                         ) {
                             Text(
-                                text = "Введите количество средств:",
+                                text = stringResource(R.string.enter_quantity),
                                 fontSize = 18.sp,
                                 color = Color.Black
                             )
@@ -123,14 +125,14 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel) {
                             horizontalArrangement = Arrangement.SpaceAround
                         ) {
                             Text(
-                                text = "RUB",
+                                text = stringResource(R.string.rubCod),
                                 fontSize = FontSizes._24,
                                 color = Color.Black
                             )
                             OutlinedTextField(value = valueCurrencyRub,
                                 onValueChange = {
                                     valueCurrencyRub = it
-                                    viewModel.inputValueRub(it.toDouble())
+                                    viewModel.getInputValueRub(it.toDouble())
                                 },
                                 modifier = Modifier.width(Dimens._240),
                                 textStyle = TextStyle(
@@ -166,7 +168,7 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel) {
                 ) {
                     Button(
                         onClick = {
-                            viewModel.getValueListResult()
+                            viewModel.setValueListResult()
                             keyboardController?.hide()
                             Toast.makeText(context, "Конвертация", Toast.LENGTH_SHORT).show()
                         },
@@ -185,7 +187,7 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel) {
                 .fillMaxSize()
         ) {
             items(
-                items = uiState.listCard,
+                items = uiState.listCardsCurrencies,
                 itemContent = {
                     ItemAnalyticsScreen(item = it)
                 }

@@ -38,7 +38,7 @@ class HomeFragment : Fragment() {
 
         scope = CoroutineScope(Dispatchers.IO).also { scope ->
             scope.launch {
-                viewModel.valuesData.collect { db ->
+                viewModel.valuesData.collect {
                     withContext(Dispatchers.Main) {
                         binding.composView.apply {
                             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)

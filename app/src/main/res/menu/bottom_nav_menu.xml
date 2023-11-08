@@ -3,9 +3,9 @@
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/baseline_home_24"
-        android:title="Курс" />
+        android:title="Конвертер валют" />
     <item
         android:id="@+id/analyticsFragment"
         android:icon="@drawable/baseline_analytics_24"
-        android:title="Аналитика" />
+        android:title="Аналитика рубля" />
 </menu>

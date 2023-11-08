@@ -6,6 +6,6 @@ data class ItemAnalyticsModel(
     val codCurrency: String,
     val exchangeRate: Double,
     val nominal:Int,
-    var result: Double
+    var resultExchangeRub: Double
 )
 

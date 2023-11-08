@@ -57,7 +57,7 @@ fun ItemAnalyticsScreen(item: ItemAnalyticsModel) {
                     .fillMaxSize()
                     .padding(Dimens._8)
                     .padding(end = 4.dp),
-                text = String.format("%.3f", item.result.toDouble()),
+                text = String.format("%.3f", item.resultExchangeRub.toDouble()),
                 color = Color.Black,
                 fontSize = 18.sp, textAlign = TextAlign.End
             )

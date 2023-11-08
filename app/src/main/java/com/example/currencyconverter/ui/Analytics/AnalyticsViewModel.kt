@@ -27,7 +27,7 @@ class AnalyticsViewModel @Inject constructor(private val repository: com.example
 
     init {
         loadPosts()
-        _valuesData = repository.getCurrenciesFromDB()
+        _valuesData = repository.getCurrenciesFromDb()
     }
 
     private val recalculatingRubUseCase = RecalculatingRubUseCase(_uiState)
@@ -35,14 +35,14 @@ class AnalyticsViewModel @Inject constructor(private val repository: com.example
     fun loadPosts() {
         viewModelScope.launch {
             _valuesData.collect {
-                _uiState.value.listCard = it.map {
+                _uiState.value.listCardsCurrencies = it.map {
                     ItemAnalyticsModel(
                         id = it.id,
                         nameCurrency = it.name,
                         codCurrency = it.charCode,
                         exchangeRate = it.value,
                         nominal = it.nominal,
-                        result = 0.0
+                        resultExchangeRub = 0.0
                     )
                 }
             }
@@ -56,12 +56,12 @@ class AnalyticsViewModel @Inject constructor(private val repository: com.example
         }
     }
 
-    fun inputValueRub(valueRUB: Double) {
+    fun getInputValueRub(valueRUB: Double) {
         recalculatingRubUseCase.execute(valueRUB)
     }
 
-    fun getValueListResult() {
-        val result = recalculatingRubUseCase.getResultRub()
-        _uiState.value = UIState(result)
+    fun setValueListResult() {
+        val resultExchange = recalculatingRubUseCase.setResultRub()
+        _uiState.value = UIState(resultExchange)
     }
 }

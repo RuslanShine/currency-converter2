@@ -40,33 +40,28 @@ android {
 }
 
 dependencies {
-
-
-
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
-
 
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
-    implementation ("com.squareup.retrofit2:converter-simplexml:2.9.0")
 
     //Room
     val room_version = "2.5.2"
-    implementation ("androidx.room:room-runtime:$room_version")
+    implementation("androidx.room:room-runtime:$room_version")
     ksp("androidx.room:room-compiler:2.5.0")
-    implementation ("androidx.room:room-ktx:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
 
     //Hilt
-    implementation ("com.google.dagger:hilt-android:2.44")
-    kapt ("com.google.dagger:hilt-compiler:2.44")
-    implementation ("com.google.dagger:hilt-android-gradle-plugin:2.44")
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-compiler:2.44")
+    implementation("com.google.dagger:hilt-android-gradle-plugin:2.44")
 
-    implementation ("com.squareup.inject:assisted-inject-annotations-dagger2:0.5.2")
-    kapt ("com.squareup.inject:assisted-inject-processor-dagger2:0.5.2")
+    //Chucker
+    debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
+    releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 
-    implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
 
 }

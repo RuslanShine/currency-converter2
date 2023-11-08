@@ -1,7 +1,8 @@
-package com.example.currencyconverter.di
+package com.example.currencyconverter.data.di
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.example.currencyconverter.data.ApiConstants
 import com.example.currencyconverter.data.DataApi
 import dagger.Module
 import dagger.Provides
@@ -30,14 +31,14 @@ class RemoteModule {
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .baseUrl(com.example.currencyconverter.data.ApiConstants.BASE_URL)
+        .baseUrl(ApiConstants.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()
 
     @Provides
     @Singleton
-    fun provideTmdbApi(retrofit: Retrofit): com.example.currencyconverter.data.DataApi = retrofit.create(
-        com.example.currencyconverter.data.DataApi::class.java)
+    fun provideTmdbApi(retrofit: Retrofit): DataApi = retrofit.create(
+        DataApi::class.java)
 
 }

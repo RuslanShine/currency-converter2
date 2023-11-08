@@ -23,17 +23,15 @@ class DataRepository @Inject constructor(private val currenciesDao: CurrenciesDA
         return dataApi.getValues()
     }
 
-    //  кладем список в БД
-    fun putCurrenciesToDb(currencies: List<Currencies>) {
+     fun putCurrenciesToDb(currencies: List<Currencies>) {
         scope.launch { currenciesDao.insertAll(currencies) }
     }
 
-    // забирает все из БД
-    fun getCurrenciesFromDB(): Flow<List<Currencies>> {
+    fun getCurrenciesFromDb(): Flow<List<Currencies>> {
         return currenciesDao.getCachedCurrencies()
     }
 
-    private fun UniversalCurrency.maptodb(): Currencies =
+    private fun UniversalCurrency.mapToDb(): Currencies =
         Currencies(
             charCode = charCode,
             iD = iD,
@@ -45,54 +43,52 @@ class DataRepository @Inject constructor(private val currenciesDao: CurrenciesDA
         )
 
     suspend fun getCurrenciesFromApi() {
-
         val api = dataApi.getValues()
-        val db = mutableListOf<Currencies>()
-
+        val database = mutableListOf<Currencies>()
         api.run {
-            db.add(valute.aED.maptodb())
-            db.add(valute.aMD.maptodb())
-            db.add(valute.aUD.maptodb())
-            db.add(valute.aZN.maptodb())
-            db.add(valute.bGN.maptodb())
-            db.add(valute.bRL.maptodb())
-            db.add(valute.bYN.maptodb())
-            db.add(valute.cAD.maptodb())
-            db.add(valute.cHF.maptodb())
-            db.add(valute.cNY.maptodb())
-            db.add(valute.cZK.maptodb())
-            db.add(valute.dKK.maptodb())
-            db.add(valute.eGP.maptodb())
-            db.add(valute.eUR.maptodb())
-            db.add(valute.gEL.maptodb())
-            db.add(valute.hKD.maptodb())
-            db.add(valute.hUF.maptodb())
-            db.add(valute.iDR.maptodb())
-            db.add(valute.iNR.maptodb())
-            db.add(valute.jPY.maptodb())
-            db.add(valute.kGS.maptodb())
-            db.add(valute.kRW.maptodb())
-            db.add(valute.kZT.maptodb())
-            db.add(valute.mDL.maptodb())
-            db.add(valute.nOK.maptodb())
-            db.add(valute.nZD.maptodb())
-            db.add(valute.pLN.maptodb())
-            db.add(valute.qAR.maptodb())
-            db.add(valute.rON.maptodb())
-            db.add(valute.rSD.maptodb())
-            db.add(valute.sEK.maptodb())
-            db.add(valute.sGD.maptodb())
-            db.add(valute.tHB.maptodb())
-            db.add(valute.tJS.maptodb())
-            db.add(valute.tMT.maptodb())
-            db.add(valute.tRY.maptodb())
-            db.add(valute.uAH.maptodb())
-            db.add(valute.uSD.maptodb())
-            db.add(valute.uZS.maptodb())
-            db.add(valute.vND.maptodb())
-            db.add(valute.zAR.maptodb())
+            database.add(valute.aED.mapToDb())
+            database.add(valute.aMD.mapToDb())
+            database.add(valute.aUD.mapToDb())
+            database.add(valute.aZN.mapToDb())
+            database.add(valute.bGN.mapToDb())
+            database.add(valute.bRL.mapToDb())
+            database.add(valute.bYN.mapToDb())
+            database.add(valute.cAD.mapToDb())
+            database.add(valute.cHF.mapToDb())
+            database.add(valute.cNY.mapToDb())
+            database.add(valute.cZK.mapToDb())
+            database.add(valute.dKK.mapToDb())
+            database.add(valute.eGP.mapToDb())
+            database.add(valute.eUR.mapToDb())
+            database.add(valute.gEL.mapToDb())
+            database.add(valute.hKD.mapToDb())
+            database.add(valute.hUF.mapToDb())
+            database.add(valute.iDR.mapToDb())
+            database.add(valute.iNR.mapToDb())
+            database.add(valute.jPY.mapToDb())
+            database.add(valute.kGS.mapToDb())
+            database.add(valute.kRW.mapToDb())
+            database.add(valute.kZT.mapToDb())
+            database.add(valute.mDL.mapToDb())
+            database.add(valute.nOK.mapToDb())
+            database.add(valute.nZD.mapToDb())
+            database.add(valute.pLN.mapToDb())
+            database.add(valute.qAR.mapToDb())
+            database.add(valute.rON.mapToDb())
+            database.add(valute.rSD.mapToDb())
+            database.add(valute.sEK.mapToDb())
+            database.add(valute.sGD.mapToDb())
+            database.add(valute.tHB.mapToDb())
+            database.add(valute.tJS.mapToDb())
+            database.add(valute.tMT.mapToDb())
+            database.add(valute.tRY.mapToDb())
+            database.add(valute.uAH.mapToDb())
+            database.add(valute.uSD.mapToDb())
+            database.add(valute.uZS.mapToDb())
+            database.add(valute.vND.mapToDb())
+            database.add(valute.zAR.mapToDb())
         }
-        putCurrenciesToDb(db)
+        putCurrenciesToDb(database)
     }
 }
 

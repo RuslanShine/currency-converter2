@@ -8,11 +8,11 @@ import kotlinx.coroutines.launch
 
 class SetCharCodeValuesUseCase(private val valuesData: Flow<List<Currencies>>) {
     private lateinit var scope: CoroutineScope
-    private var nameCurrency = "VAL"
+    private var nameCurrencyFromVal = "VAL"
     private var nameCurrencyToVal = "VAL"
 
     fun executeFromVal(): String {
-        return nameCurrency
+        return nameCurrencyFromVal
     }
 
     fun executeToVal(): String {
@@ -22,8 +22,8 @@ class SetCharCodeValuesUseCase(private val valuesData: Flow<List<Currencies>>) {
     suspend fun monitoringValueFromVal(nameCurrencyScreen: Any) {
         scope = CoroutineScope(Dispatchers.IO).also { scope ->
             scope.launch {
-                valuesData.collect { db ->
-                   nameCurrency = db.find { it.name == nameCurrencyScreen }?.charCode!!
+                valuesData.collect { database ->
+                   nameCurrencyFromVal = database.find { it.name == nameCurrencyScreen }?.charCode!!
                 }
             }
         }
@@ -32,8 +32,8 @@ class SetCharCodeValuesUseCase(private val valuesData: Flow<List<Currencies>>) {
     suspend fun monitoringValueToVal(nameCurrencyScreenToVal: Any) {
         scope = CoroutineScope(Dispatchers.IO).also { scope ->
             scope.launch {
-                valuesData.collect { db ->
-                    nameCurrencyToVal = db.find { it.name == nameCurrencyScreenToVal }?.charCode!!
+                valuesData.collect { database ->
+                    nameCurrencyToVal = database.find { it.name == nameCurrencyScreenToVal }?.charCode!!
                 }
             }
         }

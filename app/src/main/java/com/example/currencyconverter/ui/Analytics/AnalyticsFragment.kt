@@ -30,17 +30,13 @@ class AnalyticsFragment : Fragment() {
     ): View {
         _binding = FragmentAnalyticsBinding.inflate(inflater, container, false)
         return binding.root
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         scope = CoroutineScope(Dispatchers.IO).also { scope ->
             scope.launch {
-                viewModel.valuesData.collect { db ->
+                viewModel.valuesData.collect {
                     withContext(Dispatchers.Main) {
                         binding.composViewAnalyticsFragment.apply {
                             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
