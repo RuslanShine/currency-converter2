@@ -1,12 +1,10 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-
-
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+//    id("kotlin-kapt")
     id("com.google.devtools.ksp")
 }
+
 
 android {
     namespace = "com.example.currencyconverter.data"
@@ -54,14 +52,14 @@ dependencies {
     ksp("androidx.room:room-compiler:2.5.0")
     implementation("androidx.room:room-ktx:$room_version")
 
-    //Hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-compiler:2.44")
-    implementation("com.google.dagger:hilt-android-gradle-plugin:2.44")
-
     //Chucker
     debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+
+    ///Dagger2
+    val daggerVersion = "2.44.2"
+    implementation ("com.google.dagger:dagger:$daggerVersion")
+    annotationProcessor ("com.google.dagger:dagger-compiler:$daggerVersion")
 
 
 }

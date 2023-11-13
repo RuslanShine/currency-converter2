@@ -9,14 +9,13 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.viewModels
 import com.example.currencyconverter.databinding.FragmentAnalyticsBinding
 import com.example.currencyconverter.ui.Analytics.content.AnalyticsScreen
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-@AndroidEntryPoint
+
 class AnalyticsFragment : Fragment() {
 
     private var _binding: FragmentAnalyticsBinding? = null

@@ -9,7 +9,6 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.viewModels
 import com.example.currencyconverter.databinding.FragmentHomeBinding
 import com.example.currencyconverter.ui.HomeScreen.content.MainScreen
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -17,7 +16,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-@AndroidEntryPoint
+
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null

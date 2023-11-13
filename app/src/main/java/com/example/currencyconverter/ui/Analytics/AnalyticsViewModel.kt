@@ -3,11 +3,12 @@ package com.example.currencyconverter.ui.Analytics
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.currencyconverter.data.DataRepository
 import com.example.currencyconverter.ui.Analytics.model.ItemAnalyticsModel
 import com.example.currencyconverter.data.entity.Currencies
+import com.example.currencyconverter.di.App
 import com.example.currencyconverter.domain.usecases.RecalculatingRubUseCase
 import com.example.currencyconverter.ui.Analytics.model.UIState
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,9 +16,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
-class AnalyticsViewModel @Inject constructor(private val repository: com.example.currencyconverter.data.DataRepository) :
-    ViewModel() {
+
+class AnalyticsViewModel: ViewModel() {
 
     private val _valuesData: Flow<List<Currencies>>
     val valuesData get() = _valuesData
@@ -25,9 +25,12 @@ class AnalyticsViewModel @Inject constructor(private val repository: com.example
     val uiState: StateFlow<UIState> get() = _uiState.asStateFlow()
     private val _uiState = MutableStateFlow(UIState(listOf()))
 
+    @Inject lateinit var repository: DataRepository
+
     init {
         loadPosts()
         _valuesData = repository.getCurrenciesFromDb()
+        App.instance.appComponent.injectAnalyticsViewModel(this)
     }
 
     private val recalculatingRubUseCase = RecalculatingRubUseCase(_uiState)

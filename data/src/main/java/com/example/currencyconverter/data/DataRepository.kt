@@ -13,11 +13,17 @@ import javax.inject.Singleton
 
 
 @Singleton
-class DataRepository @Inject constructor(private val currenciesDao: CurrenciesDAO) {
+class DataRepository {
     val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 
-    @Inject
-    lateinit var dataApi: DataApi
+    @Inject lateinit var dataApi: DataApi
+    @Inject lateinit var currenciesDao: CurrenciesDAO
+
+    init {
+
+//        App.instance.appComponent.injectDataRepository(this)
+
+    }
 
     suspend fun getValues(): ValCurs {
         return dataApi.getValues()
