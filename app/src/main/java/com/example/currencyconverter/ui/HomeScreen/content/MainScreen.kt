@@ -63,17 +63,17 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
 
     val coroutine = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current
-    val listСurrencyName = EnumСurrency.values().map { it.nameCurrency } + "Выберите валюту"
+    val listСurrencyName = EnumСurrency.values().map { it.nameCurrency } + stringResource(R.string.choose_currency)
 
-    val listСurrencyOne = listСurrencyName
-    val expandedOne = remember { mutableStateOf(false) }
-    val currentValueOne = remember { mutableStateOf(listСurrencyOne[41]) }
-    var textOne by remember { mutableStateOf("") }
+    val listСurrencyInput = listСurrencyName
+    val inputNumber = remember { mutableStateOf(false) }
+    val currentInputCurrency = remember { mutableStateOf(listСurrencyInput[41]) }
+    var currencyNameInput by remember { mutableStateOf("") }
 
-    val listСurrencyTow = listСurrencyName
-    val expandedTow = remember { mutableStateOf(false) }
-    val currentValueTow = remember { mutableStateOf(listСurrencyTow[41]) }
-    var textTow by remember { mutableStateOf("") }
+    val listСurrencyOutput = listСurrencyName
+    val outputNumber = remember { mutableStateOf(false) }
+    val currentOutputCurrency = remember { mutableStateOf(listСurrencyOutput[41]) }
+    var currencyNameOutput by remember { mutableStateOf("") }
 
 
     Box(
@@ -124,10 +124,10 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                             contentAlignment = Alignment.TopCenter
                         ) {
                             Row(modifier = Modifier.clickable {
-                                expandedOne.value = !expandedOne.value
+                                inputNumber.value = !inputNumber.value
                             }, verticalAlignment = Alignment.CenterVertically) {
                                 Text(
-                                    text = currentValueOne.value.toString(),
+                                    text = currentInputCurrency.value.toString(),
                                     fontSize = FontSizes._18,
                                     color = Color.Black
                                 )
@@ -135,14 +135,14 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                                     imageVector = Icons.Filled.ArrowDropDown,
                                     contentDescription = null
                                 )
-                                DropdownMenu(expanded = expandedOne.value,
-                                    onDismissRequest = { expandedOne.value = false }) {
-                                    listСurrencyOne.forEach {
+                                DropdownMenu(expanded = inputNumber.value,
+                                    onDismissRequest = { inputNumber.value = false }) {
+                                    listСurrencyInput.forEach {
                                         DropdownMenuItem(
                                             text = { Text(text = it.toString()) },
                                             onClick = {
-                                                currentValueOne.value = it
-                                                expandedOne.value = false
+                                                currentInputCurrency.value = it
+                                                inputNumber.value = false
 
                                                 coroutine.launch {
                                                     viewModel.searchFromValRecalculating(it)
@@ -170,8 +170,8 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                                 fontSize = FontSizes._24,
                                 color = Color.Black
                             )
-                            OutlinedTextField(value = textOne,
-                                onValueChange = { textOne = it },
+                            OutlinedTextField(value = currencyNameInput,
+                                onValueChange = { currencyNameInput = it },
 
                                 modifier = Modifier.width(Dimens._240),
                                 textStyle = androidx.compose.ui.text.TextStyle(
@@ -189,7 +189,7 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                                         contentDescription = "clear text",
                                         modifier = Modifier
                                             .clickable {
-                                                textOne = ""
+                                                currencyNameInput = ""
                                             }
                                     )
                                 }
@@ -217,10 +217,10 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                             contentAlignment = Alignment.TopCenter
                         ) {
                             Row(modifier = Modifier.clickable {
-                                expandedTow.value = !expandedTow.value
+                                outputNumber.value = !outputNumber.value
                             }, verticalAlignment = Alignment.CenterVertically) {
                                 Text(
-                                    text = currentValueTow.value.toString(),
+                                    text = currentOutputCurrency.value.toString(),
                                     fontSize = FontSizes._18,
                                     color = Color.Black
                                 )
@@ -228,14 +228,14 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                                     imageVector = Icons.Filled.ArrowDropDown,
                                     contentDescription = null
                                 )
-                                DropdownMenu(expanded = expandedTow.value,
-                                    onDismissRequest = { expandedTow.value = false }) {
-                                    listСurrencyTow.forEach {
+                                DropdownMenu(expanded = outputNumber.value,
+                                    onDismissRequest = { outputNumber.value = false }) {
+                                    listСurrencyOutput.forEach {
                                         DropdownMenuItem(
                                             text = { Text(text = it.toString()) },
                                             onClick = {
-                                                currentValueTow.value = it
-                                                expandedTow.value = false
+                                                currentOutputCurrency.value = it
+                                                outputNumber.value = false
 
                                                 coroutine.launch {
                                                     viewModel.searchToValRecalculating(it)
@@ -264,8 +264,8 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                                 fontSize = FontSizes._24,
                                 color = Color.Black
                             )
-                            OutlinedTextField(value = textTow,
-                                onValueChange = { textTow = it },
+                            OutlinedTextField(value = currencyNameOutput,
+                                onValueChange = { currencyNameOutput = it },
                                 modifier = Modifier.width(Dimens._240),
                                 textStyle = androidx.compose.ui.text.TextStyle(
                                     fontSize = FontSizes._24
@@ -282,7 +282,7 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                                         contentDescription = "clear text",
                                         modifier = Modifier
                                             .clickable {
-                                                textTow = ""
+                                                currencyNameOutput = ""
                                             }
                                     )
                                 }
@@ -299,8 +299,8 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                     Button(
                         onClick = {
                             coroutine.launch {
-                                textTow = if (textOne > 0.toString()) {
-                                    val result = textOne
+                                currencyNameOutput = if (currencyNameInput > 0.toString()) {
+                                    val result = currencyNameInput
                                     val resultFinish = viewModel.recalculatingValues(result)
                                     String.format("%.3f", resultFinish)
                                 } else "0"

@@ -1,21 +1,23 @@
 package com.example.currencyconverter
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.view.WindowCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.currencyconverter.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.currencyconverter.di.App
+import com.example.currencyconverter.di.LoginComponent
 
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var loginComponent: LoginComponent
     lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        loginComponent = (applicationContext as App).appComponent.loginComponent().create()
+        loginComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -30,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-   private fun setupBottomNavMenu(navController: NavController) {
+    private fun setupBottomNavMenu(navController: NavController) {
         binding.bottomNavView.setupWithNavController(navController)
     }
 }

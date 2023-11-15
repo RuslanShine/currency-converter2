@@ -13,17 +13,20 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-class HomeViewModel :ViewModel() {
+class HomeViewModel @Inject constructor(val repository: DataRepository):ViewModel() {
 
     private val _valuesData: Flow<List<Currencies>>
     val valuesData get() = _valuesData
 
-    @Inject lateinit var repository: DataRepository
+
 
     init {
+
+//        App.instance.appComponent.inject(this)
         loadPosts()
         _valuesData = repository.getCurrenciesFromDb()
-        App.instance.appComponent.injectHomeViewModel(this)
+
+
     }
 
     private val recalculatingValuesUseCase = RecalculatingValuesСhoiceUseCase(valuesData)

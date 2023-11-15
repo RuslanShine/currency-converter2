@@ -9,27 +9,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.inject.Singleton
 
 
-@Singleton
-class DataRepository {
+class DataRepository @Inject constructor(val dataApi: DataApi, val currenciesDao: CurrenciesDAO) {
     val scope: CoroutineScope = CoroutineScope(Dispatchers.IO)
-
-    @Inject lateinit var dataApi: DataApi
-    @Inject lateinit var currenciesDao: CurrenciesDAO
-
-    init {
-
-//        App.instance.appComponent.injectDataRepository(this)
-
-    }
 
     suspend fun getValues(): ValCurs {
         return dataApi.getValues()
     }
 
-     fun putCurrenciesToDb(currencies: List<Currencies>) {
+    fun putCurrenciesToDb(currencies: List<Currencies>) {
         scope.launch { currenciesDao.insertAll(currencies) }
     }
 

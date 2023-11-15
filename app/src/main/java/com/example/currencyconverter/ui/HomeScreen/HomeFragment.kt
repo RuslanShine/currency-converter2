@@ -1,12 +1,13 @@
 package com.example.currencyconverter.ui.HomeScreen
 
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
+import com.example.currencyconverter.MainActivity
 import com.example.currencyconverter.databinding.FragmentHomeBinding
 import com.example.currencyconverter.ui.HomeScreen.content.MainScreen
 import kotlinx.coroutines.CoroutineScope
@@ -14,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
+import javax.inject.Inject
 
 
 class HomeFragment : Fragment() {
@@ -22,7 +23,13 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding get() = checkNotNull(_binding)
     private lateinit var scope: CoroutineScope
-    private val viewModel by viewModels<HomeViewModel>()
+    @Inject
+    lateinit var viewModel: HomeViewModel
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireContext() as MainActivity).loginComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,5 +67,4 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

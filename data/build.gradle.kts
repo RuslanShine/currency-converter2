@@ -1,14 +1,14 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-//    id("kotlin-kapt")
+    id("kotlin-kapt")
     id("com.google.devtools.ksp")
 }
 
 
 android {
     namespace = "com.example.currencyconverter.data"
-    compileSdk = 33
+    compileSdk = 34
 
 
 
@@ -47,9 +47,9 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
     //Room
-    val room_version = "2.5.2"
+    val room_version = "2.6.0"
     implementation("androidx.room:room-runtime:$room_version")
-    ksp("androidx.room:room-compiler:2.5.0")
+    ksp("androidx.room:room-compiler:2.6.0")
     implementation("androidx.room:room-ktx:$room_version")
 
     //Chucker
@@ -57,9 +57,9 @@ dependencies {
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 
     ///Dagger2
-    val daggerVersion = "2.44.2"
+    val daggerVersion = "2.48.1"
     implementation ("com.google.dagger:dagger:$daggerVersion")
-    annotationProcessor ("com.google.dagger:dagger-compiler:$daggerVersion")
+    ksp ("com.google.dagger:dagger-compiler:$daggerVersion")
 
 
 }
