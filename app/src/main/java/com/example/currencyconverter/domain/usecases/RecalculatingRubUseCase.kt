@@ -1,5 +1,6 @@
 package com.example.currencyconverter.domain.usecases
 
+
 import com.example.currencyconverter.ui.Analytics.model.ItemAnalyticsModel
 import com.example.currencyconverter.ui.Analytics.model.UIState
 import kotlinx.coroutines.flow.MutableStateFlow

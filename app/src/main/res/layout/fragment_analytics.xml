@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F1D6D6"
-    tools:context=".ui.Analytics.AnalyticsFragment">
+    tools:context=".ui.analytics.AnalyticsFragment">
 
         <androidx.compose.ui.platform.ComposeView
             android:id="@+id/compos_view_analytics_fragment"

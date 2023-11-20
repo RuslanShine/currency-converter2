@@ -1,4 +1,4 @@
-package com.example.currencyconverter.ui.HomeScreen.content
+package com.example.currencyconverter.ui.homeScreen.content
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -52,7 +52,7 @@ import com.example.currencyconverter.theme.Dimens
 import com.example.currencyconverter.theme.FontSizes
 import com.example.currencyconverter.theme.Purple40
 import com.example.currencyconverter.theme.Purple80
-import com.example.currencyconverter.ui.HomeScreen.HomeViewModel
+import com.example.currencyconverter.ui.homeScreen.HomeViewModel
 import kotlinx.coroutines.launch
 
 

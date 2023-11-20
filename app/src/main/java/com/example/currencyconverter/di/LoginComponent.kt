@@ -1,8 +1,8 @@
 package com.example.currencyconverter.di
 
 import com.example.currencyconverter.MainActivity
-import com.example.currencyconverter.ui.Analytics.AnalyticsFragment
-import com.example.currencyconverter.ui.HomeScreen.HomeFragment
+import com.example.currencyconverter.ui.analytics.AnalyticsFragment
+import com.example.currencyconverter.ui.homeScreen.HomeFragment
 import dagger.Subcomponent
 
 @Subcomponent

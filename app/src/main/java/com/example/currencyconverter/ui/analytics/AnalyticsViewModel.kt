@@ -1,4 +1,4 @@
-package com.example.currencyconverter.ui.Analytics
+package com.example.currencyconverter.ui.analytics
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

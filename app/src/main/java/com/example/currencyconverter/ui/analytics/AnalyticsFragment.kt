@@ -1,4 +1,4 @@
-package com.example.currencyconverter.ui.HomeScreen
+package com.example.currencyconverter.ui.analytics
 
 import android.content.Context
 import android.os.Bundle
@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import com.example.currencyconverter.MainActivity
-import com.example.currencyconverter.databinding.FragmentHomeBinding
-import com.example.currencyconverter.ui.HomeScreen.content.MainScreen
+import com.example.currencyconverter.databinding.FragmentAnalyticsBinding
+import com.example.currencyconverter.ui.analytics.content.AnalyticsScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -18,13 +18,13 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
-class HomeFragment : Fragment() {
+class AnalyticsFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
-    private val binding: FragmentHomeBinding get() = checkNotNull(_binding)
+    private var _binding: FragmentAnalyticsBinding? = null
+    private val binding: FragmentAnalyticsBinding get() = checkNotNull(_binding)
     private lateinit var scope: CoroutineScope
     @Inject
-    lateinit var viewModel: HomeViewModel
+    lateinit var viewModel: AnalyticsViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -35,21 +35,20 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentAnalyticsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         scope = CoroutineScope(Dispatchers.IO).also { scope ->
             scope.launch {
                 viewModel.valuesData.collect {
                     withContext(Dispatchers.Main) {
-                        binding.composView.apply {
+                        binding.composViewAnalyticsFragment.apply {
                             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
                             setContent {
-                                MainScreen(context, viewModel)
+                                AnalyticsScreen(context, viewModel)
                             }
                         }
                     }
@@ -67,4 +66,5 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

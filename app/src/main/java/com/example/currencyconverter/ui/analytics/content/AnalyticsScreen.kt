@@ -1,4 +1,4 @@
-package com.example.currencyconverter.ui.Analytics.content
+package com.example.currencyconverter.ui.analytics.content
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -52,7 +52,7 @@ import com.example.currencyconverter.theme.ButtonColors
 import com.example.currencyconverter.theme.Dimens
 import com.example.currencyconverter.theme.FontSizes
 import com.example.currencyconverter.theme.Purple40
-import com.example.currencyconverter.ui.Analytics.AnalyticsViewModel
+import com.example.currencyconverter.ui.analytics.AnalyticsViewModel
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)

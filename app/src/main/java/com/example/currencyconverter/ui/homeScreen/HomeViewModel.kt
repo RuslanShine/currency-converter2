@@ -1,11 +1,10 @@
-package com.example.currencyconverter.ui.HomeScreen
+package com.example.currencyconverter.ui.homeScreen
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.currencyconverter.data.DataRepository
 import com.example.currencyconverter.data.entity.Currencies
-import com.example.currencyconverter.di.App
 import com.example.currencyconverter.domain.usecases.RecalculatingValuesСhoiceUseCase
 import com.example.currencyconverter.domain.usecases.SetCharCodeValuesUseCase
 import kotlinx.coroutines.flow.Flow

@@ -1,4 +1,4 @@
-package com.example.currencyconverter.ui.Analytics.content
+package com.example.currencyconverter.ui.analytics.content
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,8 +17,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.currencyconverter.ui.Analytics.model.ItemAnalyticsModel
 import com.example.currencyconverter.theme.Dimens
+import com.example.currencyconverter.ui.Analytics.model.ItemAnalyticsModel
 
 @Composable
 fun ItemAnalyticsScreen(item: ItemAnalyticsModel) {
