@@ -1,6 +1,8 @@
-package com.example.currencyconverter.di
+package com.example.currencyconverter.app
 
 import android.app.Application
+import com.example.currencyconverter.di.AppComponent
+import com.example.currencyconverter.di.DaggerAppComponent
 
 class App: Application() {
 

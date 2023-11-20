@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
-import com.example.currencyconverter.MainActivity
+import com.example.currencyconverter.activity.MainActivity
 import com.example.currencyconverter.databinding.FragmentAnalyticsBinding
 import com.example.currencyconverter.ui.analytics.content.AnalyticsScreen
 import kotlinx.coroutines.CoroutineScope
@@ -48,7 +48,7 @@ class AnalyticsFragment : Fragment() {
                         binding.composViewAnalyticsFragment.apply {
                             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
                             setContent {
-                                AnalyticsScreen(context, viewModel)
+                                AnalyticsScreen(viewModel)
                             }
                         }
                     }

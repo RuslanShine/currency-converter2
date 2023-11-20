@@ -19,7 +19,7 @@ class SetCharCodeValuesUseCase(private val valuesData: Flow<List<Currencies>>) {
         return nameCurrencyToVal
     }
 
-    suspend fun monitoringValueFromVal(nameCurrencyScreen: Any) {
+     fun monitoringValueFromVal(nameCurrencyScreen: Any) {
         scope = CoroutineScope(Dispatchers.IO).also { scope ->
             scope.launch {
                 valuesData.collect { database ->
@@ -29,7 +29,7 @@ class SetCharCodeValuesUseCase(private val valuesData: Flow<List<Currencies>>) {
         }
     }
 
-    suspend fun monitoringValueToVal(nameCurrencyScreenToVal: Any) {
+     fun monitoringValueToVal(nameCurrencyScreenToVal: Any) {
         scope = CoroutineScope(Dispatchers.IO).also { scope ->
             scope.launch {
                 valuesData.collect { database ->

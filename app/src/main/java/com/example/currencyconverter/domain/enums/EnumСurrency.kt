@@ -1,5 +1,8 @@
 package com.example.currencyconverter.domain.enums
 
+import android.content.Context
+import com.example.currencyconverter.R
+
 enum class EnumСurrency(val nameCurrency: String) {
 
     AED("Дирхам ОАЭ"),
@@ -42,6 +45,19 @@ enum class EnumСurrency(val nameCurrency: String) {
     USD("Доллар США"),
     UZS("Узбекских сумов"),
     VND("Вьетнамских донгов"),
-    ZAR("Южноафриканских рэндов"),
+    ZAR("Южноафриканских рэндов");
+
+//    companion object{
+//        fun getNameСurrency(nameCurrency: String?):EnumСurrency? =
+//            values().find { it.nameCurrency ==nameCurrency }
+//    }
+//
+//    fun Context.enumToString(enumValue: Enum<EnumСurrency>):String{
+//        return when(enumValue){
+//            EnumСurrency.AED.nameCurrency-> getString(R.string.united_arab_emirates_dirhams)
+//            else -> {}
+//        }
+//    }
+
 }
 

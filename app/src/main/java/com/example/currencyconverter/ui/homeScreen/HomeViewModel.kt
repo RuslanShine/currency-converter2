@@ -1,10 +1,13 @@
 package com.example.currencyconverter.ui.homeScreen
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.currencyconverter.R
 import com.example.currencyconverter.data.DataRepository
 import com.example.currencyconverter.data.entity.Currencies
+import com.example.currencyconverter.domain.enums.EnumСurrency
 import com.example.currencyconverter.domain.usecases.RecalculatingValuesСhoiceUseCase
 import com.example.currencyconverter.domain.usecases.SetCharCodeValuesUseCase
 import kotlinx.coroutines.flow.Flow
@@ -17,15 +20,9 @@ class HomeViewModel @Inject constructor(val repository: DataRepository):ViewMode
     private val _valuesData: Flow<List<Currencies>>
     val valuesData get() = _valuesData
 
-
-
     init {
-
-//        App.instance.appComponent.inject(this)
-        loadPosts()
         _valuesData = repository.getCurrenciesFromDb()
-
-
+        loadPosts()
     }
 
     private val recalculatingValuesUseCase = RecalculatingValuesСhoiceUseCase(valuesData)
@@ -39,6 +36,9 @@ class HomeViewModel @Inject constructor(val repository: DataRepository):ViewMode
                 Log.e("HomeViewModel", e.message.toString())
                 e.printStackTrace()
             }
+
+
+
         }
     }
 
@@ -46,15 +46,15 @@ class HomeViewModel @Inject constructor(val repository: DataRepository):ViewMode
         return recalculatingValuesUseCase.execute(result)
     }
 
-    suspend fun searchFromValRecalculating(nameCurrencyFromVal: Any) {
+     fun searchFromValRecalculating(nameCurrencyFromVal: Any) {
         recalculatingValuesUseCase.monitoringValueFromVal(nameCurrencyFromVal)
     }
 
-    suspend fun searchToValRecalculating(nameCurrencyToVal: Any) {
+     fun searchToValRecalculating(nameCurrencyToVal: Any) {
         recalculatingValuesUseCase.monitoringValueToVal(nameCurrencyToVal)
     }
 
-    suspend fun searchValueFromVal(nameCurrencyScreen: Any) {
+     fun searchValueFromVal(nameCurrencyScreen: Any) {
         setCharCodeValuesUseCase.monitoringValueFromVal(nameCurrencyScreen)
     }
 
@@ -62,12 +62,24 @@ class HomeViewModel @Inject constructor(val repository: DataRepository):ViewMode
         return setCharCodeValuesUseCase.executeFromVal()
     }
 
-    suspend fun searchValueToVal(nameCurrencyScreenToVal: Any) {
+    fun searchValueToVal(nameCurrencyScreenToVal: Any) {
         setCharCodeValuesUseCase.monitoringValueToVal(nameCurrencyScreenToVal)
     }
 
     fun setCurrencyNameToVal(): String {
         return setCharCodeValuesUseCase.executeToVal()
     }
+
+//    fun Context.enumToString(enumValue: Enum<EnumСurrency>):String{
+//        return when(enumValue){
+//            EnumСurrency.AED -> getString(R.string.united_arab_emirates_dirhams)
+//
+//
+//            else -> {"123"}
+//        }
+//    }
+
+
+
 
 }

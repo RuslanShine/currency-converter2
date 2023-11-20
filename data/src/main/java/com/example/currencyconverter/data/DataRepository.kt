@@ -37,6 +37,17 @@ class DataRepository @Inject constructor(val dataApi: DataApi, val currenciesDao
             value = value
         )
 
+    private fun UniversalCurrency.mapToDbs(): Currencies =
+        Currencies(
+            charCode = charCode,
+            iD = iD,
+            name = name,
+            nominal = nominal,
+            numCode = numCode,
+            previous = previous,
+            value = value
+        )
+
     suspend fun getCurrenciesFromApi() {
         val api = dataApi.getValues()
         val database = mutableListOf<Currencies>()

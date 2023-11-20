@@ -54,10 +54,11 @@ import com.example.currencyconverter.theme.FontSizes
 import com.example.currencyconverter.theme.Purple40
 import com.example.currencyconverter.ui.analytics.AnalyticsViewModel
 
+
 @SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel) {
+fun AnalyticsScreen(viewModel: AnalyticsViewModel) {
     var valueCurrencyRub by remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
     val uiState by viewModel.uiState.collectAsState()
@@ -144,11 +145,11 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel) {
                                     unfocusedBorderColor = Color.White,
                                     textColor = Color.Black
                                 ),
-                                placeholder = { Text("0") },
+                                placeholder = { stringResource(R.string._0) },
                                 trailingIcon = {
                                     Icon(
                                         Icons.Default.Clear,
-                                        contentDescription = "clear text",
+                                        contentDescription = stringResource(R.string.clear_text),
                                         modifier = Modifier
                                             .clickable {
                                                 valueCurrencyRub = ""
@@ -170,12 +171,11 @@ fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel) {
                         onClick = {
                             viewModel.setValueListResult()
                             keyboardController?.hide()
-                            Toast.makeText(context, "Конвертация", Toast.LENGTH_SHORT).show()
                         },
                         modifier = Modifier.width(Dimens._320),
                         colors = ButtonDefaults.buttonColors(ButtonColors)
                     ) {
-                        Text("CONVERT", fontSize = FontSizes._24)
+                        Text(stringResource(R.string.convert), fontSize = FontSizes._24)
 
                     }
                 }

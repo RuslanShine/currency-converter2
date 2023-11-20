@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
-import com.example.currencyconverter.MainActivity
+import com.example.currencyconverter.activity.MainActivity
 import com.example.currencyconverter.databinding.FragmentHomeBinding
 import com.example.currencyconverter.ui.homeScreen.content.MainScreen
 import kotlinx.coroutines.CoroutineScope
@@ -49,7 +49,7 @@ class HomeFragment : Fragment() {
                         binding.composView.apply {
                             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
                             setContent {
-                                MainScreen(context, viewModel)
+                                MainScreen(context,viewModel)
                             }
                         }
                     }

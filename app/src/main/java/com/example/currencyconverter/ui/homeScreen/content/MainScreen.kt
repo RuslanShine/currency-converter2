@@ -61,9 +61,10 @@ import kotlinx.coroutines.launch
 @Composable
 fun MainScreen(context: Context, viewModel: HomeViewModel) {
 
-    val coroutine = rememberCoroutineScope()
+
     val keyboardController = LocalSoftwareKeyboardController.current
-    val listСurrencyName = EnumСurrency.values().map { it.nameCurrency } + stringResource(R.string.choose_currency)
+    val listСurrencyName =
+        EnumСurrency.values().map { it.nameCurrency } + stringResource(R.string.choose_currency)
 
     val listСurrencyInput = listСurrencyName
     val inputNumber = remember { mutableStateOf(false) }
@@ -127,7 +128,7 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                                 inputNumber.value = !inputNumber.value
                             }, verticalAlignment = Alignment.CenterVertically) {
                                 Text(
-                                    text = currentInputCurrency.value.toString(),
+                                    text = currentInputCurrency.value,
                                     fontSize = FontSizes._18,
                                     color = Color.Black
                                 )
@@ -139,17 +140,17 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                                     onDismissRequest = { inputNumber.value = false }) {
                                     listСurrencyInput.forEach {
                                         DropdownMenuItem(
-                                            text = { Text(text = it.toString()) },
+                                            text = { Text(text = it) },
                                             onClick = {
                                                 currentInputCurrency.value = it
                                                 inputNumber.value = false
 
-                                                coroutine.launch {
-                                                    viewModel.searchFromValRecalculating(it)
-                                                }
-                                                coroutine.launch {
-                                                    viewModel.searchValueFromVal(it)
-                                                }
+
+                                                viewModel.searchFromValRecalculating(it)
+
+
+                                                viewModel.searchValueFromVal(it)
+
                                             },
                                             modifier = Modifier.background(Color.White),
                                         )
@@ -183,10 +184,10 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                                     unfocusedBorderColor = Color.White,
                                     textColor = Color.Black
                                 ),
-                                placeholder = { Text("0") },
+                                placeholder = { Text(stringResource(R.string._0)) },
                                 trailingIcon = {
                                     Icon(Icons.Default.Clear,
-                                        contentDescription = "clear text",
+                                        contentDescription = stringResource(R.string.clear_text),
                                         modifier = Modifier
                                             .clickable {
                                                 currencyNameInput = ""
@@ -220,7 +221,7 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                                 outputNumber.value = !outputNumber.value
                             }, verticalAlignment = Alignment.CenterVertically) {
                                 Text(
-                                    text = currentOutputCurrency.value.toString(),
+                                    text = currentOutputCurrency.value,
                                     fontSize = FontSizes._18,
                                     color = Color.Black
                                 )
@@ -232,17 +233,17 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                                     onDismissRequest = { outputNumber.value = false }) {
                                     listСurrencyOutput.forEach {
                                         DropdownMenuItem(
-                                            text = { Text(text = it.toString()) },
+                                            text = { Text(text = it) },
                                             onClick = {
                                                 currentOutputCurrency.value = it
                                                 outputNumber.value = false
 
-                                                coroutine.launch {
-                                                    viewModel.searchToValRecalculating(it)
-                                                }
-                                                coroutine.launch {
-                                                    viewModel.searchValueToVal(it)
-                                                }
+
+                                                viewModel.searchToValRecalculating(it)
+
+
+                                                viewModel.searchValueToVal(it)
+
 
                                             },
                                             modifier = Modifier.background(Color.White)
@@ -276,10 +277,10 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                                     unfocusedBorderColor = Color.White,
                                     textColor = Color.Black
                                 ),
-                                placeholder = { Text("0") },
+                                placeholder = { Text(stringResource(R.string._0)) },
                                 trailingIcon = {
                                     Icon(Icons.Default.Clear,
-                                        contentDescription = "clear text",
+                                        contentDescription = stringResource(R.string.clear_text),
                                         modifier = Modifier
                                             .clickable {
                                                 currencyNameOutput = ""
@@ -298,20 +299,45 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                 ) {
                     Button(
                         onClick = {
-                            coroutine.launch {
-                                currencyNameOutput = if (currencyNameInput > 0.toString()) {
-                                    val result = currencyNameInput
-                                    val resultFinish = viewModel.recalculatingValues(result)
-                                    String.format("%.3f", resultFinish)
-                                } else "0"
+                            if (currentInputCurrency.value != "Выберите валюту") {
+                                if (currentOutputCurrency.value != "Выберите валюту"){
+
+
+                                    currencyNameOutput = if (currencyNameInput != "") {
+                                        val resultFinish =
+                                            viewModel.recalculatingValues(currencyNameInput)
+                                        String.format("%.3f", resultFinish)
+                                    } else { "0" }
+
+
+                                }else{Toast.makeText(context, "Выберите валюту конвертации", Toast.LENGTH_SHORT)
+                                    .show()}
+
+
+
+                            } else {
+                                Toast.makeText(context, "Выберите конвертируемую валюту", Toast.LENGTH_SHORT)
+                                    .show()
                             }
+
+//                            currencyNameOutput = if (currencyNameInput != "" || currentInputCurrency.value != "Выберите валюту") {
+//                                val resultFinish =
+//                                    viewModel.recalculatingValues(currencyNameInput)
+//                                String.format("%.3f", resultFinish)
+//                            } else {
+//                                "0"
+//                            }
+
+
+
+
+
                             keyboardController?.hide()
-                            Toast.makeText(context, "Конвертация", Toast.LENGTH_SHORT).show()
                         },
                         modifier = Modifier.width(Dimens._320),
                         colors = ButtonDefaults.buttonColors(ButtonColors)
                     ) {
-                        Text("CONVERT", fontSize = FontSizes._24)
+                        Text(stringResource(R.string.convert), fontSize = FontSizes._24)
 
                     }
                 }
