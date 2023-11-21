@@ -36,9 +36,6 @@ class HomeViewModel @Inject constructor(val repository: DataRepository):ViewMode
                 Log.e("HomeViewModel", e.message.toString())
                 e.printStackTrace()
             }
-
-
-
         }
     }
 
@@ -70,16 +67,11 @@ class HomeViewModel @Inject constructor(val repository: DataRepository):ViewMode
         return setCharCodeValuesUseCase.executeToVal()
     }
 
-//    fun Context.enumToString(enumValue: Enum<EnumСurrency>):String{
-//        return when(enumValue){
-//            EnumСurrency.AED -> getString(R.string.united_arab_emirates_dirhams)
-//
-//
-//            else -> {"123"}
-//        }
-//    }
-
-
-
-
+    fun Context.enumToString(enumValue: EnumСurrency):String{
+        return when(enumValue){
+            EnumСurrency.AED -> getString(R.string.united_arab_emirates_dirhams)
+            EnumСurrency.AMD ->getString(R.string.armenian_drams)
+            else -> {"123"}
+        }
+    }
 }

@@ -48,7 +48,7 @@ class AnalyticsFragment : Fragment() {
                         binding.composViewAnalyticsFragment.apply {
                             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
                             setContent {
-                                AnalyticsScreen(viewModel)
+                                AnalyticsScreen(context,viewModel)
                             }
                         }
                     }

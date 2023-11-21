@@ -9,7 +9,11 @@
     <string name="rubCod">RUB</string>
     <string name="choose_currency">Выберите валюту</string>
     <string name="united_arab_emirates_dirhams">Дирхам ОАЭ</string>
+    <string name="armenian_drams">Армянских драмов</string>
     <string name="_0">0</string>
     <string name="clear_text">clear text</string>
     <string name="convert">КОНВЕРТИРОВАТЬ</string>
+    <string name="enter_value">Введите значение</string>
+    <string name="select_convertible_currency">Выберите конвертируемую валюту</string>
+    <string name="select_conversion_currency">Выберите валюту конвертации</string>
 </resources>

@@ -145,12 +145,8 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                                                 currentInputCurrency.value = it
                                                 inputNumber.value = false
 
-
                                                 viewModel.searchFromValRecalculating(it)
-
-
                                                 viewModel.searchValueFromVal(it)
-
                                             },
                                             modifier = Modifier.background(Color.White),
                                         )
@@ -238,13 +234,8 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                                                 currentOutputCurrency.value = it
                                                 outputNumber.value = false
 
-
                                                 viewModel.searchToValRecalculating(it)
-
-
                                                 viewModel.searchValueToVal(it)
-
-
                                             },
                                             modifier = Modifier.background(Color.White)
                                         )
@@ -299,39 +290,24 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                 ) {
                     Button(
                         onClick = {
-                            if (currentInputCurrency.value != "Выберите валюту") {
-                                if (currentOutputCurrency.value != "Выберите валюту"){
-
-
-                                    currencyNameOutput = if (currencyNameInput != "") {
-                                        val resultFinish =
-                                            viewModel.recalculatingValues(currencyNameInput)
+                            if (currentInputCurrency.value != listСurrencyInput[41]) {
+                                if (currentOutputCurrency.value != listСurrencyInput[41]) {
+                                    currencyNameOutput = if (currencyNameInput.isNotEmpty()) {
+                                        val resultFinish = viewModel.recalculatingValues(currencyNameInput)
                                         String.format("%.3f", resultFinish)
-                                    } else { "0" }
-
-
-                                }else{Toast.makeText(context, "Выберите валюту конвертации", Toast.LENGTH_SHORT)
-                                    .show()}
-
-
-
+                                    } else {
+                                        "0"
+                                    }
+                                } else {
+                                    Toast.makeText(
+                                        context,
+                                        R.string.select_conversion_currency, Toast.LENGTH_SHORT).show()
+                                }
                             } else {
-                                Toast.makeText(context, "Выберите конвертируемую валюту", Toast.LENGTH_SHORT)
-                                    .show()
+                                Toast.makeText(
+                                    context,
+                                    R.string.select_convertible_currency, Toast.LENGTH_SHORT).show()
                             }
-
-//                            currencyNameOutput = if (currencyNameInput != "" || currentInputCurrency.value != "Выберите валюту") {
-//                                val resultFinish =
-//                                    viewModel.recalculatingValues(currencyNameInput)
-//                                String.format("%.3f", resultFinish)
-//                            } else {
-//                                "0"
-//                            }
-
-
-
-
-
                             keyboardController?.hide()
                         },
                         modifier = Modifier.width(Dimens._320),

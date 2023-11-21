@@ -47,15 +47,13 @@ enum class EnumСurrency(val nameCurrency: String) {
     VND("Вьетнамских донгов"),
     ZAR("Южноафриканских рэндов");
 
-//    companion object{
-//        fun getNameСurrency(nameCurrency: String?):EnumСurrency? =
-//            values().find { it.nameCurrency ==nameCurrency }
-//    }
-//
-//    fun Context.enumToString(enumValue: Enum<EnumСurrency>):String{
+
+
+//    fun Context.enumToString(enumValue: EnumСurrency):String{
 //        return when(enumValue){
-//            EnumСurrency.AED.nameCurrency-> getString(R.string.united_arab_emirates_dirhams)
-//            else -> {}
+//            AED.nameCurrency->getString(R.string.united_arab_emirates_dirhams)
+//            AMD.nameCurrency->getString(R.string.armenian_drams)
+//            else -> {"123"}
 //        }
 //    }
 
