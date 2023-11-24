@@ -3,7 +3,11 @@ package com.example.currencyconverter.ui.homeScreen
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.currencyconverter.R
 import com.example.currencyconverter.data.DataRepository
 import com.example.currencyconverter.data.entity.Currencies
@@ -13,6 +17,7 @@ import com.example.currencyconverter.domain.usecases.SetCharCodeValuesUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import javax.inject.Provider
 
 
 class HomeViewModel @Inject constructor(val repository: DataRepository):ViewModel() {
@@ -67,11 +72,15 @@ class HomeViewModel @Inject constructor(val repository: DataRepository):ViewMode
         return setCharCodeValuesUseCase.executeToVal()
     }
 
-    fun Context.enumToString(enumValue: EnumСurrency):String{
-        return when(enumValue){
-            EnumСurrency.AED -> getString(R.string.united_arab_emirates_dirhams)
-            EnumСurrency.AMD ->getString(R.string.armenian_drams)
-            else -> {"123"}
-        }
-    }
+//    class Factory @Inject constructor(myViewModelProvider: Provider<HomeViewModel>) : ViewModelProvider.Factory {
+//        private val providers = mapOf<Class<*>, Provider<out ViewModel>>(
+//            HomeViewModel::class.java to myViewModelProvider
+//        )
+//
+//        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+//            return providers[modelClass]!!.get() as T
+//        }
+//    }
+
+
 }

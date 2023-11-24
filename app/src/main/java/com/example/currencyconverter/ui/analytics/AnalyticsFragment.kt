@@ -7,9 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.currencyconverter.activity.MainActivity
+import com.example.currencyconverter.app.App
 import com.example.currencyconverter.databinding.FragmentAnalyticsBinding
+import com.example.currencyconverter.di.AppComponent
 import com.example.currencyconverter.ui.analytics.content.AnalyticsScreen
+import com.example.currencyconverter.ui.homeScreen.HomeViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -23,13 +28,9 @@ class AnalyticsFragment : Fragment() {
     private var _binding: FragmentAnalyticsBinding? = null
     private val binding: FragmentAnalyticsBinding get() = checkNotNull(_binding)
     private lateinit var scope: CoroutineScope
-    @Inject
-    lateinit var viewModel: AnalyticsViewModel
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireContext() as MainActivity).loginComponent.inject(this)
-    }
+
+    private val viewModel = ViewModelProvider(this).get(AnalyticsViewModel::class.java)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

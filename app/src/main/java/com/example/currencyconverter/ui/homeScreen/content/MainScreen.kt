@@ -61,10 +61,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun MainScreen(context: Context, viewModel: HomeViewModel) {
 
-
     val keyboardController = LocalSoftwareKeyboardController.current
-    val listСurrencyName =
-        EnumСurrency.values().map { it.nameCurrency } + stringResource(R.string.choose_currency)
+    val listСurrencyName = EnumСurrency.values().map { it.nameCurrency } + stringResource(R.string.choose_currency)
 
     val listСurrencyInput = listСurrencyName
     val inputNumber = remember { mutableStateOf(false) }
@@ -140,7 +138,7 @@ fun MainScreen(context: Context, viewModel: HomeViewModel) {
                                     onDismissRequest = { inputNumber.value = false }) {
                                     listСurrencyInput.forEach {
                                         DropdownMenuItem(
-                                            text = { Text(text = it) },
+                                            text = { Text(text = context.enumToString()) },
                                             onClick = {
                                                 currentInputCurrency.value = it
                                                 inputNumber.value = false
