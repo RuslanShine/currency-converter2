@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var loginComponent: LoginComponent
     lateinit var binding: ActivityMainBinding
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         loginComponent = (applicationContext as App).appComponent.loginComponent().create()
         loginComponent.inject(this)
