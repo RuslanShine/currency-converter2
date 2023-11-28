@@ -58,7 +58,7 @@ import com.example.currencyconverter.ui.analytics.AnalyticsViewModel
 @SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun AnalyticsScreen(viewModel: AnalyticsViewModel) {
+fun AnalyticsScreen(context: Context, viewModel: AnalyticsViewModel) {
     var valueCurrencyRub by remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
     val uiState by viewModel.uiState.collectAsState()
@@ -169,7 +169,12 @@ fun AnalyticsScreen(viewModel: AnalyticsViewModel) {
                 ) {
                     Button(
                         onClick = {
-                            viewModel.setValueListResult()
+                            if (valueCurrencyRub.isNotEmpty()) {
+                                viewModel.setValueListResult()
+                            } else {
+                                Toast.makeText(context, R.string.enter_value, Toast.LENGTH_SHORT)
+                                    .show()
+                            }
                             keyboardController?.hide()
                         },
                         modifier = Modifier.width(Dimens._320),
